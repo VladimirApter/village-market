@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thingsObjs: {fileID: 1488137071}
   thingPrefab: {fileID: 8869017854723499403, guid: 86b129020c60d0744a066b5eae9b4000, type: 3}
-  thingsCount: 10
+  thingsCount: 50
   platform: {fileID: 1444949162}
 --- !u!114 &1444949166
 MonoBehaviour:

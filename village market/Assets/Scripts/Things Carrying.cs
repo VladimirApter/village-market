@@ -46,7 +46,7 @@ public class ThingsCarrying : MonoBehaviour
         
         foreach (var thing in things.Where(x => x.IsCarried))
         {
-            thing.ThingObj.transform.position = player.transform.position + (player.transform.rotation * new Vector3(2, 0, 0));
+            thing.ThingObj.transform.position = player.transform.position + (player.transform.rotation * new Vector3(2.2f, 0, 0));
         }
     }
 }
