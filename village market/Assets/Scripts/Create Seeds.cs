@@ -4,25 +4,29 @@ using Model;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class CreateThings : MonoBehaviour
+public class CreateSeeds : MonoBehaviour
 {
-    public GameObject thingsObjs;
-    public GameObject thingPrefab = Thing.ThingPrefab;
-    public static List<Thing> things;
-    public int thingsCount = 10;
+    public GameObject seedsObjs;
+    public GameObject seedPrefab;
+    public int seedsCount = 20;
     public GameObject platform = Platform.PlatformObj;
     
     // Start is called before the first frame update
     void Start()
     {
-        things = new List<Thing>();
-        for (var i = 0; i < thingsCount; i++)
-            things.Add(new Thing() 
+        var things = new List<Thing>();
+        for (var i = 0; i < seedsCount; i++)
+        {
+            things.Add(new Seed()
             {
                 IsCarried = false,
-                ThingObj = Instantiate(thingPrefab, GetRandomPlatformPosition(thingPrefab), 
-                    Quaternion.identity, thingsObjs.transform)
+                ThingObj = Instantiate(seedPrefab, GetRandomPlatformPosition(seedPrefab),
+                    Quaternion.identity, seedsObjs.transform),
+                SeedPrefab = seedPrefab
             });
+        }
+
+        Objects.things = things;
     }
 
     private Vector2 GetRandomPlatformPosition(GameObject obj)

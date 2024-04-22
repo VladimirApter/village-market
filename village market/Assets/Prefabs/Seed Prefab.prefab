@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1776474150035502869}
   - component: {fileID: 1940738287471295335}
   m_Layer: 0
-  m_Name: Thing
+  m_Name: Seed Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

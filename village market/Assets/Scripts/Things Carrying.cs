@@ -17,7 +17,7 @@ public class ThingsCarrying : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var things = CreateThings.things;
+        var things = Objects.things;
         if (Input.GetKeyDown(KeyCode.Mouse0) && !Player.IsCarrying)
         {
             var minDistance = float.PositiveInfinity;
