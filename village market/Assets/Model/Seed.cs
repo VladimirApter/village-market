@@ -4,6 +4,6 @@ namespace Model
 {
     public class Seed : Thing
     {
-        public GameObject SeedPrefab;
+        public static GameObject SeedPrefab;
     }
 }

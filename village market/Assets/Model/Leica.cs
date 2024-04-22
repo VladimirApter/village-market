@@ -1,7 +1,9 @@
+using UnityEngine;
+
 namespace Model
 {
-    public class Leica : Thing
+    public class Leica : Instrument
     {
-        
+        public static GameObject LeicaPrefab;
     }
 }

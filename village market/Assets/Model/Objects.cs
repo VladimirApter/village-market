@@ -4,6 +4,6 @@ namespace Model
 {
     public static class Objects
     {
-        public static List<Thing> things;
+        public static List<Thing> things = new();
     }
 }
