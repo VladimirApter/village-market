@@ -9,7 +9,7 @@ public class CreateSeedbeds : MonoBehaviour
 {
     public GameObject seedbedObjs;
     private GameObject platform;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,19 +20,20 @@ public class CreateSeedbeds : MonoBehaviour
     void Update()
     {
         var hoe = GetHoe(Objects.Instruments);
-        
+
         if (hoe is null || !hoe.IsCarried) return;
         if (!Input.GetKeyDown(KeyCode.Mouse0) || !Player.IsCarrying) return;
-        
+
         var seedbedCoordinates = GetCurrentSeedbedCoordinates();
         if (Objects.Seedbeds.Keys.Contains(seedbedCoordinates))
         {
+            if (Objects.Seedbeds[seedbedCoordinates].IsPlanted) return;
             var a = Objects.Seedbeds[seedbedCoordinates].SeedbedObj;
             Destroy(a);
             Objects.Seedbeds.Remove(seedbedCoordinates);
             return;
         }
-        
+
         var newSeedbed = new Seedbed()
         {
             SeedbedObj = Instantiate(Seedbed.SeedbedPrefab,
@@ -58,7 +59,7 @@ public class CreateSeedbeds : MonoBehaviour
         return (x, y);
     }
 
-    private Vector2 ConvertSeedbedCoordinatesToVector((int, int) coordinates)
+    public static Vector2 ConvertSeedbedCoordinatesToVector((int, int) coordinates)
     {
         var seedbedScale = Seedbed.SeedbedPrefab.transform.localScale;
         var xSign = Math.Sign(coordinates.Item1);
