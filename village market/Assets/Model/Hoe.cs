@@ -4,6 +4,6 @@ namespace Model
 {
     public class Hoe : Instrument
     {
-        public static GameObject HoePrefab;
+        public static GameObject HoePrefab { get; set; }
     }
 }

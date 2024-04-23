@@ -44,6 +44,9 @@ TagManager:
   - name: platform
     uniqueID: 2242647413
     locked: 0
+  - name: seedbeds
+    uniqueID: 2992920513
+    locked: 0
   - name: things
     uniqueID: 918167937
     locked: 0

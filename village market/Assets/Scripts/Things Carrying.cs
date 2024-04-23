@@ -17,11 +17,11 @@ public class ThingsCarrying : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var things = Objects.things;
+        var things = Objects.Things;
         if (Input.GetKeyDown(KeyCode.Mouse0) && !Player.IsCarrying)
         {
             var minDistance = float.PositiveInfinity;
-            var bestThing = things[0];
+            var bestThing = things.FirstOrDefault();
             foreach (var thing in things)
             {
                 var distance = Vector3.Distance(player.transform.position, thing.ThingObj.transform.position);
@@ -31,7 +31,7 @@ public class ThingsCarrying : MonoBehaviour
             }
             if (minDistance < Player.TakingRadius)
             {
-                bestThing.IsCarried = true;
+                bestThing!.IsCarried = true;
                 Player.IsCarrying = true;
             }
             

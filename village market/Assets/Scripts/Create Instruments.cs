@@ -6,18 +6,21 @@ using UnityEngine;
 public class CreateInstruments : MonoBehaviour
 {
     public GameObject instrumentsObjs;
-    public GameObject platform = Platform.PlatformObj;
+    private GameObject platform;
     
     // Start is called before the first frame update
     void Start()
     {
-        var instruments = new List<Thing>();
+        platform = Platform.PlatformObj;
+        var instruments = new List<Instrument>();
+        
         instruments.Add(new Leica()
         {
             IsCarried = false,
             ThingObj = Instantiate(Leica.LeicaPrefab, platform.transform.position,
                 Quaternion.identity, instrumentsObjs.transform),
         });
+        
         instruments.Add(new Hoe()
         {
             IsCarried = false,
@@ -25,7 +28,8 @@ public class CreateInstruments : MonoBehaviour
                 Quaternion.identity, instrumentsObjs.transform),
         });
 
-        Objects.things.AddRange(instruments);
+        Objects.Things.AddRange(instruments);
+        Objects.Instruments.AddRange(instruments);
     }
 
     // Update is called once per frame

@@ -9,11 +9,12 @@ public class CreateSeeds : MonoBehaviour
 {
     public GameObject seedsObjs;
     public int seedsCount = 20;
-    public GameObject platform = Platform.PlatformObj;
+    private GameObject platform;
     
     // Start is called before the first frame update
     void Start()
     {
+        platform = Platform.PlatformObj;
         var seedPrefab = Seed.SeedPrefab;
         var seeds = new List<Thing>();
         for (var i = 0; i < seedsCount; i++)
@@ -26,7 +27,7 @@ public class CreateSeeds : MonoBehaviour
             });
         }
 
-        Objects.things.AddRange(seeds);
+        Objects.Things.AddRange(seeds);
     }
 
     private Vector2 GetRandomPlatformPosition(GameObject obj)

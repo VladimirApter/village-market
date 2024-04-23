@@ -4,6 +4,6 @@ namespace Model
 {
     public class Leica : Instrument
     {
-        public static GameObject LeicaPrefab;
+        public static GameObject LeicaPrefab { get; set; }
     }
 }

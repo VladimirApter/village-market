@@ -4,7 +4,7 @@ namespace Model
 {
     public class Thing
     {
-        public GameObject ThingObj;
-        public bool IsCarried = false;
+        public GameObject ThingObj { get; set; }
+        public bool IsCarried { get; set; } = false;
     }
 }
