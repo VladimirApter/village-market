@@ -18,10 +18,10 @@ public class PlantSeed : MonoBehaviour
         var seed = (Seed)things.FirstOrDefault(x => x.IsCarried && x is Seed);
         
         if (seed == null) return;
+        var coordsSeed = (Vector2)seed.ThingObj.transform.position;
 
         foreach (var seedBed in seedBeds.Values)
         {
-            var coordsSeed = (Vector2)seed.ThingObj.transform.position;
             var coordsSeedBed = seedBed.Coords;
 
             if (Vector2.Distance(coordsSeed, coordsSeedBed) <=
@@ -30,9 +30,10 @@ public class PlantSeed : MonoBehaviour
             {
                 seed.ThingObj.transform.position = coordsSeedBed;
                 seed.Cords = coordsSeedBed;
-                seedBed.IsPlanted = true;
-                seedBed.Seed = seed;
                 seed.IsCarried = false;
+                seed.Seedbed = seedBed;
+                
+                seedBed.IsPlanted = true;
                 Player.IsCarrying = false;
             }
         }

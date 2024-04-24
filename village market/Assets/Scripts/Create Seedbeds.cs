@@ -27,7 +27,6 @@ public class CreateSeedbeds : MonoBehaviour
         var seedbedCoordinates = GetCurrentSeedbedCoordinates();
         if (Objects.Seedbeds.Keys.Contains(seedbedCoordinates))
         {
-            //if (Objects.Seedbeds[seedbedCoordinates].IsPlanted) return;
             Destroy(Objects.Seedbeds[seedbedCoordinates].SeedbedObj);
             Objects.Seedbeds.Remove(seedbedCoordinates);
             return;

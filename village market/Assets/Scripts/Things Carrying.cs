@@ -27,12 +27,23 @@ public class ThingsCarrying : MonoBehaviour
 
                 if (closestThing != null)
                 {
-                    var seedbed = Objects.Seedbeds.FirstOrDefault(x =>
-                        x.Value.IsPlanted && CreateSeedbeds.ConvertSeedbedCoordinatesToVector(x.Key) == closestThing.Cords);
-                    
-                    if (seedbed.Value != null) seedbed.Value.IsPlanted = false;
                     closestThing.IsCarried = true;
                     Player.IsCarrying = true;
+                    
+                    if (closestThing is Seed || closestThing is Fruit)
+                    {
+                        var seedbed = Objects.Seedbeds.FirstOrDefault(x =>
+                            x.Value.IsPlanted && CreateSeedbeds.ConvertSeedbedCoordinatesToVector(x.Key) ==
+                            closestThing.Cords);
+                        if (seedbed.Value != null)
+                        {
+                            if (closestThing is Seed seed)
+                                seed.Seedbed = null;
+                                
+                            seedbed.Value.IsPlanted = false;
+                        }
+                    }
+                    
                 }
             }
             else
