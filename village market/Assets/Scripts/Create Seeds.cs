@@ -22,6 +22,7 @@ public class CreateSeeds : MonoBehaviour
             seeds.Add(new Seed()
             {
                 IsCarried = false,
+                Cords = GetRandomPlatformPosition(seedPrefab),
                 ThingObj = Instantiate(seedPrefab, GetRandomPlatformPosition(seedPrefab),
                     Quaternion.identity, seedsObjs.transform),
             });
@@ -43,6 +44,5 @@ public class CreateSeeds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

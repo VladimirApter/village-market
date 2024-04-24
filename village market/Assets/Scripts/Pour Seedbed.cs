@@ -19,7 +19,7 @@ public class PourSeedbed : MonoBehaviour
         var seedBeds = Objects.Seedbeds;
         var seedbedScale = Seedbed.SeedbedPrefab.transform.localScale;
         
-        var leica = instruments.OfType<Leica>().FirstOrDefault();
+        var leica = instruments.FirstOrDefault(x => x is Leica);
         if (leica == null) return;
 
         foreach (var coords in seedBeds.Keys)
@@ -28,7 +28,7 @@ public class PourSeedbed : MonoBehaviour
             var cordSeedBed = CreateSeedbeds.ConvertSeedbedCoordinatesToVector(coords);
 
             if (Vector2.Distance(coordLeica, cordSeedBed) <= new Vector2(seedbedScale.x / 2, seedbedScale.y / 2).magnitude &&
-                Input.GetKeyDown(KeyCode.Mouse0) && !seedBeds[coords].IsPoured)
+                Input.GetKeyDown(KeyCode.Mouse0) && !seedBeds[coords].IsPoured && leica.IsCarried)
             {
                 var seedbed = seedBeds[coords];
                 seedbed.IsPoured = true;

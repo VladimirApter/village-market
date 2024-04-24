@@ -35,6 +35,7 @@ public class CreateSeedbeds : MonoBehaviour
 
         var newSeedbed = new Seedbed()
         {
+            Coords = ConvertSeedbedCoordinatesToVector(seedbedCoordinates),
             SeedbedObj = Instantiate(Seedbed.SeedbedPrefab,
                 ConvertSeedbedCoordinatesToVector(seedbedCoordinates),
                 Quaternion.identity, seedbedObjs.transform),

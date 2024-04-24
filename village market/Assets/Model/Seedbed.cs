@@ -1,4 +1,5 @@
 using UnityEngine;
+using Vector2 = System.Numerics.Vector2;
 
 namespace Model
 {
@@ -9,5 +10,6 @@ namespace Model
         public bool IsPlanted { get; set; }
         public bool IsPoured { get; set; }
         public Seed Seed;
+        public UnityEngine.Vector2 Coords { get; set; }
     }
 }

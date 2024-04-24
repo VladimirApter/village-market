@@ -8,45 +8,48 @@ using UnityEngine;
 public class ThingsCarrying : MonoBehaviour
 {
     public GameObject player = Player.PlayerObj;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         var things = Objects.Things;
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !Player.IsCarrying)
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            var minDistance = float.PositiveInfinity;
-            var bestThing = things.FirstOrDefault();
-            foreach (var thing in things)
+            if (!Player.IsCarrying)
             {
-                var distance = Vector3.Distance(player.transform.position, thing.ThingObj.transform.position);
-                if (!(distance < minDistance)) continue;
-                minDistance = distance;
-                bestThing = thing;
+                var closestThing = things.OrderBy(CalculateDistancePlayerToThing)
+                    .FirstOrDefault(t => CalculateDistancePlayerToThing(t) < Player.TakingRadius);
+
+                if (closestThing != null)
+                {
+                    var seedbed = Objects.Seedbeds.FirstOrDefault(x =>
+                        x.Value.IsPlanted && CreateSeedbeds.ConvertSeedbedCoordinatesToVector(x.Key) == closestThing.Cords);
+                    
+                    if (seedbed.Value != null) seedbed.Value.IsPlanted = false;
+                    closestThing.IsCarried = true;
+                    Player.IsCarrying = true;
+                }
             }
-            if (minDistance < Player.TakingRadius)
+            else
             {
-                bestThing!.IsCarried = true;
-                Player.IsCarrying = true;
+                Player.IsCarrying = false;
+                foreach (var thing in things.Where(x => x.IsCarried))
+                    thing.IsCarried = false;
             }
-            
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1)  && Player.IsCarrying)
-        {
-            Player.IsCarrying = false;
-            foreach (var thing in things.Where(x => x.IsCarried))
-                thing.IsCarried = false;
-        }
-        
         foreach (var thing in things.Where(x => x.IsCarried))
-        {
-            thing.ThingObj.transform.position = player.transform.position + (player.transform.rotation * new Vector3(2.2f, 0, 0));
-        }
+            thing.ThingObj.transform.position =
+                player.transform.position + (player.transform.rotation * new Vector3(2.2f, 0, 0));
+    }
+
+    private float CalculateDistancePlayerToThing(Thing t)
+    {
+        return Vector3.Distance(player.transform.position, t.ThingObj.transform.position);
     }
 }
