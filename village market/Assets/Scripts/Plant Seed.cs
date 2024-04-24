@@ -9,29 +9,30 @@ public class PlantSeed : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
+    //Update is called once per frame
     void Update()
     {
         var seedBeds = Objects.Seedbeds;
         var things = Objects.Things;
-
+        var seedbedScale = Seedbed.SeedbedPrefab.transform.localScale;
+        
+        var seed = (Seed)things.FirstOrDefault(x => x.IsCarried && x is Seed);
+        if (seed == null) return;
+    
         foreach (var coords in seedBeds.Keys)
         {
-            var thing = things.FirstOrDefault(x => x.IsCarried && x is Seed);
-            if (thing == null) continue;
-
-            var cordSeed = (Vector2)thing.ThingObj.transform.position;
+            var cordSeed = (Vector2)seed.ThingObj.transform.position;
             var cordSeedBed = CreateSeedbeds.ConvertSeedbedCoordinatesToVector(coords);
-
-            if (Vector2.Distance(cordSeed, cordSeedBed) <= new Vector2(2.5f, 2.5f).magnitude &&
+            
+            if (Vector2.Distance(cordSeed, cordSeedBed) <= new Vector2(seedbedScale.x / 2, seedbedScale.y / 2).magnitude &&
                 Input.GetKeyDown(KeyCode.Mouse0) && !seedBeds[coords].IsPlanted)
             {
-                Debug.Log("Семечко посажено: " + cordSeed);
-                seedBeds[coords].IsPlanted = true;
-                thing.CanCarried = false;
-                thing.IsCarried = false;
+                var seedbed = seedBeds[coords];
+                seedbed.IsPlanted = true;
+                seedbed.Seed = seed;
+                seed.IsCarried = false;
                 Player.IsCarrying = false;
-                thing.ThingObj.transform.position = cordSeedBed;
+                seed.ThingObj.transform.position = cordSeedBed;
             }
         }
     }

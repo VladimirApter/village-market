@@ -29,7 +29,7 @@ public class ThingsCarrying : MonoBehaviour
                 minDistance = distance;
                 bestThing = thing;
             }
-            if (minDistance < Player.TakingRadius && bestThing!.CanCarried)
+            if (minDistance < Player.TakingRadius)
             {
                 bestThing!.IsCarried = true;
                 Player.IsCarrying = true;

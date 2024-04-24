@@ -27,9 +27,8 @@ public class CreateSeedbeds : MonoBehaviour
         var seedbedCoordinates = GetCurrentSeedbedCoordinates();
         if (Objects.Seedbeds.Keys.Contains(seedbedCoordinates))
         {
-            if (Objects.Seedbeds[seedbedCoordinates].IsPlanted) return;
-            var a = Objects.Seedbeds[seedbedCoordinates].SeedbedObj;
-            Destroy(a);
+            //if (Objects.Seedbeds[seedbedCoordinates].IsPlanted) return;
+            Destroy(Objects.Seedbeds[seedbedCoordinates].SeedbedObj);
             Objects.Seedbeds.Remove(seedbedCoordinates);
             return;
         }
@@ -39,6 +38,8 @@ public class CreateSeedbeds : MonoBehaviour
             SeedbedObj = Instantiate(Seedbed.SeedbedPrefab,
                 ConvertSeedbedCoordinatesToVector(seedbedCoordinates),
                 Quaternion.identity, seedbedObjs.transform),
+            IsPlanted = false,
+            IsPoured = false,
         };
         Objects.Seedbeds.Add(seedbedCoordinates, newSeedbed);
     }
