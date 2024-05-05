@@ -29,21 +29,33 @@ public class ThingsCarrying : MonoBehaviour
                 {
                     closestThing.IsCarried = true;
                     Player.IsCarrying = true;
-                    
+
                     if (closestThing is Seed || closestThing is Fruit)
                     {
                         var seedbed = Objects.Seedbeds.FirstOrDefault(x =>
-                            x.Value.IsPlanted && CreateSeedbeds.ConvertSeedbedCoordinatesToVector(x.Key) ==
+                            x.Value.IsBusy && SquareSection.ConvertSectionToVector(x.Key) ==
                             closestThing.Cords);
+
                         if (seedbed.Value != null)
                         {
                             if (closestThing is Seed seed)
                                 seed.Seedbed = null;
-                                
-                            seedbed.Value.IsPlanted = false;
+
+                            seedbed.Value.IsBusy = false;
                         }
+
+                        if (closestThing is Fruit)
+                        {
+                            var table = Objects.Table.FirstOrDefault(x =>
+                                x.Value.IsBusy && SquareSection.ConvertSectionToVector(x.Key) ==
+                                closestThing.Cords);
+                            if (table.Value != null)
+                            {
+                                table.Value.IsBusy = false;
+                            }
+                        }
+                        
                     }
-                    
                 }
             }
             else

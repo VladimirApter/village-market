@@ -23,8 +23,10 @@ public class CreateSeedbeds : MonoBehaviour
 
         if (hoe is null || !hoe.IsCarried) return;
         if (!Input.GetKeyDown(KeyCode.Mouse0) || !Player.IsCarrying) return;
-
-        var seedbedCoordinates = GetCurrentSeedbedCoordinates();
+        
+        var seedbedCoordinates = SquareSection.GetCurrentSectionCoordinates();
+        
+        if (Objects.Table.ContainsKey(seedbedCoordinates)) return;
         if (Objects.Seedbeds.Keys.Contains(seedbedCoordinates))
         {
             Destroy(Objects.Seedbeds[seedbedCoordinates].SeedbedObj);
@@ -32,13 +34,14 @@ public class CreateSeedbeds : MonoBehaviour
             return;
         }
 
+        
         var newSeedbed = new Seedbed()
         {
-            Coords = ConvertSeedbedCoordinatesToVector(seedbedCoordinates),
+            Coords = SquareSection.ConvertSectionToVector(seedbedCoordinates),
             SeedbedObj = Instantiate(Seedbed.SeedbedPrefab,
-                ConvertSeedbedCoordinatesToVector(seedbedCoordinates),
+                SquareSection.ConvertSectionToVector(seedbedCoordinates),
                 Quaternion.identity, seedbedObjs.transform),
-            IsPlanted = false,
+            IsBusy = false,
             IsPoured = false,
         };
         Objects.Seedbeds.Add(seedbedCoordinates, newSeedbed);
@@ -47,25 +50,5 @@ public class CreateSeedbeds : MonoBehaviour
     private Hoe GetHoe(List<Instrument> instruments)
     {
         return instruments.OfType<Hoe>().FirstOrDefault();
-    }
-
-
-    private (int, int) GetCurrentSeedbedCoordinates()
-    {
-        var playerPos = Player.PlayerObj.transform.position;
-        var seedbedScale = Seedbed.SeedbedPrefab.transform.localScale;
-
-        var x = Math.Max((int)(Math.Abs(playerPos.x) / seedbedScale.x) + 1, 1) * Math.Sign(playerPos.x);
-        var y = Math.Max((int)(Math.Abs(playerPos.y) / seedbedScale.y) + 1, 1) * Math.Sign(playerPos.y);
-        return (x, y);
-    }
-
-    public static Vector2 ConvertSeedbedCoordinatesToVector((int, int) coordinates)
-    {
-        var seedbedScale = Seedbed.SeedbedPrefab.transform.localScale;
-        var xSign = Math.Sign(coordinates.Item1);
-        var ySign = Math.Sign(coordinates.Item2);
-        return new Vector2((coordinates.Item1 - 1 * xSign) * seedbedScale.x + seedbedScale.x / 2 * xSign,
-            (coordinates.Item2 - 1 * ySign) * seedbedScale.y + seedbedScale.y / 2 * ySign);
     }
 }
