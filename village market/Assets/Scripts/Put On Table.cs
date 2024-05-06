@@ -14,33 +14,34 @@ public class PutOnTable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var tables = Objects.Table;
+        var tables = Objects.Tables;
         var things = Objects.Things;
         var seedbedScale = Table.TablePrefab.transform.localScale;
-        var product = (Fruit)things.FirstOrDefault(x => x.IsCarried && x is Fruit);
+        var fruit = (Fruit)things.FirstOrDefault(x => x.IsCarried && x is Fruit);
 
-        if (product == null) return;
-        var coordsThing = (Vector2)product.ThingObj.transform.position;
+        if (fruit == null) return;
+        var fruitCoords = (Vector2)fruit.ThingObj.transform.position;
 
         foreach (var table in tables.Values)
         {
             var coordsTable = table.Coords;
 
-            if (Vector2.Distance(coordsThing, coordsTable) <=
+            if (Vector2.Distance(fruitCoords, coordsTable) <=
                 new Vector2(seedbedScale.x / 2, seedbedScale.y / 2).magnitude &&
                 Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (product is Fruit)
+                if (fruit is Fruit)
                 {
-                    table.CountProduct["fruit"]++;
-                    Objects.Fruits.Add((coordsTable, product));
+                    table.FruitsCount["fruit"]++;
+                    Objects.Fruits.Add(fruit);
                 }
 
-                product.ThingObj.transform.position = coordsTable;
-                product.Cords = coordsTable;
-                product.IsCarried = false;
+                fruit.ThingObj.transform.position = coordsTable;
+                fruit.Cords = coordsTable;
+                fruit.IsCarried = false;
 
-                table.IsBusy = true;
+                //table.IsBusy = true;
+                table.Fruits.Add(fruit);
                 Player.IsCarrying = false;
             }
         }

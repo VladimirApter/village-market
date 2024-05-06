@@ -46,12 +46,19 @@ public class ThingsCarrying : MonoBehaviour
 
                         if (closestThing is Fruit)
                         {
-                            var table = Objects.Table.FirstOrDefault(x =>
+                            var table = Objects.Tables.FirstOrDefault(x =>
                                 x.Value.IsBusy && SquareSection.ConvertSectionToVector(x.Key) ==
                                 closestThing.Cords);
                             if (table.Value != null)
                             {
+                                table.Value.FruitsCount["fruit"]--;
                                 table.Value.IsBusy = false;
+                                foreach (var fruit in table.Value.FruitsCount.Keys)
+                                {
+                                    if (table.Value.FruitsCount[fruit] == 0) continue;
+                                    table.Value.IsBusy = true;
+                                    break;
+                                }
                             }
                         }
                         

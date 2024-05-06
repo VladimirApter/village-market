@@ -18,7 +18,7 @@ public class CreateTable : MonoBehaviour
     {
         foreach (var partTable in coordsTable)
         {
-            if (!Objects.Table.ContainsKey(partTable))
+            if (!Objects.Tables.ContainsKey(partTable))
             {
                 var table = new Table()
                 {
@@ -28,7 +28,7 @@ public class CreateTable : MonoBehaviour
                         Quaternion.identity, tableObjs.transform),
                     IsBusy = false
                 };
-                Objects.Table.Add(partTable, table);
+                Objects.Tables.Add(partTable, table);
             }
             
         }

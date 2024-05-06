@@ -23,10 +23,11 @@ public class CreateSeedbeds : MonoBehaviour
 
         if (hoe is null || !hoe.IsCarried) return;
         if (!Input.GetKeyDown(KeyCode.Mouse0) || !Player.IsCarrying) return;
+        if (Player.PlayerObj.transform.position.x > 0) return;
         
         var seedbedCoordinates = SquareSection.GetCurrentSectionCoordinates();
         
-        if (Objects.Table.ContainsKey(seedbedCoordinates)) return;
+        if (Objects.Tables.ContainsKey(seedbedCoordinates)) return;
         if (Objects.Seedbeds.Keys.Contains(seedbedCoordinates))
         {
             Destroy(Objects.Seedbeds[seedbedCoordinates].SeedbedObj);

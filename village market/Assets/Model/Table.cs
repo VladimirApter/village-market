@@ -7,6 +7,7 @@ namespace Model
     {
         public GameObject TableObj { get; set; }
         public static GameObject TablePrefab { get; set; }
-        public Dictionary<string, int> CountProduct = new(){{"fruit", 0}};
+        public List<Fruit> Fruits { get; set; } = new();
+        public Dictionary<string, int> FruitsCount = new() { { "fruit", 0 } };
     }
 }
