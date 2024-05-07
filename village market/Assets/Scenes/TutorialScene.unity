@@ -840,6 +840,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1435243996}
+  speed: 5
+  animator: {fileID: 1435243999}
+--- !u!95 &1435243999 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2618041446004350647, guid: 6d0c1214e14389747bf2e3efef65770d, type: 3}
+  m_PrefabInstance: {fileID: 1435243995}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1608127045
 GameObject:
   m_ObjectHideFlags: 0

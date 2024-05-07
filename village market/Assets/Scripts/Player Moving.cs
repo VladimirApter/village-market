@@ -1,50 +1,40 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using Model;
-using Unity.VisualScripting;
 using UnityEngine;
-using Quaternion = UnityEngine.Quaternion;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 public class PlayerMoving : MonoBehaviour
 {
     public GameObject player = Player.PlayerObj;
-    
+    [SerializeField] public float speed;
+    public Animator animator;
+    private Vector2 direction;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        var moveDirection = GetMoveDirection();
-        if (moveDirection.x == 0 && moveDirection.y == 0) return;
-        var rotationDirection = Vector2.Angle(moveDirection, Vector2.right);
-        if (moveDirection.y < 0)
-            rotationDirection = -rotationDirection;
-        player.transform.eulerAngles = new Vector3(0, 0, (float)rotationDirection);
-        player.transform.Translate(Vector2.right * (Player.Speed * Time.deltaTime));
+        direction.x = Input.GetAxisRaw("Horizontal");
+        direction.y = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("Horizontal", direction.x);
+        animator.SetFloat("Vertical", direction.y);
+        animator.SetFloat("Speed", direction.sqrMagnitude);
+
+        if (direction.x == 0 && direction.y == 0) return;
+
+        var rotationDirection = Vector2.SignedAngle(Vector2.up, direction);
+        //player.transform.eulerAngles = new Vector3(0, 0, rotationDirection);
+
+        // Перемещаем персонажа в соответствии с направлением
+        player.transform.position = new Vector3(
+            player.transform.position.x + direction.x * speed * Time.deltaTime,
+            player.transform.position.y + direction.y * speed * Time.deltaTime,
+            player.transform.position.z
+        );
     }
-
-    private Vector2 GetMoveDirection()
-    {
-        var moveDirection = new Vector2(0, 0);
-        
-        if (Input.GetKey(KeyCode.W))
-            moveDirection.y += 1;
-        if (Input.GetKey(KeyCode.A))
-            moveDirection.x += -1;
-        if (Input.GetKey(KeyCode.S))
-            moveDirection.y += -1;
-        if (Input.GetKey(KeyCode.D))
-            moveDirection.x += 1;
-
-        return moveDirection;
-    }
-
 }
