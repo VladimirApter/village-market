@@ -49,6 +49,10 @@ public class SeedGrowing : MonoBehaviour
             newFruitsInThisFrame.Add(newFruit);
             seedsGrewInThisFrame.Add(seed);
             Destroy(seed.ThingObj);
+            
+            seed.Seedbed.IsPoured = false;
+            seed.Seedbed.SeedbedObj.GetComponent<SpriteRenderer>().color =
+                Seedbed.SeedbedPrefab.GetComponent<SpriteRenderer>().color;
         }
 
         Objects.Things.AddRange(newFruitsInThisFrame);
