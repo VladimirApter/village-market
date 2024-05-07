@@ -42,6 +42,7 @@ public class PutOnTable : MonoBehaviour
 
                 //table.IsBusy = true;
                 table.Fruits.Add(fruit);
+                table.IsBusy = true;
                 Player.IsCarrying = false;
             }
         }
