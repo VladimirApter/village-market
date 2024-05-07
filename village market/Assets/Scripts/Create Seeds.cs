@@ -22,6 +22,7 @@ public class CreateSeeds : MonoBehaviour
             seeds.Add(new Seed()
             {
                 IsCarried = false,
+                Cords = GetRandomPlatformPosition(seedPrefab),
                 ThingObj = Instantiate(seedPrefab, GetRandomPlatformPosition(seedPrefab),
                     Quaternion.identity, seedsObjs.transform),
             });
@@ -37,12 +38,12 @@ public class CreateSeeds : MonoBehaviour
         var maxValueX = (int)((platformScale.x - objScale.x) / 2);
         var maxValueY = (int)((platformScale.y - objScale.y) / 2);
         var rnd = new System.Random();
-        return new Vector2(rnd.Next(-maxValueX, maxValueX), rnd.Next(-maxValueY, maxValueY));
+        //return new Vector2(rnd.Next(-maxValueX, maxValueX), rnd.Next(-maxValueY, maxValueY));
+        return new Vector2(rnd.Next(-maxValueX, 0), rnd.Next(-maxValueY, maxValueY));
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
