@@ -8,6 +8,6 @@ namespace Model
         public GameObject RequestObj { get; set; }
         public static GameObject RequestPrefab { get; set; }
         public List<GameObject> Fruits { get; set; } = new();
-        public Dictionary<string, int> FruitsCount = new() { { "fruit", 0 } };
+        public Dictionary<string, int> FruitsCount = new() { { "beet", 0 }, { "wheat", 0 }, { "fruit", 0 } };
     }
 }
