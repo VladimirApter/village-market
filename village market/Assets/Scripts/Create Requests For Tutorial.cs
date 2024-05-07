@@ -5,7 +5,7 @@ using System.Text;
 using Model;
 using UnityEngine;
 
-public class CreateRequest : MonoBehaviour
+public class CreateRequestsForTutorial : MonoBehaviour
 {
     public GameObject requestObjs;
     public GameObject requestFruits;
@@ -31,27 +31,15 @@ public class CreateRequest : MonoBehaviour
                     SquareSection.ConvertSectionToVector(coordRequest),
                     Quaternion.identity, requestObjs.transform)
             };
-            var fruitsCount = rnd.Next(1, 6);
-            var wheatCount = rnd.Next(0, fruitsCount);
-            var beetsCount = fruitsCount - wheatCount;
+            var fruitsCount = rnd.Next(1, 2);
 
-            request.FruitsCount["wheat"] = wheatCount;
-            
-            for (var i = 0; i < wheatCount; i++)
+            request.FruitsCount["fruit"] = fruitsCount;
+            for (var i = 0; i < fruitsCount; i++)
             {
-                var wheat = Instantiate(Wheat.WheatPrefab,
+                var fruit = Instantiate(Fruit.FruitPrefab,
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((i - 2) * 2, 0),
                     Quaternion.identity, requestFruits.transform);
-                request.Fruits.Add(wheat);
-            }
-
-            request.FruitsCount["beet"] = beetsCount;
-            for (var i = 0; i < beetsCount; i++)
-            {
-                var beet = Instantiate(Beet.BeetPrefab,
-                    SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((wheatCount + i - 2) * 2, 0),
-                    Quaternion.identity, requestFruits.transform);
-                request.Fruits.Add(beet);
+                request.Fruits.Add(fruit);
             }
 
             Objects.Requests.Add(coordRequest, request);
