@@ -8,22 +8,34 @@ using UnityEngine.Serialization;
 public class CreateSeeds : MonoBehaviour
 {
     public GameObject seedsObjs;
-    public int seedsCount = 20;
+    public int beetSeedsCount = 10;
+    public int wheatSeedsCount = 10;
     private GameObject platform;
     
     // Start is called before the first frame update
     void Start()
     {
         platform = Platform.PlatformObj;
-        var seedPrefab = Seed.SeedPrefab;
         var seeds = new List<Thing>();
-        for (var i = 0; i < seedsCount; i++)
+        
+        for (var i = 0; i < beetSeedsCount; i++)
         {
-            seeds.Add(new Seed()
+            seeds.Add(new BeetSeed()
             {
                 IsCarried = false,
-                Cords = GetRandomPlatformPosition(seedPrefab),
-                ThingObj = Instantiate(seedPrefab, GetRandomPlatformPosition(seedPrefab),
+                Cords = GetRandomPlatformPosition(BeetSeed.BeetSeedPrefab),
+                ThingObj = Instantiate(BeetSeed.BeetSeedPrefab, GetRandomPlatformPosition(BeetSeed.BeetSeedPrefab),
+                    Quaternion.identity, seedsObjs.transform),
+            });
+        }
+        
+        for (var i = 0; i < wheatSeedsCount; i++)
+        {
+            seeds.Add(new WheatSeed()
+            {
+                IsCarried = false,
+                Cords = GetRandomPlatformPosition(WheatSeed.WheatSeedPrefab),
+                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, GetRandomPlatformPosition(WheatSeed.WheatSeedPrefab),
                     Quaternion.identity, seedsObjs.transform),
             });
         }

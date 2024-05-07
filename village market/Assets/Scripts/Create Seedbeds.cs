@@ -22,7 +22,7 @@ public class CreateSeedbeds : MonoBehaviour
         var hoe = GetHoe(Objects.Instruments);
 
         if (hoe is null || !hoe.IsCarried) return;
-        if (!Input.GetKeyDown(KeyCode.Mouse0) || !Player.IsCarrying) return;
+        if (!(Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) || !Player.IsCarrying) return;
         if (Player.PlayerObj.transform.position.x > 0) return;
         
         var seedbedCoordinates = SquareSection.GetCurrentSectionCoordinates();

@@ -28,7 +28,7 @@ public class PourSeedbed : MonoBehaviour
             var cordSeedBed = SquareSection.ConvertSectionToVector(coords);
 
             if (Vector2.Distance(coordLeica, cordSeedBed) <= new Vector2(seedbedScale.x / 2, seedbedScale.y / 2).magnitude &&
-                Input.GetKeyDown(KeyCode.Mouse0) && !seedBeds[coords].IsPoured && leica.IsCarried)
+                (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) && !seedBeds[coords].IsPoured && leica.IsCarried)
             {
                 var seedbed = seedBeds[coords];
                 seedbed.IsPoured = true;

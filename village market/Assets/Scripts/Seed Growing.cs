@@ -31,14 +31,22 @@ public class SeedGrowing : MonoBehaviour
         {
             seed.GrowingFramesCount++;
             if (seed.GrowingFramesCount < Seed.FramesToGrow) continue;
-            
-            newFruitsInThisFrame.Add(new Fruit()
+
+            var newFruit = seed switch
             {
-                IsCarried = false,
-                Cords = seed.Cords,
-                ThingObj = Instantiate(Fruit.FruitPrefab, seed.Cords,
-                    Quaternion.identity, fruitObjs.transform),
-            });
+                BeetSeed => new Beet() {
+                    ThingObj = Instantiate(Beet.BeetPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform),
+                },
+                WheatSeed => new Wheat() {
+                    ThingObj = Instantiate(Wheat.WheatPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform),
+                },
+                _ => new Fruit() {
+                    ThingObj = Instantiate(Fruit.FruitPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform),
+                }
+            };
+            newFruit.Cords = seed.Cords;
+            
+            newFruitsInThisFrame.Add(newFruit);
             seedsGrewInThisFrame.Add(seed);
             Destroy(seed.ThingObj);
         }

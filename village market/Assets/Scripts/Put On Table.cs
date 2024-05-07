@@ -28,7 +28,7 @@ public class PutOnTable : MonoBehaviour
 
             if (Vector2.Distance(fruitCoords, coordsTable) <=
                 new Vector2(seedbedScale.x / 2, seedbedScale.y / 2).magnitude &&
-                Input.GetKeyDown(KeyCode.Mouse0))
+                (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)))
             {
                 if (fruit is Fruit)
                 {

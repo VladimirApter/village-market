@@ -18,7 +18,7 @@ public class ThingsCarrying : MonoBehaviour
     void Update()
     {
         var things = Objects.Things;
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.L))
         {
             if (!Player.IsCarrying)
             {
