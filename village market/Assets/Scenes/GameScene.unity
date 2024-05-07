@@ -369,6 +369,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1295264875}
+  speed: 10
+  animator: {fileID: 1295264880}
 --- !u!114 &1295264879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,6 +384,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1295264875}
+--- !u!95 &1295264880 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2618041446004350647, guid: 6d0c1214e14389747bf2e3efef65770d, type: 3}
+  m_PrefabInstance: {fileID: 574749948919713225}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1327752393
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,6 +675,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2618041446004350647, guid: 6d0c1214e14389747bf2e3efef65770d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 71f10cbc56c6d6441bfbc4612e3db87e, type: 2}
     - target: {fileID: 7948461372507537089, guid: 6d0c1214e14389747bf2e3efef65770d, type: 3}
       propertyPath: m_Name
       value: Player
