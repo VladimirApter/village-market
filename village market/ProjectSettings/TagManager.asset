@@ -50,6 +50,9 @@ TagManager:
   - name: things
     uniqueID: 918167937
     locked: 0
+  - name: instruments
+    uniqueID: 3060762389
+    locked: 0
   - name: player
     uniqueID: 2548753913
     locked: 0
