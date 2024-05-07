@@ -28,13 +28,22 @@ public class PutOnTable : MonoBehaviour
 
             if (Vector2.Distance(fruitCoords, coordsTable) <=
                 new Vector2(seedbedScale.x / 2, seedbedScale.y / 2).magnitude &&
-                Input.GetKeyDown(KeyCode.Mouse0))
+                (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)))
             {
-                if (fruit is Fruit)
+                switch (fruit)
                 {
-                    table.FruitsCount["fruit"]++;
-                    Objects.Fruits.Add(fruit);
+                    case Wheat:
+                        table.FruitsCount["wheat"]++;
+                        break;
+                    case Beet:
+                        table.FruitsCount["beet"]++;
+                        break;
+                    default:
+                        table.FruitsCount["fruit"]++;
+                        break;
                 }
+                
+                Objects.Fruits.Add(fruit);
 
                 fruit.ThingObj.transform.position = coordsTable;
                 fruit.Cords = coordsTable;
@@ -42,7 +51,6 @@ public class PutOnTable : MonoBehaviour
 
                 //table.IsBusy = true;
                 table.Fruits.Add(fruit);
-                table.IsBusy = true;
                 Player.IsCarrying = false;
             }
         }

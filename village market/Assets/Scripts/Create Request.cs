@@ -22,54 +22,39 @@ public class CreateRequest : MonoBehaviour
     {
         foreach (var coordRequest in coordsRequests)
         {
-            if (!Objects.Requests.ContainsKey(coordRequest))
+            if (Objects.Requests.ContainsKey(coordRequest)) continue;
+            
+            var rnd = new System.Random();
+            var request = new Request()
             {
-                var rnd = new System.Random();
-                var request = new Request()
-                {
-                    RequestObj = Instantiate(Request.RequestPrefab,
-                        SquareSection.ConvertSectionToVector(coordRequest),
-                        Quaternion.identity, requestObjs.transform)
-                };
-                request.FruitsCount["fruit"] = rnd.Next(1, 6);
-                for (int i = 0; i < request.FruitsCount["fruit"]; i++)
-                {
-                    var fruit = Instantiate(Fruit.FruitPrefab,
-                        SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((i - 2) * 2, 0),
-                        Quaternion.identity, requestFruits.transform);
-                    request.Fruits.Add(fruit);
-                }
+                RequestObj = Instantiate(Request.RequestPrefab,
+                    SquareSection.ConvertSectionToVector(coordRequest),
+                    Quaternion.identity, requestObjs.transform)
+            };
+            var fruitsCount = rnd.Next(1, 6);
+            var wheatCount = rnd.Next(0, fruitsCount);
+            var beetsCount = fruitsCount - wheatCount;
 
-                Objects.Requests.Add(coordRequest, request);
-            }
-        }
-
-        foreach (var requestCoords in Objects.Requests.Keys)
-        {
-            var request = Objects.Requests[requestCoords];
-            var table = Objects.Tables[(requestCoords.Item1 - 2, requestCoords.Item2)];
-
-            var isRequestCompleted = true; 
-            foreach (var fruit in request.FruitsCount.Keys)
-                if (request.FruitsCount[fruit] != table.FruitsCount[fruit])
-                    isRequestCompleted = false;
-            if (!isRequestCompleted) 
-                continue;
-
-            foreach (var fruit in table.Fruits)
+            request.FruitsCount["wheat"] = wheatCount;
+            
+            for (var i = 0; i < wheatCount; i++)
             {
-                Objects.Fruits.Remove(fruit);
-                Objects.Things.Remove(fruit);
-                Destroy(fruit.ThingObj);
+                var wheat = Instantiate(Wheat.WheatPrefab,
+                    SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((i - 2) * 2, 0),
+                    Quaternion.identity, requestFruits.transform);
+                request.Fruits.Add(wheat);
             }
-            table.Fruits.Clear();
-            table.FruitsCount = new Dictionary<string, int> { { "fruit", 0 } };
 
-            foreach (var fruit in request.Fruits)
-                Destroy(fruit);
-            Objects.Requests.Remove(requestCoords);
-            Destroy(request.RequestObj);
-            break;
+            request.FruitsCount["beet"] = beetsCount;
+            for (var i = 0; i < beetsCount; i++)
+            {
+                var beet = Instantiate(Beet.BeetPrefab,
+                    SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((wheatCount + i - 2) * 2, 0),
+                    Quaternion.identity, requestFruits.transform);
+                request.Fruits.Add(beet);
+            }
+
+            Objects.Requests.Add(coordRequest, request);
         }
     }
 }
