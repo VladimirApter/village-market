@@ -26,7 +26,7 @@ public class PlantSeed : MonoBehaviour
 
             if (Vector2.Distance(coordsSeed, coordsSeedBed) <=
                 new Vector2(seedbedScale.x / 2, seedbedScale.y / 2).magnitude &&
-                Input.GetKeyDown(KeyCode.Mouse0) && !seedBed.IsBusy)
+                (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) && !seedBed.IsBusy)
             {
                 seed.ThingObj.transform.position = coordsSeedBed;
                 seed.Cords = coordsSeedBed;
