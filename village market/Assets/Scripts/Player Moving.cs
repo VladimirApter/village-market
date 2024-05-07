@@ -1,50 +1,44 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using Model;
-using Unity.VisualScripting;
 using UnityEngine;
-using Quaternion = UnityEngine.Quaternion;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 public class PlayerMoving : MonoBehaviour
 {
     public GameObject player = Player.PlayerObj;
-    
+    [SerializeField] public float speed;
+    public Animator animator;
+    private Vector2 direction;
+
+    public static Quaternion rotation = new Quaternion(-5, 0, 0, 0);
+    private static readonly int Horizontal = Animator.StringToHash("Horizontal");
+    private static readonly int Vertical = Animator.StringToHash("Vertical");
+    private static readonly int Speed = Animator.StringToHash("Speed");
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        var moveDirection = GetMoveDirection();
-        if (moveDirection.x == 0 && moveDirection.y == 0) return;
-        var rotationDirection = Vector2.Angle(moveDirection, Vector2.right);
-        if (moveDirection.y < 0)
-            rotationDirection = -rotationDirection;
-        player.transform.eulerAngles = new Vector3(0, 0, (float)rotationDirection);
-        player.transform.Translate(Vector2.right * (Player.Speed * Time.deltaTime));
-    }
-
-    private Vector2 GetMoveDirection()
-    {
-        var moveDirection = new Vector2(0, 0);
+        direction.x = Input.GetAxisRaw("Horizontal");
+        direction.y = Input.GetAxisRaw("Vertical");
         
-        if (Input.GetKey(KeyCode.W))
-            moveDirection.y += 1;
-        if (Input.GetKey(KeyCode.A))
-            moveDirection.x += -1;
-        if (Input.GetKey(KeyCode.S))
-            moveDirection.y += -1;
-        if (Input.GetKey(KeyCode.D))
-            moveDirection.x += 1;
-
-        return moveDirection;
+        if (direction != new Vector2(0, 0))
+        {
+            animator.SetFloat(Horizontal, direction.x);
+            animator.SetFloat(Vertical, direction.y);
+            animator.SetFloat(Speed, direction.sqrMagnitude);
+        }
+        
+        var position = player.transform.position;
+        position = new Vector3(
+            position.x + direction.x * speed * Time.deltaTime,
+            position.y + direction.y * speed * Time.deltaTime,
+            position.z
+        );
+        player.transform.position = position;
     }
-
 }

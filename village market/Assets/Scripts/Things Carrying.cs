@@ -8,6 +8,8 @@ using UnityEngine;
 public class ThingsCarrying : MonoBehaviour
 {
     public GameObject player = Player.PlayerObj;
+    private Vector2 direction;
+    public static Vector2 lastDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -80,8 +82,22 @@ public class ThingsCarrying : MonoBehaviour
         }
 
         foreach (var thing in things.Where(x => x.IsCarried))
+        {
+            
+            direction.x = Input.GetAxisRaw("Horizontal");
+            direction.y = Input.GetAxisRaw("Vertical");
+            
+            if (direction == new Vector2(0, 0)) continue;
+            
+            var rotationDirection = Vector2.Angle(direction, Vector2.right);
+            
+            if (direction.y < 0) rotationDirection = -rotationDirection;
+            
+            thing.ThingObj.transform.eulerAngles = new Vector3(0, 0, rotationDirection);
             thing.ThingObj.transform.position =
-                player.transform.position + (player.transform.rotation * new Vector3(2.2f, 0, 0));
+                player.transform.position + (thing.ThingObj.transform.rotation * new Vector3(2.2f, 0, 0));
+        }
+            
     }
 
     private float CalculateDistancePlayerToThing(Thing t)
