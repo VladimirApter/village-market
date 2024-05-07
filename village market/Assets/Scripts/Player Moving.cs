@@ -10,6 +10,11 @@ public class PlayerMoving : MonoBehaviour
     public Animator animator;
     private Vector2 direction;
 
+    public static Quaternion rotation = new Quaternion(-5, 0, 0, 0);
+    private static readonly int Horizontal = Animator.StringToHash("Horizontal");
+    private static readonly int Vertical = Animator.StringToHash("Vertical");
+    private static readonly int Speed = Animator.StringToHash("Speed");
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,21 +25,20 @@ public class PlayerMoving : MonoBehaviour
     {
         direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");
-
-        animator.SetFloat("Horizontal", direction.x);
-        animator.SetFloat("Vertical", direction.y);
-        animator.SetFloat("Speed", direction.sqrMagnitude);
-
-        if (direction.x == 0 && direction.y == 0) return;
-
-        var rotationDirection = Vector2.SignedAngle(Vector2.up, direction);
-        //player.transform.eulerAngles = new Vector3(0, 0, rotationDirection);
-
-        // Перемещаем персонажа в соответствии с направлением
-        player.transform.position = new Vector3(
-            player.transform.position.x + direction.x * speed * Time.deltaTime,
-            player.transform.position.y + direction.y * speed * Time.deltaTime,
-            player.transform.position.z
+        
+        if (direction != new Vector2(0, 0))
+        {
+            animator.SetFloat(Horizontal, direction.x);
+            animator.SetFloat(Vertical, direction.y);
+            animator.SetFloat(Speed, direction.sqrMagnitude);
+        }
+        
+        var position = player.transform.position;
+        position = new Vector3(
+            position.x + direction.x * speed * Time.deltaTime,
+            position.y + direction.y * speed * Time.deltaTime,
+            position.z
         );
+        player.transform.position = position;
     }
 }
