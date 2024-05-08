@@ -34,11 +34,7 @@ public class PlayerMoving : MonoBehaviour
         }
         
         var position = player.transform.position;
-        position = new Vector3(
-            position.x + direction.x * speed * Time.deltaTime,
-            position.y + direction.y * speed * Time.deltaTime,
-            position.z
-        );
-        player.transform.position = position;
+        var movingDelta = new Vector3(direction.x ,direction.y).normalized * (speed * Time.deltaTime);
+        player.transform.position = position + movingDelta;
     }
 }
