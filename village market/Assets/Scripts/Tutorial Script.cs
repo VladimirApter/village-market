@@ -34,6 +34,6 @@ public class TutorialScript : MonoBehaviour
         if (Objects.Seedbeds.Any(x => x.Value.IsBusy)) myText2.text = textToDisplay7;
         if (Objects.Seedbeds.Any(x => x.Value.IsBusy) && Objects.Seedbeds.Any(x => x.Value.IsPoured)) myText2.text = textToDisplay9;
         if (Objects.Things.Any(x => x is Fruit)) myText2.text = textToDisplay11;
-        if (Objects.Tables.Any(x => x.Value.IsBusy)) myText2.text = textToDisplay12;
+        if (Objects.Tables.Any(x => x.Value.Fruits.Count > 0)) myText2.text = textToDisplay12;
     }
 }
