@@ -19,12 +19,14 @@ public class TutorialScript : MonoBehaviour
     private string textToDisplay9 = "Подождите, когда вырастет семечко";
     private string textToDisplay11 = "Возьмите и положите плод на стол";
     private string textToDisplay12 = "Поздравляем! Вы прошли обучение";
+    public static bool isTutorialFinished;
 
 
     void Start()
     {
         myText1.text = textToDisplay1;
         myText2.text = textToDisplay3;
+        isTutorialFinished = false;
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class TutorialScript : MonoBehaviour
         if (Objects.Seedbeds.Any(x => x.Value.IsBusy)) myText2.text = textToDisplay7;
         if (Objects.Seedbeds.Any(x => x.Value.IsBusy) && Objects.Seedbeds.Any(x => x.Value.IsPoured)) myText2.text = textToDisplay9;
         if (Objects.Things.Any(x => x is Fruit)) myText2.text = textToDisplay11;
-        if (Objects.Tables.Any(x => x.Value.Fruits.Count > 0)) myText2.text = textToDisplay12;
+        //Tables.Any(x => x.Value.Fruits.Count > 0)
+        if (isTutorialFinished) myText2.text = textToDisplay12;
     }
 }

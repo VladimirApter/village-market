@@ -967,6 +967,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1793364623}
   - component: {fileID: 1793364624}
+  - component: {fileID: 1793364625}
   m_Layer: 0
   m_Name: Requests
   m_TagString: Untagged
@@ -1004,6 +1005,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requestObjs: {fileID: 1793364621}
   requestFruits: {fileID: 1609785543}
+--- !u!114 &1793364625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793364621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027a87f76bc5efb4c9bf059dc75a6332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2119057280
 PrefabInstance:
   m_ObjectHideFlags: 0

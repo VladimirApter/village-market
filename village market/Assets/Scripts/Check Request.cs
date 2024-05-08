@@ -28,6 +28,7 @@ public class CheckRequest : MonoBehaviour
             }
             if (!isRequestCompleted) 
                 continue;
+            TutorialScript.isTutorialFinished = true;
 
             foreach (var fruit in table.Fruits)
             {
