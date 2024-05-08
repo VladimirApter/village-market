@@ -21,8 +21,8 @@ public class CreateSeedsForTutorial : MonoBehaviour
         {
             seeds.Add(new Seed()
             {
-                Cords = GetRandomPlatformPosition(Seed.SeedPrefab),
-                ThingObj = Instantiate(Seed.SeedPrefab, GetRandomPlatformPosition(Seed.SeedPrefab),
+                Cords = GetRandomPlatformPosition(),
+                ThingObj = Instantiate(Seed.SeedPrefab, GetRandomPlatformPosition(),
                     Quaternion.identity, seedsObjs.transform),
             });
         }
@@ -30,12 +30,11 @@ public class CreateSeedsForTutorial : MonoBehaviour
         Objects.Things.AddRange(seeds);
     }
 
-    private Vector2 GetRandomPlatformPosition(GameObject obj)
+    private Vector2 GetRandomPlatformPosition()
     {
-        var objScale = obj.transform.localScale;
         var platformScale = platform.transform.localScale;
-        var maxValueX = (int)((platformScale.x - objScale.x) / 2);
-        var maxValueY = (int)((platformScale.y - objScale.y) / 2);
+        var maxValueX = (int)((platformScale.x - 5) / 2);
+        var maxValueY = (int)((platformScale.y - 5) / 2);
         var rnd = new System.Random();
         //return new Vector2(rnd.Next(-maxValueX, maxValueX), rnd.Next(-maxValueY, maxValueY));
         return new Vector2(rnd.Next(-maxValueX, 0), rnd.Next(-maxValueY, maxValueY));

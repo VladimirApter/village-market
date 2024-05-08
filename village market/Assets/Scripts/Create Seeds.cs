@@ -22,7 +22,7 @@ public class CreateSeeds : MonoBehaviour
         {
             seeds.Add(new BeetSeed()
             {
-                ThingObj = Instantiate(BeetSeed.BeetSeedPrefab, GetRandomPlatformPosition(BeetSeed.BeetSeedPrefab),
+                ThingObj = Instantiate(BeetSeed.BeetSeedPrefab, GetRandomPlatformPosition(),
                     Quaternion.identity, seedsObjs.transform),
             });
         }
@@ -31,7 +31,7 @@ public class CreateSeeds : MonoBehaviour
         {
             seeds.Add(new WheatSeed()
             {
-                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, GetRandomPlatformPosition(WheatSeed.WheatSeedPrefab),
+                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, GetRandomPlatformPosition(),
                     Quaternion.identity, seedsObjs.transform),
             });
         }
@@ -41,12 +41,11 @@ public class CreateSeeds : MonoBehaviour
         Objects.Things.AddRange(seeds);
     }
 
-    private Vector2 GetRandomPlatformPosition(GameObject obj)
+    private Vector2 GetRandomPlatformPosition()
     {
-        var objScale = obj.transform.localScale;
         var platformScale = platform.transform.localScale;
-        var maxValueX = (int)((platformScale.x - objScale.x) / 2);
-        var maxValueY = (int)((platformScale.y - objScale.y) / 2);
+        var maxValueX = (int)((platformScale.x - 5) / 2);
+        var maxValueY = (int)((platformScale.y - 5) / 2);
         var rnd = new System.Random();
         //return new Vector2(rnd.Next(-maxValueX, maxValueX), rnd.Next(-maxValueY, maxValueY));
         return new Vector2(rnd.Next(-maxValueX, 0), rnd.Next(-maxValueY, maxValueY));

@@ -17,7 +17,7 @@ public class CheckRequest : MonoBehaviour
         foreach (var requestCoords in Objects.Requests.Keys)
         {
             var request = Objects.Requests[requestCoords];
-            var table = Objects.Tables[(requestCoords.Item1 - 2, requestCoords.Item2)];
+            var table = Objects.Tables[(requestCoords.Item1 - 3, requestCoords.Item2)];
 
             var isRequestCompleted = true; 
             foreach (var fruit in request.FruitsCount.Keys)
