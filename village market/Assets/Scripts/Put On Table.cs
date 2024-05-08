@@ -16,7 +16,6 @@ public class PutOnTable : MonoBehaviour
     {
         var tables = Objects.Tables;
         var things = Objects.Things;
-        var seedbedScale = Table.TablePrefab.transform.localScale;
         var fruit = (Fruit)things.FirstOrDefault(x => x.IsCarried && x is Fruit);
 
         if (fruit == null) return;
@@ -27,7 +26,7 @@ public class PutOnTable : MonoBehaviour
             var coordsTable = table.Coords;
 
             if (Vector2.Distance(fruitCoords, coordsTable) <=
-                new Vector2(seedbedScale.x / 2, seedbedScale.y / 2).magnitude &&
+                new Vector2(SquareSection.SquareSectionScale.x / 2, SquareSection.SquareSectionScale.y / 2).magnitude &&
                 (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)))
             {
                 switch (fruit)

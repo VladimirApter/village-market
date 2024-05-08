@@ -14,7 +14,6 @@ public class PlantSeed : MonoBehaviour
     {
         var seedBeds = Objects.Seedbeds;
         var things = Objects.Things;
-        var seedbedScale = Seedbed.SeedbedPrefab.transform.localScale;
         var seed = (Seed)things.FirstOrDefault(x => x.IsCarried && x is Seed);
 
         if (seed == null) return;
@@ -23,9 +22,9 @@ public class PlantSeed : MonoBehaviour
         foreach (var seedBed in seedBeds.Values)
         {
             var coordsSeedBed = seedBed.Coords;
-
+            
             if (Vector2.Distance(coordsSeed, coordsSeedBed) <=
-                new Vector2(seedbedScale.x / 2, seedbedScale.y / 2).magnitude &&
+                new Vector2(SquareSection.SquareSectionScale.x / 2, SquareSection.SquareSectionScale.y / 2).magnitude &&
                 (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) && !seedBed.IsBusy)
             {
                 seed.ThingObj.transform.position = coordsSeedBed;
