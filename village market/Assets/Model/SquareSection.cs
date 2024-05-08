@@ -10,7 +10,7 @@ namespace Model
     {
         public bool IsBusy { get; set; }
         public UnityEngine.Vector2 Coords { get; set; }
-        public static Vector3 SquareSectionScale = new(5, 5, 1);
+        public static Vector3 SquareSectionScale = new(4, 4, 1);
         public static (int, int) GetCurrentSectionCoordinates()
         {
             var playerPos = Player.PlayerObj.transform.position;
