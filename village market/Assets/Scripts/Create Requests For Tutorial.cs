@@ -10,7 +10,7 @@ public class CreateRequestsForTutorial : MonoBehaviour
     public GameObject requestObjs;
     public GameObject requestFruits;
 
-    private readonly (int, int)[] coordsRequests = new[] { (10, -1), (10, 2), (10, 4), (10, -3), (10, -5) };
+    private readonly (int, int)[] coordsRequests = new[] { (10, -1) };
 
     // Start is called before the first frame update
     void Start()

@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class CreateSeedsForTutorial : MonoBehaviour
 {
     public GameObject seedsObjs;
-    public int seedsCount = 20;
+    public int seedsCount = 1;
     private GameObject platform;
     
     // Start is called before the first frame update
@@ -21,23 +21,13 @@ public class CreateSeedsForTutorial : MonoBehaviour
         {
             seeds.Add(new Seed()
             {
-                Cords = GetRandomPlatformPosition(),
-                ThingObj = Instantiate(Seed.SeedPrefab, GetRandomPlatformPosition(),
+                Cords = platform.transform.position,
+                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, SquareSection.ConvertSectionToVector((-2, 4)),//GetRandomPlatformPosition(),
                     Quaternion.identity, seedsObjs.transform),
             });
         }
 
         Objects.Things.AddRange(seeds);
-    }
-
-    private Vector2 GetRandomPlatformPosition()
-    {
-        var platformScale = platform.transform.localScale;
-        var maxValueX = (int)((platformScale.x - 5) / 2);
-        var maxValueY = (int)((platformScale.y - 5) / 2);
-        var rnd = new System.Random();
-        //return new Vector2(rnd.Next(-maxValueX, maxValueX), rnd.Next(-maxValueY, maxValueY));
-        return new Vector2(rnd.Next(-maxValueX, 0), rnd.Next(-maxValueY, maxValueY));
     }
 
     // Update is called once per frame
