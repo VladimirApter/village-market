@@ -29,9 +29,15 @@ public class SeedGrowing : MonoBehaviour
         
         foreach (var seed in Objects.Things.OfType<Seed>().Where(seed => seed.IsPlanted && seed.Seedbed.IsPoured))
         {
+            if (!Objects.Seedbeds.Values.Contains(seed.Seedbed))
+            {
+                seed.IsPlanted = false;
+                seed.GrowingFramesCount = 0;
+                return;
+            }
             seed.GrowingFramesCount++;
             if (seed.GrowingFramesCount < Seed.FramesToGrow) continue;
-
+            
             var newFruit = seed switch
             {
                 BeetSeed => new Beet() {

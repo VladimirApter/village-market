@@ -8,7 +8,11 @@ namespace Model
         public static int FramesToGrow { get; } = 300;
         public Seedbed Seedbed { get; set; }
 
-        public bool IsPlanted => Seedbed != null;
+        public bool IsPlanted
+        {
+            get => Seedbed != null;
+            set { }
+        }
 
         public bool IsGrowing { get; set; }
         public int GrowingFramesCount { get; set; }
