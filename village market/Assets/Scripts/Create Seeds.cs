@@ -22,7 +22,7 @@ public class CreateSeeds : MonoBehaviour
         {
             seeds.Add(new BeetSeed()
             {
-                ThingObj = Instantiate(BeetSeed.BeetSeedPrefab, GetRandomPlatformPosition(),
+                ThingObj = Instantiate(BeetSeed.BeetSeedPrefab, SquareSection.ConvertSectionToVector((-4, 4)),//GetRandomPlatformPosition(),
                     Quaternion.identity, seedsObjs.transform),
             });
         }
@@ -31,7 +31,7 @@ public class CreateSeeds : MonoBehaviour
         {
             seeds.Add(new WheatSeed()
             {
-                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, GetRandomPlatformPosition(),
+                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, SquareSection.ConvertSectionToVector((-2, 4)),//GetRandomPlatformPosition(),
                     Quaternion.identity, seedsObjs.transform),
             });
         }

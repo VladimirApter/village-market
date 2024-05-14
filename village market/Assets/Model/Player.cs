@@ -8,6 +8,6 @@ namespace Model
         public static float Speed { get; set; } = 30;
         public static float RotationSpeed { get; set; } = 1;
         public static bool IsCarrying { get; set; } = false;
-        public static float TakingRadius { get; set; } = 3;
+        public static float TakingRadius { get; set; } = 5;
     }
 }

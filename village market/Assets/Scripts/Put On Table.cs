@@ -25,7 +25,7 @@ public class PutOnTable : MonoBehaviour
         {
             var coordsTable = table.Coords;
 
-            if (Vector2.Distance(fruitCoords, coordsTable) <=
+            if (Vector2.Distance(fruitCoords, coordsTable + new Vector2(0, 1.5f)) <=
                 new Vector2(SquareSection.SquareSectionScale.x / 2, SquareSection.SquareSectionScale.y / 2).magnitude &&
                 (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)))
             {

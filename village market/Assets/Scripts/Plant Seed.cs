@@ -23,7 +23,7 @@ public class PlantSeed : MonoBehaviour
         {
             var coordsSeedBed = seedBed.Coords;
             
-            if (Vector2.Distance(coordsSeed, coordsSeedBed) <=
+            if (Vector2.Distance(coordsSeed, coordsSeedBed + new Vector2(0, 1.5f)) <=
                 new Vector2(SquareSection.SquareSectionScale.x / 2, SquareSection.SquareSectionScale.y / 2).magnitude &&
                 (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) && !seedBed.IsBusy)
             {
