@@ -22,7 +22,12 @@ public class DestroySeedbed : MonoBehaviour
                 new Vector2(SquareSection.SquareSectionScale.x / 2, SquareSection.SquareSectionScale.y / 2).magnitude &&
                 seedbed.Value.CanDestroy)
             {
-                Destroy(Objects.Seedbeds[seedbed.Key].SeedbedObj);
+                seedbed.Value.DestroyFramesCount++;
+            }
+
+            if (seedbed.Value.DestroyFramesCount >= Seedbed.FramesToDestroy)
+            {
+                Destroy(seedbed.Value.SeedbedObj);
                 Objects.Seedbeds.Remove(seedbed.Key);
                 return;
             }

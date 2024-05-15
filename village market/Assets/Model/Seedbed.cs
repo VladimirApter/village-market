@@ -8,8 +8,10 @@ namespace Model
     {
         public GameObject SeedbedObj { get; set; }
         public static GameObject SeedbedPrefab { get; set; }
+        public static int FramesToDestroy { get; } = 30;
         public bool IsPoured { get; set; }
         public bool CanDestroy { get; set; }
+        public int DestroyFramesCount { get; set; }
         public IEnumerator WaitAndCanDestroy()
         {
             yield return new WaitForSeconds(2f);
