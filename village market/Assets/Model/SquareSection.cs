@@ -14,7 +14,8 @@ namespace Model
         {
             var playerPos = Player.PlayerObj.transform.position;
             var x = Math.Max((int)(Math.Abs(playerPos.x) / SquareSectionScale.x) + 1, 1) * Math.Sign(playerPos.x);
-            var y = Math.Max((int)(Math.Abs(playerPos.y) / SquareSectionScale.y) + 1, 1) * Math.Sign(playerPos.y);
+            var ySign = playerPos.y == 0 ? 1 : Math.Sign(playerPos.y);
+            var y = Math.Max((int)(Math.Abs(playerPos.y) / SquareSectionScale.y) + 1, 1) * ySign;
 
             return (x, y);
         }

@@ -25,8 +25,7 @@ public class CreateSeedbeds : MonoBehaviour
         if (Player.PlayerObj.transform.position.x > 0) return;
 
         var seedbedCoordinates = SquareSection.GetCurrentSectionCoordinates();
-
-        if (Objects.Tables.ContainsKey(seedbedCoordinates)) return;
+        
         if (Objects.Seedbeds.Keys.Contains(seedbedCoordinates))
         {
             Destroy(Objects.Seedbeds[seedbedCoordinates].SeedbedObj);
