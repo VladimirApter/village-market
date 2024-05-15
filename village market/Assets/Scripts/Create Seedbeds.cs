@@ -20,7 +20,6 @@ public class CreateSeedbeds : MonoBehaviour
     void Update()
     {
         var hoe = GetHoe(Objects.Instruments);
-        DestroySeedbed();
         if (hoe is null || !hoe.IsCarried) return;
         if (!(Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) || !Player.IsCarrying) return;
         if (Player.PlayerObj.transform.position.x > 0) return;
@@ -48,23 +47,6 @@ public class CreateSeedbeds : MonoBehaviour
         };
         StartCoroutine(newSeedbed.WaitAndCanDestroy());
         Objects.Seedbeds.Add(seedbedCoordinates, newSeedbed);
-    }
-
-    private void DestroySeedbed()
-    {
-        var playerPos = Player.PlayerObj.transform.position;
-        foreach (var seedbed in Objects.Seedbeds)
-        {
-            var seedbedCoords = SquareSection.ConvertSectionToVector(seedbed.Key);
-            if (Vector2.Distance(seedbedCoords + new Vector2(0, 1.5f), playerPos) <=
-                new Vector2(SquareSection.SquareSectionScale.x / 2, SquareSection.SquareSectionScale.y / 2).magnitude &&
-                seedbed.Value.CanDestroy)
-            {
-                Destroy(Objects.Seedbeds[seedbed.Key].SeedbedObj);
-                Objects.Seedbeds.Remove(seedbed.Key);
-                return;
-            }
-        }
     }
 
     private Hoe GetHoe(List<Instrument> instruments)
