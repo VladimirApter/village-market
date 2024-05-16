@@ -9,7 +9,8 @@ public class TutorialScript : MonoBehaviour
 {
     public Text myText1;
     public Text myText2;
-
+    public Image myImage;
+    
     private string textToDisplay1 = "Правая кнопка мыши - брать предметы\n" +
                                     "Левая кнопка мыши - действие предметом в руке";
 
@@ -32,6 +33,7 @@ public class TutorialScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        myImage.transform.position = Player.PlayerObj.transform.position+new Vector3(0, 10, 0);
         if (Objects.Seedbeds.Count > 0) myText2.text = textToDisplay5;
         if (Objects.Seedbeds.Any(x => x.Value.IsBusy)) myText2.text = textToDisplay7;
         if (Objects.Seedbeds.Any(x => x.Value.IsBusy) && Objects.Seedbeds.Any(x => x.Value.IsPoured)) myText2.text = textToDisplay9;
