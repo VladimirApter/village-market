@@ -9,5 +9,8 @@ namespace Model
         public static GameObject RequestPrefab { get; set; }
         public List<GameObject> Fruits { get; set; } = new();
         public Dictionary<string, int> FruitsCount = new() { { "beet", 0 }, { "wheat", 0 }, { "fruit", 0 } };
+        public int Price { get; set; }
+        public int FramesToDestroy { get; set; }
+        public int DestroyFramesCount { get; set; }
     }
 }

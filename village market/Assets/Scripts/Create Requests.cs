@@ -25,18 +25,20 @@ public class CreateRequests : MonoBehaviour
             if (Objects.Requests.ContainsKey(coordRequest)) continue;
             
             var rnd = new System.Random();
-            var request = new Request()
-            {
-                RequestObj = Instantiate(Request.RequestPrefab,
-                    SquareSection.ConvertSectionToVector(coordRequest),
-                    Quaternion.identity, requestObjs.transform)
-            };
             var fruitsCount = rnd.Next(1, 6);
             var wheatCount = rnd.Next(0, fruitsCount);
             var beetsCount = fruitsCount - wheatCount;
-
-            request.FruitsCount["wheat"] = wheatCount;
             
+            var request = new Request
+            {
+                RequestObj = Instantiate(Request.RequestPrefab,
+                    SquareSection.ConvertSectionToVector(coordRequest),
+                    Quaternion.identity, requestObjs.transform),
+                FruitsCount = { ["wheat"] = wheatCount, ["beet"] = beetsCount },
+                Price = fruitsCount * 100,
+                FramesToDestroy = 1000 * fruitsCount
+            };
+
             for (var i = 0; i < wheatCount; i++)
             {
                 var wheat = Instantiate(Wheat.WheatPrefab,
@@ -45,7 +47,6 @@ public class CreateRequests : MonoBehaviour
                 request.Fruits.Add(wheat);
             }
 
-            request.FruitsCount["beet"] = beetsCount;
             for (var i = 0; i < beetsCount; i++)
             {
                 var beet = Instantiate(Beet.BeetPrefab,

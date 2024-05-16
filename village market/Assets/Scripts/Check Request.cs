@@ -28,6 +28,7 @@ public class CheckRequest : MonoBehaviour
             }
             if (!isRequestCompleted) 
                 continue;
+            Player.TotalScore += request.Price;
             TutorialScript.isTutorialFinished = true;
 
             foreach (var fruit in table.Fruits)

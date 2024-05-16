@@ -9,5 +9,6 @@ namespace Model
         public static float RotationSpeed { get; set; } = 1;
         public static bool IsCarrying { get; set; } = false;
         public static float TakingRadius { get; set; } = 5;
+        public static int TotalScore = 0;
     }
 }
