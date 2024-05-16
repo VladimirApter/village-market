@@ -10,5 +10,6 @@ namespace Model
         public static bool IsCarrying { get; set; } = false;
         public static float TakingRadius { get; set; } = 5;
         public static int TotalScore = 0;
+        public static string Name { get; set; }
     }
 }

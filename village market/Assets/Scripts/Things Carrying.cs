@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Model;
 using UnityEngine;
@@ -9,7 +6,7 @@ public class ThingsCarrying : MonoBehaviour
 {
     public GameObject player = Player.PlayerObj;
     private Vector2 direction;
-    public static Vector2 lastDirection;
+    private float rotationDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +66,6 @@ public class ThingsCarrying : MonoBehaviour
                                 table.Fruits.Remove((Fruit)closestThing);
                             }
                         }
-                        
                     }
                 }
             }
@@ -81,23 +77,26 @@ public class ThingsCarrying : MonoBehaviour
             }
         }
 
+        direction.x = Input.GetAxisRaw("Horizontal");
+        direction.y = Input.GetAxisRaw("Vertical");
+
+        if (direction.y != 0) rotationDirection = direction.y < 0 ? (float)Direction.Down : (float)Direction.Up;
+        if (direction.x != 0) rotationDirection = direction.x < 0 ? (float)Direction.Left : (float)Direction.Right;
+
         foreach (var thing in things.Where(x => x.IsCarried))
         {
-            
-            direction.x = Input.GetAxisRaw("Horizontal");
-            direction.y = Input.GetAxisRaw("Vertical");
-            
-            if (direction == new Vector2(0, 0)) continue;
-            
-            var rotationDirection = Vector2.Angle(direction, Vector2.right);
-            
-            if (direction.y < 0) rotationDirection = -rotationDirection;
-            
             thing.ThingObj.transform.eulerAngles = new Vector3(0, 0, rotationDirection);
             thing.ThingObj.transform.position =
                 player.transform.position + (thing.ThingObj.transform.rotation * new Vector3(2.2f, 0, 0));
         }
-            
+    }
+
+    private enum Direction
+    {
+        Up = 90,
+        Down = -90,
+        Left = -180,
+        Right = 0
     }
 
     private float CalculateDistancePlayerToThing(Thing t)
