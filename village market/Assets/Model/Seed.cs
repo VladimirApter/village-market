@@ -5,7 +5,7 @@ namespace Model
     public class Seed : Thing
     {
         public static GameObject SeedPrefab { get; set; }
-        public static int FramesToGrow { get; } = 300;
+        public int FramesToGrow { get; } = 300;
         public Seedbed Seedbed { get; set; }
 
         public bool IsPlanted

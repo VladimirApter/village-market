@@ -6041,6 +6041,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 2618041446004350647, guid: 6d0c1214e14389747bf2e3efef65770d, type: 3}
   m_PrefabInstance: {fileID: 574749948919713225}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &1295264881 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8200559081822837319, guid: 6d0c1214e14389747bf2e3efef65770d, type: 3}
+  m_PrefabInstance: {fileID: 574749948919713225}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1327752393
 GameObject:
   m_ObjectHideFlags: 0
@@ -6071,6 +6076,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitObjs: {fileID: 1327752393}
+  newSprites:
+  - {fileID: 811017752, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: 982025143, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: -822426590, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: -597172053, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: 1047326833, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: 112088213, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: -1712146294, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: -1181306476, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
 --- !u!4 &1327752395
 Transform:
   m_ObjectHideFlags: 0
@@ -11380,6 +11394,7 @@ GameObject:
   - component: {fileID: 1998476251}
   - component: {fileID: 1998476252}
   - component: {fileID: 1998476253}
+  - component: {fileID: 1998476254}
   m_Layer: 0
   m_Name: Seedbeds
   m_TagString: Untagged
@@ -11451,6 +11466,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99bb7c55a0631e47a42fe3f00316121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1998476254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998476248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a8231decf9eb846b0641cb41b02633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1295264881}
+  newSprites:
+  - {fileID: 811017752, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: 982025143, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  timeInterval: 2
 --- !u!1 &2004731545
 GameObject:
   m_ObjectHideFlags: 0

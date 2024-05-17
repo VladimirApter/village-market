@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,12 @@ public class SeedGrowing : MonoBehaviour
     public GameObject fruitObjs;
     private readonly List<Seed> seedsGrewInThisFrame = new();
     private readonly List<Fruit> newFruitsInThisFrame = new();
+
+    public Sprite[] newSprites;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -26,7 +29,7 @@ public class SeedGrowing : MonoBehaviour
 
         seedsGrewInThisFrame.Clear();
         newFruitsInThisFrame.Clear();
-        
+
         foreach (var seed in Objects.Things.OfType<Seed>().Where(seed => seed.IsPlanted && seed.Seedbed.IsPoured))
         {
             if (!Objects.Seedbeds.Values.Contains(seed.Seedbed))
@@ -35,27 +38,44 @@ public class SeedGrowing : MonoBehaviour
                 seed.GrowingFramesCount = 0;
                 return;
             }
+
             seed.GrowingFramesCount++;
-            if (seed.GrowingFramesCount < Seed.FramesToGrow) continue;
-            
+            var spriteIndex = seed switch
+            {
+                WheatSeed => (int)Math.Floor(3.99 *
+                                             (1 - (seed.FramesToGrow - seed.GrowingFramesCount) /
+                                                 (double)seed.FramesToGrow)),
+                BeetSeed => (int)Math.Floor(4 +
+                                            3.99 * (1 - (seed.FramesToGrow - seed.GrowingFramesCount) /
+                                                (double)seed.FramesToGrow)),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
+            seed.ThingObj.GetComponent<SpriteRenderer>().sprite = newSprites[spriteIndex];
+
+            if (seed.GrowingFramesCount < seed.FramesToGrow) continue;
+
             var newFruit = seed switch
             {
-                BeetSeed => new Beet() {
+                BeetSeed => new Beet()
+                {
                     ThingObj = Instantiate(Beet.BeetPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform),
                 },
-                WheatSeed => new Wheat() {
+                WheatSeed => new Wheat()
+                {
                     ThingObj = Instantiate(Wheat.WheatPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform),
                 },
-                _ => new Fruit() {
+                _ => new Fruit()
+                {
                     ThingObj = Instantiate(Fruit.FruitPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform),
                 }
             };
             newFruit.Cords = seed.Cords;
-            
+
             newFruitsInThisFrame.Add(newFruit);
             seedsGrewInThisFrame.Add(seed);
             Destroy(seed.ThingObj);
-            
+
             seed.Seedbed.IsPoured = false;
             seed.Seedbed.SeedbedObj.GetComponent<SpriteRenderer>().color =
                 Seedbed.SeedbedPrefab.GetComponent<SpriteRenderer>().color;
