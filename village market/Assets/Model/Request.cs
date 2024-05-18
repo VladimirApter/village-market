@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Slider = UnityEngine.UIElements.Slider;
 
 namespace Model
 {
@@ -12,5 +14,7 @@ namespace Model
         public int Price { get; set; }
         public int FramesToDestroy { get; set; }
         public int DestroyFramesCount { get; set; }
+        public GameObject DestroyBar { get; set; }
+        public static GameObject DestroyBarPrefab { get; set; }
     }
 }

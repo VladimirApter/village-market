@@ -44,6 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: game indicators
+    uniqueID: 4022196667
+    locked: 0
   - name: seedbeds
     uniqueID: 2992920513
     locked: 0

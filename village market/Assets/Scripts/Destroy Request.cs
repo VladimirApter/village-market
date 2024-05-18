@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Model;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Slider = UnityEngine.UI.Slider;
 
 public class DestroyRequest : MonoBehaviour
 {
@@ -18,6 +20,11 @@ public class DestroyRequest : MonoBehaviour
         foreach (var (requestCoords, request) in Objects.Requests)
         {
             request.DestroyFramesCount++;
+            if (request.DestroyBar != null)
+            {
+                var slider = request.DestroyBar.GetComponent<Slider>();
+                slider.value = 1 - (float)request.DestroyFramesCount / request.FramesToDestroy;
+            }
             
             if (request.DestroyFramesCount >= request.FramesToDestroy)
                 requestsToDestroy[requestCoords] = request;

@@ -32,7 +32,7 @@ public class CreateRequestsForTutorial : MonoBehaviour
                     Quaternion.identity, requestObjs.transform),
                 FruitsCount = { ["wheat"] = fruitsCount },
                 Price = fruitsCount * 100,
-                FramesToDestroy = 1000 * fruitsCount
+                FramesToDestroy = 10000000 * fruitsCount
             };
 
             for (var i = 0; i < fruitsCount; i++)

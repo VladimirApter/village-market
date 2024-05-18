@@ -4,17 +4,21 @@ using System.Linq;
 using System.Text;
 using Model;
 using UnityEngine;
+using UnityEngine.UI;
+using Slider = UnityEngine.UIElements.Slider;
 
 public class CreateRequests : MonoBehaviour
 {
     public GameObject requestObjs;
     public GameObject requestFruits;
+    public GameObject destroyBars;
 
     private readonly (int, int)[] coordsRequests = new[] { (10, -1), (10, 2), (10, 4), (10, -3), (10, -5) };
 
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -36,7 +40,10 @@ public class CreateRequests : MonoBehaviour
                     Quaternion.identity, requestObjs.transform),
                 FruitsCount = { ["wheat"] = wheatCount, ["beet"] = beetsCount },
                 Price = fruitsCount * 100,
-                FramesToDestroy = 1000 * fruitsCount
+                FramesToDestroy = 1000 * fruitsCount,
+                DestroyBar = Instantiate(Request.DestroyBarPrefab,
+                    SquareSection.ConvertSectionToVector(coordRequest) + new Vector2(8, 0),
+                    Quaternion.identity, destroyBars.transform)
             };
 
             for (var i = 0; i < wheatCount; i++)
