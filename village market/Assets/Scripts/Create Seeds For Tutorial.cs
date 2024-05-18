@@ -19,9 +19,8 @@ public class CreateSeedsForTutorial : MonoBehaviour
         
         for (var i = 0; i < seedsCount; i++)
         {
-            seeds.Add(new Seed()
+            seeds.Add(new WheatSeed()
             {
-                Cords = platform.transform.position,
                 ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, SquareSection.ConvertSectionToVector((-2, 4)),//GetRandomPlatformPosition(),
                     Quaternion.identity, seedsObjs.transform),
             });

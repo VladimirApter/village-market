@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Model;
 using UnityEngine;
@@ -6,7 +7,6 @@ public class ThingsCarrying : MonoBehaviour
 {
     public GameObject player = Player.PlayerObj;
     private Vector2 direction;
-    private float rotationDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -72,31 +72,41 @@ public class ThingsCarrying : MonoBehaviour
             else
             {
                 Player.IsCarrying = false;
-                foreach (var thing in things.Where(x => x.IsCarried))
+                var thing = things.FirstOrDefault(x => x.IsCarried);
+                if (thing != null)
+                {
                     thing.IsCarried = false;
+                    
+                    var spriteRenderer = thing.ThingObj.GetComponent<SpriteRenderer>();
+                    spriteRenderer.sortingLayerName = "things";
+                    spriteRenderer.sortingOrder = 0;
+                }
             }
         }
 
         direction.x = Input.GetAxisRaw("Horizontal");
         direction.y = Input.GetAxisRaw("Vertical");
-
-        if (direction.y != 0) rotationDirection = direction.y < 0 ? (float)Direction.Down : (float)Direction.Up;
-        if (direction.x != 0) rotationDirection = direction.x < 0 ? (float)Direction.Left : (float)Direction.Right;
+        if (direction is { x: 0, y: 0 })
+            return;
 
         foreach (var thing in things.Where(x => x.IsCarried))
         {
-            thing.ThingObj.transform.eulerAngles = new Vector3(0, 0, rotationDirection);
-            thing.ThingObj.transform.position =
-                player.transform.position + (thing.ThingObj.transform.rotation * new Vector3(2.2f, 0, 0));
+            thing.ThingObj.transform.position = player.transform.position + (Vector3)direction.normalized * 2.2f;
+            
+            var spriteRenderer = thing.ThingObj.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingLayerName = "player";
+            spriteRenderer.sortingOrder = 0;
+            spriteRenderer.flipX = false;
+            if (Math.Abs(direction.y + 1f) < 1e-3)
+            {
+                spriteRenderer.sortingLayerName = "player";
+                spriteRenderer.sortingOrder = 2;
+            }
+            if (Math.Abs(direction.x + 1f) < 1e-3)
+                spriteRenderer.flipX = true;
+            
+            break;
         }
-    }
-
-    private enum Direction
-    {
-        Up = 90,
-        Down = -90,
-        Left = -180,
-        Right = 0
     }
 
     private float CalculateDistancePlayerToThing(Thing t)

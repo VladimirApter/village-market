@@ -14,22 +14,23 @@ public class DestroyRequest : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(Player.TotalScore);
-        foreach (var pair in Objects.Requests)
+        var requestsToDestroy = new Dictionary<(int, int), Request>();
+        foreach (var (requestCoords, request) in Objects.Requests)
         {
-            var requestCoords = pair.Key;
-            var request = pair.Value;
-
             request.DestroyFramesCount++;
             
             if (request.DestroyFramesCount >= request.FramesToDestroy)
-            {
-                Player.TotalScore -= request.Price;
-                foreach (var fruit in request.Fruits)
-                    Destroy(fruit);
-                Objects.Requests.Remove(requestCoords);
-                Destroy(request.RequestObj);
-            }
+                requestsToDestroy[requestCoords] = request;
         }
+
+        foreach (var (requestCoords, request) in requestsToDestroy)
+        {
+            Player.TotalScore -= request.Price;
+            foreach (var fruit in request.Fruits)
+                Destroy(fruit);
+            Objects.Requests.Remove(requestCoords);
+            Destroy(request.RequestObj);
+        }
+        
     }
 }

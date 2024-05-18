@@ -7848,6 +7848,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitObjs: {fileID: 1347352198}
+  newSprites:
+  - {fileID: 811017752, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: 982025143, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: -822426590, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: -597172053, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: 1047326833, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: 112088213, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: -1712146294, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
+  - {fileID: -1181306476, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
 --- !u!4 &1347352200
 Transform:
   m_ObjectHideFlags: 0
@@ -8034,6 +8043,10 @@ PrefabInstance:
     - target: {fileID: 7948461372507537089, guid: 6d0c1214e14389747bf2e3efef65770d, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200559081822837319, guid: 6d0c1214e14389747bf2e3efef65770d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

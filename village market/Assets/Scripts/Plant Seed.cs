@@ -32,6 +32,10 @@ public class PlantSeed : MonoBehaviour
                 seed.IsCarried = false;
                 seed.Seedbed = seedBed;
                 
+                var spriteRenderer = seed.ThingObj.GetComponent<SpriteRenderer>();
+                spriteRenderer.sortingLayerName = "things";
+                spriteRenderer.sortingOrder = 0;
+                
                 seedBed.IsBusy = true;
                 Player.IsCarrying = false;
             }

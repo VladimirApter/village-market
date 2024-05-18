@@ -24,24 +24,23 @@ public class CreateRequestsForTutorial : MonoBehaviour
         {
             if (Objects.Requests.ContainsKey(coordRequest)) continue;
             
-            var rnd = new System.Random();
             var fruitsCount = 1;
             var request = new Request
             {
                 RequestObj = Instantiate(Request.RequestPrefab,
                     SquareSection.ConvertSectionToVector(coordRequest),
                     Quaternion.identity, requestObjs.transform),
-                FruitsCount = { ["fruit"] = fruitsCount },
+                FruitsCount = { ["wheat"] = fruitsCount },
                 Price = fruitsCount * 100,
                 FramesToDestroy = 1000 * fruitsCount
             };
 
             for (var i = 0; i < fruitsCount; i++)
             {
-                var fruit = Instantiate(Fruit.FruitPrefab,
+                var wheat = Instantiate(Wheat.WheatPrefab,
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((i - 2) * 2, 0),
                     Quaternion.identity, requestFruits.transform);
-                request.Fruits.Add(fruit);
+                request.Fruits.Add(wheat);
             }
 
             Objects.Requests.Add(coordRequest, request);
