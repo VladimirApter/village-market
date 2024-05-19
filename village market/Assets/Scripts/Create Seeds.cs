@@ -10,19 +10,18 @@ public class CreateSeeds : MonoBehaviour
     public GameObject seedsObjs;
     public int beetSeedsCount = 10;
     public int wheatSeedsCount = 10;
-    private GameObject platform;
+    public int appleTreeSeedsCount = 10;
     
     // Start is called before the first frame update
     void Start()
     {
-        platform = Platform.PlatformObj;
         var seeds = new List<Seed>();
         
         for (var i = 0; i < beetSeedsCount; i++)
         {
             seeds.Add(new BeetSeed()
             {
-                ThingObj = Instantiate(BeetSeed.BeetSeedPrefab, SquareSection.ConvertSectionToVector((-4, 4)),//GetRandomPlatformPosition(),
+                ThingObj = Instantiate(BeetSeed.BeetSeedPrefab, SquareSection.ConvertSectionToVector((-4, 4)),
                     Quaternion.identity, seedsObjs.transform),
             });
         }
@@ -31,7 +30,16 @@ public class CreateSeeds : MonoBehaviour
         {
             seeds.Add(new WheatSeed()
             {
-                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, SquareSection.ConvertSectionToVector((-2, 4)),//GetRandomPlatformPosition(),
+                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, SquareSection.ConvertSectionToVector((-2, 4)),
+                    Quaternion.identity, seedsObjs.transform),
+            });
+        }
+        
+        for (var i = 0; i < appleTreeSeedsCount; i++)
+        {
+            seeds.Add(new AppleTreeSeed()
+            {
+                ThingObj = Instantiate(AppleTreeSeed.AppleTreeSeedPrefab, SquareSection.ConvertSectionToVector((-1, 4)),
                     Quaternion.identity, seedsObjs.transform),
             });
         }
@@ -39,16 +47,6 @@ public class CreateSeeds : MonoBehaviour
         foreach (var seed in seeds)
             seed.Cords = seed.ThingObj.transform.position;
         Objects.Things.AddRange(seeds);
-    }
-
-    private Vector2 GetRandomPlatformPosition()
-    {
-        var platformScale = platform.transform.localScale;
-        var maxValueX = (int)((platformScale.x - 5) / 2);
-        var maxValueY = (int)((platformScale.y - 5) / 2);
-        var rnd = new System.Random();
-        //return new Vector2(rnd.Next(-maxValueX, maxValueX), rnd.Next(-maxValueY, maxValueY));
-        return new Vector2(rnd.Next(-maxValueX, 0), rnd.Next(-maxValueY, maxValueY));
     }
 
     // Update is called once per frame

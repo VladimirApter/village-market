@@ -10,6 +10,7 @@ namespace Model
         public bool IsBusy { get; set; }
         public UnityEngine.Vector2 Coords { get; set; }
         public static Vector3 SquareSectionScale = new(4, 4, 1);
+
         public static (int, int) GetCurrentSectionCoordinates()
         {
             var playerPos = Player.PlayerObj.transform.position;
@@ -24,8 +25,22 @@ namespace Model
         {
             var xSign = Math.Sign(coordinates.Item1);
             var ySign = Math.Sign(coordinates.Item2);
-            return new Vector2((coordinates.Item1 - 1 * xSign) * SquareSectionScale.x + SquareSectionScale.x / 2 * xSign,
+            return new Vector2(
+                (coordinates.Item1 - 1 * xSign) * SquareSectionScale.x + SquareSectionScale.x / 2 * xSign,
                 (coordinates.Item2 - 1 * ySign) * SquareSectionScale.y + SquareSectionScale.y / 2 * ySign);
+        }
+
+        public static (int, int) ConvertVectorToSection(Vector2 vector)
+        {
+            var xSign = Math.Sign(vector.x);
+            var ySign = Math.Sign(vector.y);
+
+            var sectionX = (int)Math.Floor((vector.x - SquareSectionScale.x / 2 * xSign) / SquareSectionScale.x) +
+                           xSign;
+            var sectionY = (int)Math.Floor((vector.y - SquareSectionScale.y / 2 * ySign) / SquareSectionScale.y) +
+                           ySign;
+
+            return (sectionX, sectionY);
         }
     }
 }
