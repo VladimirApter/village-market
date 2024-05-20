@@ -112,6 +112,14 @@ public class SeedGrowing : MonoBehaviour
         seed.IsPlanted = false;
         seed.GrowingFramesCount = 0;
 
+        if (seed is AppleTreeSeed)
+        {
+            foreach (var seedbed in seed.Seedbeds)
+            {
+                seedbed.IsBusy = false;
+            }
+        }
+        
         seed.ThingObj.GetComponent<SpriteRenderer>().sprite = seed switch
         {
             WheatSeed => newSprites[0],

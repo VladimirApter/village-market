@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Model;
 using UnityEngine;
 
@@ -27,6 +28,13 @@ public class DestroySeedbed : MonoBehaviour
 
             if (seedbed.Value.DestroyFramesCount >= Seedbed.FramesToDestroy)
             {
+                var seed = (Seed)Objects.Things.FirstOrDefault(x => x is Seed { Seedbed: not null } seed && seed.Seedbed.Coords == seedbed.Value.Coords);
+                if (seed != null)
+                {
+                    seed.Seedbed = null;
+                    seed.IsPlanted = false;
+                }
+                
                 Destroy(seedbed.Value.SeedbedObj);
                 Objects.Seedbeds.Remove(seedbed.Key);
                 return;
