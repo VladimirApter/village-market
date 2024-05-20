@@ -23,7 +23,8 @@ public class SeedGrowing : MonoBehaviour
     {
         foreach (var seed in Objects.Things.OfType<Seed>())
         {
-            if (!seed.IsPlanted) seed.GrowingFramesCount = 0;
+            if (!seed.IsPlanted && seed is not AppleTreeSeed) seed.GrowingFramesCount = 0;
+            if (!seed.IsPlantedOnSeedbeds && seed is AppleTreeSeed) seed.GrowingFramesCount = 0;
         }
 
         seedsGrewInThisFrame.Clear();
@@ -39,6 +40,17 @@ public class SeedGrowing : MonoBehaviour
 
             UpdateGrowingSeed(seed);
         }
+        
+        foreach (var seed in Objects.Things.OfType<Seed>().Where(seed => seed.IsPlantedOnSeedbeds && seed.Seedbeds.All(seedBed => seedBed.IsPoured)))
+        {
+            if (!seed.Seedbeds.All(seedBed => Objects.Seedbeds.Values.Contains(seedBed)))
+            {
+                UnplantSeed(seed);
+                return;
+            }
+            UpdateGrowingSeed(seed);
+        }
+
 
         Objects.Things.AddRange(newFruitsInThisFrame);
         Objects.Things.RemoveAll(seed => seedsGrewInThisFrame.Contains(seed));
@@ -47,7 +59,6 @@ public class SeedGrowing : MonoBehaviour
     private void UpdateGrowingSeed(Seed seed)
     {
         seed.GrowingFramesCount++;
-
         UpdateSeedSprite(seed);
 
         if (seed.GrowingFramesCount < seed.FramesToGrow) return;
@@ -58,7 +69,22 @@ public class SeedGrowing : MonoBehaviour
         seedsGrewInThisFrame.Add(seed);
 
         Destroy(seed.ThingObj);
-        ResetSeedbed(seed.Seedbed);
+        if (seed is AppleTreeSeed)
+        {
+            foreach (var seedbed in seed.Seedbeds)
+            {
+                seedbed.IsPoured = false;
+                seedbed.IsBusy = false;
+                seedbed.SeedbedObj.GetComponent<SpriteRenderer>().color =
+                    Seedbed.SeedbedPrefab.GetComponent<SpriteRenderer>().color;
+            }
+            
+        }
+        else
+        {
+            ResetSeedbed(seed.Seedbed);
+        }
+        
     }
 
     private void UpdateSeedSprite(Seed seed)
@@ -67,6 +93,7 @@ public class SeedGrowing : MonoBehaviour
         {
             WheatSeed => GetSpriteIndex(seed, 1, 3.99),
             BeetSeed => GetSpriteIndex(seed, 5, 3.99),
+            AppleTreeSeed => GetSpriteIndex(seed, 10, 2.99),
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -89,6 +116,7 @@ public class SeedGrowing : MonoBehaviour
         {
             WheatSeed => newSprites[0],
             BeetSeed => newSprites[5],
+            AppleTreeSeed => newSprites[10],
             _ => seed.ThingObj.GetComponent<SpriteRenderer>().sprite
         };
     }
@@ -101,6 +129,10 @@ public class SeedGrowing : MonoBehaviour
                 { ThingObj = Instantiate(Beet.BeetPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform) },
             WheatSeed => new Wheat
                 { ThingObj = Instantiate(Wheat.WheatPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform) },
+            AppleTreeSeed => new Apple
+            {
+                ThingObj = Instantiate(Apple.ApplePrefab, seed.Cords, Quaternion.identity, fruitObjs.transform)
+            },
             _ => new Fruit
                 { ThingObj = Instantiate(Fruit.FruitPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform) }
         };

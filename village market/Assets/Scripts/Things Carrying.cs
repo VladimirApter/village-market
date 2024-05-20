@@ -23,7 +23,7 @@ public class ThingsCarrying : MonoBehaviour
             {
                 var closestThing = things.OrderBy(CalculateDistancePlayerToThing)
                     .FirstOrDefault(t => CalculateDistancePlayerToThing(t) < Player.TakingRadius);
-
+                
                 if (closestThing != null)
                 {
                     closestThing.IsCarried = true;
@@ -34,15 +34,27 @@ public class ThingsCarrying : MonoBehaviour
                         var seedbed = Objects.Seedbeds.FirstOrDefault(x =>
                             x.Value.IsBusy && SquareSection.ConvertSectionToVector(x.Key) ==
                             closestThing.Cords);
+                        
+                        if (closestThing is AppleTreeSeed seed2)
+                        {
+                            var seedbeds = seed2.Seedbeds;
+                            if (seedbeds != null)
+                            {
+                                if (closestThing is Seed seed) seed.Seedbeds = null;
+                                foreach (var seedbed1 in seedbeds)
+                                {
+                                    seedbed1.IsBusy = false;
+                                }
+                            }
+                        }
 
                         if (seedbed.Value != null)
                         {
-                            if (closestThing is Seed seed)
-                                seed.Seedbed = null;
-
+                            if (closestThing is Seed seed) seed.Seedbed = null;
+                            
                             seedbed.Value.IsBusy = false;
                         }
-
+   
                         if (closestThing is Fruit)
                         {
                             var table = Objects.Tables.FirstOrDefault(x =>

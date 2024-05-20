@@ -14,6 +14,11 @@ namespace Model
             get => Seedbed != null;
             set { }
         }
+        public bool IsPlantedOnSeedbeds
+        {
+            get => Seedbeds != null;
+            set { }
+        }
 
         public bool IsGrowing { get; set; }
         public int GrowingFramesCount { get; set; }
