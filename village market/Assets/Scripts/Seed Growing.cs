@@ -40,14 +40,16 @@ public class SeedGrowing : MonoBehaviour
 
             UpdateGrowingSeed(seed);
         }
-        
-        foreach (var seed in Objects.Things.OfType<Seed>().Where(seed => seed.IsPlantedOnSeedbeds && seed.Seedbeds.All(seedBed => seedBed.IsPoured)))
+
+        foreach (var seed in Objects.Things.OfType<Seed>()
+                     .Where(seed => seed.IsPlantedOnSeedbeds && seed.Seedbeds.All(seedBed => seedBed.IsPoured)))
         {
             if (!seed.Seedbeds.All(seedBed => Objects.Seedbeds.Values.Contains(seedBed)))
             {
                 UnplantSeed(seed);
                 return;
             }
+
             UpdateGrowingSeed(seed);
         }
 
@@ -78,13 +80,11 @@ public class SeedGrowing : MonoBehaviour
                 seedbed.SeedbedObj.GetComponent<SpriteRenderer>().color =
                     Seedbed.SeedbedPrefab.GetComponent<SpriteRenderer>().color;
             }
-            
         }
         else
         {
             ResetSeedbed(seed.Seedbed);
         }
-        
     }
 
     private void UpdateSeedSprite(Seed seed)
@@ -92,8 +92,8 @@ public class SeedGrowing : MonoBehaviour
         var spriteIndex = seed switch
         {
             WheatSeed => GetSpriteIndex(seed, 1, 3.99),
-            BeetSeed => GetSpriteIndex(seed, 5, 3.99),
-            AppleTreeSeed => GetSpriteIndex(seed, 10, 2.99),
+            BeetSeed => GetSpriteIndex(seed, 6, 3.99),
+            AppleTreeSeed => GetSpriteIndex(seed, 11, 2.99),
             _ => throw new ArgumentOutOfRangeException()
         };
 
