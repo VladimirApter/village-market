@@ -96,10 +96,13 @@ public class ThingsCarrying : MonoBehaviour
             }
         }
 
-        direction.x = Input.GetAxisRaw("Horizontal");
-        direction.y = Input.GetAxisRaw("Vertical");
-        if (direction is { x: 0, y: 0 })
-            return;
+        var xMoving = Input.GetAxisRaw("Horizontal");
+        var yMoving = Input.GetAxisRaw("Vertical");
+        if (xMoving != 0 || yMoving != 0)
+        {
+            direction.x = xMoving;
+            direction.y = yMoving;
+        }
 
         foreach (var thing in things.Where(x => x.IsCarried))
         {
