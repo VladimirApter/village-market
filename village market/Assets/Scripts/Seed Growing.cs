@@ -53,6 +53,14 @@ public class SeedGrowing : MonoBehaviour
         UpdateSeedSprite(seed);
 
         if (seed.GrowingFramesCount < seed.FramesToGrow) return;
+        if (seed.GrowingFramesCount == seed.FramesToGrow && seed is AppleTreeSeed)
+        {
+            seed.CanCarried = false;
+            foreach (var seedbed in seed.Seedbeds)
+            {
+                seedbed.CanDestroy = false;
+            }
+        }
 
         if (seed is AppleTreeSeed)
         {
@@ -60,6 +68,7 @@ public class SeedGrowing : MonoBehaviour
             foreach (var seedbed in seed.Seedbeds)
             {
                 ResetSeedbed(seedbed);
+                seedbed.IsBusy = true;
             }
         }
         else
@@ -68,8 +77,12 @@ public class SeedGrowing : MonoBehaviour
             ResetSeedbed(seed.Seedbed);
         }
 
-        seedsGrewInThisFrame.Add(seed);
-        if (seed is not AppleTreeSeed) Destroy(seed.ThingObj);
+        if (seed is not AppleTreeSeed)
+        {
+            seedsGrewInThisFrame.Add(seed);
+            Destroy(seed.ThingObj);
+        }
+        
     }
 
     private void UpdateSeedSprite(Seed seed)
@@ -78,7 +91,7 @@ public class SeedGrowing : MonoBehaviour
         {
             WheatSeed => GetSpriteIndex(seed, 1, 3.99),
             BeetSeed => GetSpriteIndex(seed, 6, 3.99),
-            AppleTreeSeed => GetSpriteIndex(seed, 11, 2.99),
+            AppleTreeSeed => GetSpriteIndex(seed, 11, 3),
             _ => throw new ArgumentOutOfRangeException()
         };
 

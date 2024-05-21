@@ -22,6 +22,7 @@ public class Init : MonoBehaviour
     public GameObject DestroyBarPrefab;
     public GameObject ApplePrefab;
     public GameObject AppleTreeSeedPrefab;
+    public GameObject AxePrefab;
     
     // Start is called before the first frame update
     void Awake()
@@ -42,5 +43,6 @@ public class Init : MonoBehaviour
         Model.Request.DestroyBarPrefab = DestroyBarPrefab;
         Model.Apple.ApplePrefab = ApplePrefab;
         Model.AppleTreeSeed.AppleTreeSeedPrefab = AppleTreeSeedPrefab;
+        Model.Axe.AxePrefab = AxePrefab;
     }
 }

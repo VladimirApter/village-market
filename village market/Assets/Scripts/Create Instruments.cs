@@ -27,6 +27,13 @@ public class CreateInstruments : MonoBehaviour
             ThingObj = Instantiate(Hoe.HoePrefab, (Vector2)platform.transform.position + Vector2.right * 3,
                 Quaternion.identity, instrumentsObjs.transform),
         });
+        
+        instruments.Add(new Axe()
+        {
+            IsCarried = false,
+            ThingObj = Instantiate(Axe.AxePrefab, (Vector2)platform.transform.position - Vector2.right * 3,
+                Quaternion.identity, instrumentsObjs.transform),
+        });
 
         Objects.Things.AddRange(instruments);
         Objects.Instruments.AddRange(instruments);

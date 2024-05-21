@@ -6189,6 +6189,7 @@ MonoBehaviour:
   - {fileID: 296530843, guid: d39548d1c1c97ed4489ad313e479a3ae, type: 3}
   - {fileID: 1982253827, guid: d39548d1c1c97ed4489ad313e479a3ae, type: 3}
   - {fileID: 1091249396, guid: d39548d1c1c97ed4489ad313e479a3ae, type: 3}
+  - {fileID: -160617850, guid: d39548d1c1c97ed4489ad313e479a3ae, type: 3}
 --- !u!4 &1327752395
 Transform:
   m_ObjectHideFlags: 0
@@ -9733,6 +9734,7 @@ MonoBehaviour:
   DestroyBarPrefab: {fileID: 3445736955579975412, guid: fce9550458fe6d341b12495f83bb529b, type: 3}
   ApplePrefab: {fileID: 4744106278931427204, guid: d661ed2e43841bf40aa628f683e9475b, type: 3}
   AppleTreeSeedPrefab: {fileID: 4744106278931427204, guid: bdb143d760086584984c888bcb3e2580, type: 3}
+  AxePrefab: {fileID: 3595754936706886835, guid: 5264f3c06f34f6c44b86f937f903977c, type: 3}
 --- !u!1 &1488137071
 GameObject:
   m_ObjectHideFlags: 0
@@ -9743,6 +9745,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1488137072}
   - component: {fileID: 1488137073}
+  - component: {fileID: 1488137074}
   m_Layer: 0
   m_Name: Seeds
   m_TagString: Untagged
@@ -9780,7 +9783,19 @@ MonoBehaviour:
   seedsObjs: {fileID: 1488137071}
   beetSeedsCount: 10
   wheatSeedsCount: 10
-  appleTreeSeedsCount: 10
+  appleTreeSeedsCount: 1
+--- !u!114 &1488137074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488137071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b2d12e45937d25419c7898fb181f74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1715314071
 GameObject:
   m_ObjectHideFlags: 0

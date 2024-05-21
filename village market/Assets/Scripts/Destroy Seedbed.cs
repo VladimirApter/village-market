@@ -37,11 +37,19 @@ public class DestroySeedbed : MonoBehaviour
 
                 if (seedAppleTree != null)
                 {
-                    foreach (var seedbed1 in seedAppleTree.Seedbeds)
+                    if (seedAppleTree.GrowingFramesCount != seedAppleTree.FramesToGrow)
                     {
-                        seedbed1.IsBusy = false;
+                        foreach (var seedbed1 in seedAppleTree.Seedbeds)
+                        {
+                            seedbed1.IsBusy = false;
+                        }
+                        seedAppleTree.Seedbeds = null;
                     }
-                    seedAppleTree.Seedbeds = null;
+                    else
+                    {
+                        return;
+                    }
+                    
                 }
                 
                 Destroy(seedbed.Value.SeedbedObj);

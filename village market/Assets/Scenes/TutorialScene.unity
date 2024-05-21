@@ -7849,14 +7849,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitObjs: {fileID: 1347352198}
   newSprites:
+  - {fileID: 1226625167, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
   - {fileID: 811017752, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
   - {fileID: 982025143, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
   - {fileID: -822426590, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
   - {fileID: -597172053, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
-  - {fileID: 1047326833, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
-  - {fileID: 112088213, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
-  - {fileID: -1712146294, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
-  - {fileID: -1181306476, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
 --- !u!4 &1347352200
 Transform:
   m_ObjectHideFlags: 0
@@ -11863,6 +11860,10 @@ MonoBehaviour:
   BeetPrefab: {fileID: 4744106278931427204, guid: 129c07dd7b9e7bb478672789a0523e12, type: 3}
   WheatSeedPrefab: {fileID: 8040092593742384278, guid: c531bd908fbb87f40852df4e0ddc68bd, type: 3}
   WheatPrefab: {fileID: 8876820962116748285, guid: bd6992d6413e83248b8f493eb62c7382, type: 3}
+  DestroyBarPrefab: {fileID: 0}
+  ApplePrefab: {fileID: 0}
+  AppleTreeSeedPrefab: {fileID: 0}
+  AxePrefab: {fileID: 3595754936706886835, guid: 5264f3c06f34f6c44b86f937f903977c, type: 3}
 --- !u!1 &2141343290
 GameObject:
   m_ObjectHideFlags: 0
