@@ -69,7 +69,7 @@ public class SeedGrowing : MonoBehaviour
         }
 
         seedsGrewInThisFrame.Add(seed);
-        Destroy(seed.ThingObj);
+        if (seed is not AppleTreeSeed) Destroy(seed.ThingObj);
     }
 
     private void UpdateSeedSprite(Seed seed)
@@ -106,19 +106,32 @@ public class SeedGrowing : MonoBehaviour
 
     private Fruit CreateNewFruit(Seed seed, Vector2 coords)
     {
-        var fruitPrefab = seed switch
-        {
-            BeetSeed => Beet.BeetPrefab,
-            WheatSeed => Wheat.WheatPrefab,
-            AppleTreeSeed => Apple.ApplePrefab,
-            _ => Fruit.FruitPrefab
-        };
+        GameObject prefab;
+        Fruit fruit;
 
-        return new Fruit
+        switch (seed)
         {
-            Cords = coords,
-            ThingObj = Instantiate(fruitPrefab, coords, Quaternion.identity, fruitObjs.transform)
-        };
+            case BeetSeed:
+                prefab = Beet.BeetPrefab;
+                fruit = new Beet();
+                break;
+            case WheatSeed:
+                prefab = Wheat.WheatPrefab;
+                fruit = new Wheat();
+                break;
+            case AppleTreeSeed:
+                prefab = Apple.ApplePrefab;
+                fruit = new Apple();
+                break;
+            default:
+                prefab = Fruit.FruitPrefab;
+                fruit = new Fruit();
+                break;
+        }
+
+        fruit.Cords = coords;
+        fruit.ThingObj = Instantiate(prefab, coords, Quaternion.identity, fruitObjs.transform);
+        return fruit;
     }
 
     private IEnumerable<Fruit> CreateNewFruits(Seed seed)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 30c11598db3303645b32e6e581850e87
+guid: 28015f9ad329ce1489a27c6e287735c6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Basic_tools_and_meterials_0
+      name: Basic_tools_and_meterials 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 396b5e0d0bd66924a975d2c79967ff4a
-      internalID: -526272620
+      spriteID: d62456eb0671c0d45aab973d97a07a31
+      internalID: 2011763657
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_tools_and_meterials_1
+      name: Basic_tools_and_meterials 1_1
       rect:
         serializedVersion: 2
         x: 18
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2666f00b9223507468aac5ad4870e701
-      internalID: 106409465
+      spriteID: 385293677e3f99544bd58bc05ec40822
+      internalID: -532009983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_tools_and_meterials_2
+      name: Basic_tools_and_meterials 1_2
       rect:
         serializedVersion: 2
         x: 34
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2826fff916753c24c9fc84b279692c3b
-      internalID: 1032690768
+      spriteID: 07e43633c4fc2de4397444888675c982
+      internalID: 160088891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_tools_and_meterials_3
+      name: Basic_tools_and_meterials 1_3
       rect:
         serializedVersion: 2
         x: 1
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8af0061543ac6cd4eb497f6eba76c6e1
-      internalID: -747986399
+      spriteID: c8c46f260675b154da0a9884f6f1fa83
+      internalID: 785396098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_tools_and_meterials_4
+      name: Basic_tools_and_meterials 1_4
       rect:
         serializedVersion: 2
         x: 17
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38c30694c2254ff458f8a1225aeae9fb
-      internalID: -1308483161
+      spriteID: a49d3dffaecd17b488138cd9a489c22e
+      internalID: -1617859894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Basic_tools_and_meterials_5
+      name: Basic_tools_and_meterials 1_5
       rect:
         serializedVersion: 2
         x: 33
@@ -229,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ff30682900a1ba41ba025451c7aefed
-      internalID: -475297275
+      spriteID: 9420ae78e4366cf4fb63b8ef329709f6
+      internalID: -1133213405
       vertices: []
       indices: 
       edges: []
@@ -246,12 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Basic_tools_and_meterials_0: -526272620
-      Basic_tools_and_meterials_1: 106409465
-      Basic_tools_and_meterials_2: 1032690768
-      Basic_tools_and_meterials_3: -747986399
-      Basic_tools_and_meterials_4: -1308483161
-      Basic_tools_and_meterials_5: -475297275
+      Basic_tools_and_meterials 1_0: 2011763657
+      Basic_tools_and_meterials 1_1: -532009983
+      Basic_tools_and_meterials 1_2: 160088891
+      Basic_tools_and_meterials 1_3: 785396098
+      Basic_tools_and_meterials 1_4: -1617859894
+      Basic_tools_and_meterials 1_5: -1133213405
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
