@@ -21,38 +21,27 @@ public class SeedGrowing : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        foreach (var seed in Objects.Things.OfType<Seed>())
-        {
-            if (!seed.IsPlanted && seed is not AppleTreeSeed) seed.GrowingFramesCount = 0;
-            if (!seed.IsPlantedOnSeedbeds && seed is AppleTreeSeed) seed.GrowingFramesCount = 0;
-        }
-
         seedsGrewInThisFrame.Clear();
         newFruitsInThisFrame.Clear();
 
-        foreach (var seed in Objects.Things.OfType<Seed>().Where(seed => seed.IsPlanted && seed.Seedbed.IsPoured))
+        foreach (var seed in Objects.Things.OfType<Seed>())
         {
-            if (!Objects.Seedbeds.Values.Contains(seed.Seedbed))
+            if (!seed.IsPlanted && seed is not AppleTreeSeed || !seed.IsPlantedOnSeedbeds && seed is AppleTreeSeed)
             {
-                UnplantSeed(seed);
-                return;
+                seed.GrowingFramesCount = 0;
             }
 
-            UpdateGrowingSeed(seed);
-        }
-
-        foreach (var seed in Objects.Things.OfType<Seed>()
-                     .Where(seed => seed.IsPlantedOnSeedbeds && seed.Seedbeds.All(seedBed => seedBed.IsPoured)))
-        {
-            if (!seed.Seedbeds.All(seedBed => Objects.Seedbeds.Values.Contains(seedBed)))
+            if (seed.IsPlanted && seed.Seedbed.IsPoured ||
+                seed.IsPlantedOnSeedbeds && seed.Seedbeds.All(seedBed => seedBed.IsPoured))
             {
-                UnplantSeed(seed);
-                return;
+                UpdateGrowingSeed(seed);
             }
 
-            UpdateGrowingSeed(seed);
+            if (seed.Seedbed == null && seed is not AppleTreeSeed || seed.Seedbeds == null && seed is AppleTreeSeed)
+            {
+                UnplantSeed(seed);
+            }
         }
-
 
         Objects.Things.AddRange(newFruitsInThisFrame);
         Objects.Things.RemoveAll(seed => seedsGrewInThisFrame.Contains(seed));
@@ -65,26 +54,22 @@ public class SeedGrowing : MonoBehaviour
 
         if (seed.GrowingFramesCount < seed.FramesToGrow) return;
 
-        var newFruit = CreateNewFruit(seed);
-        newFruit.Cords = seed.Cords;
-        newFruitsInThisFrame.Add(newFruit);
-        seedsGrewInThisFrame.Add(seed);
-
-        Destroy(seed.ThingObj);
         if (seed is AppleTreeSeed)
         {
+            newFruitsInThisFrame.AddRange(CreateNewFruits(seed));
             foreach (var seedbed in seed.Seedbeds)
             {
-                seedbed.IsPoured = false;
-                seedbed.IsBusy = false;
-                seedbed.SeedbedObj.GetComponent<SpriteRenderer>().color =
-                    Seedbed.SeedbedPrefab.GetComponent<SpriteRenderer>().color;
+                ResetSeedbed(seedbed);
             }
         }
         else
         {
+            newFruitsInThisFrame.Add(CreateNewFruit(seed, seed.Cords));
             ResetSeedbed(seed.Seedbed);
         }
+
+        seedsGrewInThisFrame.Add(seed);
+        Destroy(seed.ThingObj);
     }
 
     private void UpdateSeedSprite(Seed seed)
@@ -100,26 +85,16 @@ public class SeedGrowing : MonoBehaviour
         seed.ThingObj.GetComponent<SpriteRenderer>().sprite = newSprites[spriteIndex];
         return;
 
-        int GetSpriteIndex(Seed seed, int baseIndex, double multiplier)
+        int GetSpriteIndex(Seed seed2, int baseIndex, double multiplier)
         {
-            return (int)Math.Floor(baseIndex + multiplier * (1 - (seed.FramesToGrow - seed.GrowingFramesCount) /
-                (double)seed.FramesToGrow));
+            return (int)Math.Floor(baseIndex + multiplier * (1 - (seed2.FramesToGrow - seed2.GrowingFramesCount) /
+                (double)seed2.FramesToGrow));
         }
     }
 
     private void UnplantSeed(Seed seed)
     {
-        seed.IsPlanted = false;
         seed.GrowingFramesCount = 0;
-
-        if (seed is AppleTreeSeed)
-        {
-            foreach (var seedbed in seed.Seedbeds)
-            {
-                seedbed.IsBusy = false;
-            }
-        }
-        
         seed.ThingObj.GetComponent<SpriteRenderer>().sprite = seed switch
         {
             WheatSeed => newSprites[0],
@@ -129,26 +104,38 @@ public class SeedGrowing : MonoBehaviour
         };
     }
 
-    private Fruit CreateNewFruit(Seed seed)
+    private Fruit CreateNewFruit(Seed seed, Vector2 coords)
     {
-        return seed switch
+        var fruitPrefab = seed switch
         {
-            BeetSeed => new Beet
-                { ThingObj = Instantiate(Beet.BeetPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform) },
-            WheatSeed => new Wheat
-                { ThingObj = Instantiate(Wheat.WheatPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform) },
-            AppleTreeSeed => new Apple
-            {
-                ThingObj = Instantiate(Apple.ApplePrefab, seed.Cords, Quaternion.identity, fruitObjs.transform)
-            },
-            _ => new Fruit
-                { ThingObj = Instantiate(Fruit.FruitPrefab, seed.Cords, Quaternion.identity, fruitObjs.transform) }
+            BeetSeed => Beet.BeetPrefab,
+            WheatSeed => Wheat.WheatPrefab,
+            AppleTreeSeed => Apple.ApplePrefab,
+            _ => Fruit.FruitPrefab
         };
+
+        return new Fruit
+        {
+            Cords = coords,
+            ThingObj = Instantiate(fruitPrefab, coords, Quaternion.identity, fruitObjs.transform)
+        };
+    }
+
+    private IEnumerable<Fruit> CreateNewFruits(Seed seed)
+    {
+        if (seed is AppleTreeSeed)
+        {
+            foreach (var seedbed in seed.Seedbeds)
+            {
+                yield return CreateNewFruit(seed, seedbed.Coords);
+            }
+        }
     }
 
     private void ResetSeedbed(Seedbed seedbed)
     {
         seedbed.IsPoured = false;
+        seedbed.IsBusy = false;
         seedbed.SeedbedObj.GetComponent<SpriteRenderer>().color =
             Seedbed.SeedbedPrefab.GetComponent<SpriteRenderer>().color;
     }
