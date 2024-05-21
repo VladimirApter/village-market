@@ -29,18 +29,32 @@ public class CreateRequests : MonoBehaviour
             if (Objects.Requests.ContainsKey(coordRequest)) continue;
             
             var rnd = new System.Random();
-            var fruitsCount = rnd.Next(1, 6);
-            var wheatCount = rnd.Next(0, fruitsCount);
-            var beetsCount = fruitsCount - wheatCount;
+            var maxFruitsCount = 6;
+            var fruitsTypesCount = 3;
+            
+            var wheatCount = rnd.Next(0, maxFruitsCount / fruitsTypesCount + 1);
+            var beetsCount = rnd.Next(0, maxFruitsCount / fruitsTypesCount + 1);
+            var applesCount = rnd.Next(0, maxFruitsCount / fruitsTypesCount + 1);
+            while (wheatCount + beetsCount + applesCount == 0)
+            {
+                var count = rnd.Next(1, maxFruitsCount / fruitsTypesCount + 1);
+                if (wheatCount == 0)
+                    wheatCount = count;
+                else if (beetsCount == 0)
+                    beetsCount = count;
+                else if (applesCount == 0)
+                    applesCount = count;
+            }
+            var totalFruitsCount = wheatCount + beetsCount + applesCount;
             
             var request = new Request
             {
                 RequestObj = Instantiate(Request.RequestPrefab,
                     SquareSection.ConvertSectionToVector(coordRequest),
                     Quaternion.identity, requestObjs.transform),
-                FruitsCount = { ["wheat"] = wheatCount, ["beet"] = beetsCount },
-                Price = fruitsCount * 100,
-                FramesToDestroy = 1000 * fruitsCount,
+                FruitsCount = { ["wheat"] = wheatCount, ["beet"] = beetsCount, ["apple"] = applesCount},
+                Price = maxFruitsCount * 100,
+                FramesToDestroy = 1000 * totalFruitsCount,
                 DestroyBar = Instantiate(Request.DestroyBarPrefab,
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2(8, 0),
                     Quaternion.identity, destroyBars.transform)
@@ -60,6 +74,14 @@ public class CreateRequests : MonoBehaviour
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((wheatCount + i - 2) * 2, 0),
                     Quaternion.identity, requestFruits.transform);
                 request.Fruits.Add(beet);
+            }
+            
+            for (var i = 0; i < applesCount; i++)
+            {
+                var apple = Instantiate(Apple.ApplePrefab,
+                    SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((wheatCount + beetsCount + i - 2) * 2, 0),
+                    Quaternion.identity, requestFruits.transform);
+                request.Fruits.Add(apple);
             }
 
             Objects.Requests.Add(coordRequest, request);

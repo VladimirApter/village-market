@@ -38,7 +38,7 @@ public class CheckRequest : MonoBehaviour
                 Destroy(fruit.ThingObj);
             }
             table.Fruits.Clear();
-            table.FruitsCount = new Dictionary<string, int> { { "beet", 0 }, { "wheat", 0 }, { "fruit", 0 } };
+            table.FruitsCount = new Dictionary<string, int> { { "beet", 0 }, { "wheat", 0 }, { "apple", 0 }, { "fruit", 0 } };
 
             foreach (var fruit in request.Fruits)
                 Destroy(fruit);

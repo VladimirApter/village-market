@@ -37,6 +37,9 @@ public class PutOnTable : MonoBehaviour
                     case Beet:
                         table.FruitsCount["beet"]++;
                         break;
+                    case Apple:
+                        table.FruitsCount["apple"]++;
+                        break;
                     default:
                         table.FruitsCount["fruit"]++;
                         break;
