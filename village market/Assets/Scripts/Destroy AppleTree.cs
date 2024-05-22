@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class DestroyAppleTree : MonoBehaviour
 {
+    public GameObject logObjs;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,12 @@ public class DestroyAppleTree : MonoBehaviour
                     }
                     Destroy(appleTreeSeed.ThingObj);
                     Objects.Things.Remove(appleTreeSeed);
+                    
+                    Objects.Things.Add(new Log
+                    {
+                        ThingObj = Instantiate(Log.LogPrefab, appleTreeSeed.Cords,
+                            Quaternion.identity, logObjs.transform),
+                    });
                     break;
                 }
             } 

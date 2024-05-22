@@ -8,9 +8,9 @@ using UnityEngine.Serialization;
 public class CreateSeeds : MonoBehaviour
 {
     public GameObject seedsObjs;
-    public int beetSeedsCount = 10;
-    public int wheatSeedsCount = 10;
-    public int appleTreeSeedsCount = 10;
+    private int beetSeedsCount = 10;
+    private int wheatSeedsCount = 10;
+    private int appleTreeSeedsCount = 10;
     
     // Start is called before the first frame update
     void Start()

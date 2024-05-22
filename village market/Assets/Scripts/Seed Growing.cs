@@ -55,6 +55,10 @@ public class SeedGrowing : MonoBehaviour
         if (seed.GrowingFramesCount < seed.FramesToGrow) return;
         if (seed.GrowingFramesCount == seed.FramesToGrow && seed is AppleTreeSeed)
         {
+            var spriteRenderer = seed.ThingObj.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingLayerName = "seedbeds";
+            spriteRenderer.sortingOrder = 1;
+            
             seed.CanCarried = false;
             foreach (var seedbed in seed.Seedbeds)
             {
@@ -151,12 +155,24 @@ public class SeedGrowing : MonoBehaviour
     {
         if (seed is AppleTreeSeed)
         {
-            foreach (var seedbed in seed.Seedbeds)
+            var seedbeds = seed.Seedbeds.OrderBy(seedbed => seedbed.Coords.y).ToList();
+            var firstTwo = seedbeds.Take(2).ToList();
+            var lastTwo = seedbeds.TakeLast(2).ToList();
+
+            foreach (var seedbed in firstTwo.Concat(lastTwo))
             {
-                yield return CreateNewFruit(seed, seedbed.Coords);
+                var apple = CreateNewFruit(seed, seedbed.Coords);
+                if (lastTwo.Contains(seedbed))
+                {
+                    var spriteRenderer = apple.ThingObj.GetComponent<SpriteRenderer>();
+                    spriteRenderer.sortingLayerName = "seedbeds";
+                    spriteRenderer.sortingOrder = 0;
+                }
+                yield return apple;
             }
         }
     }
+
 
     private void ResetSeedbed(Seedbed seedbed)
     {
