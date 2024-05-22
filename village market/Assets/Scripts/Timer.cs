@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Model;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -27,9 +29,8 @@ public class Timer : MonoBehaviour
         else if (timeStart < 0)
         {
             timeStart = 0;
-            //game over
             timerText.color = Color.red;
-            ;
+            SceneManager.LoadScene("LeaderBoardScene");
         }
 
         int minutes = Mathf.FloorToInt(timeStart / 60);

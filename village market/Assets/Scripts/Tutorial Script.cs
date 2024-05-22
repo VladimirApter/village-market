@@ -7,13 +7,15 @@ using UnityEngine.UI;
 
 public class TutorialScript : MonoBehaviour
 {
-    public Text myText1;
+    public Image LeftClick;
+    public Image RightClick;
     public Text myText2;
     public Image myImage;
+    public Image myImage2;
     
-    private string textToDisplay1 = "Правая кнопка мыши - брать предметы\n" +
-                                    "Левая кнопка мыши - действие предметом в руке";
+    
 
+    //private string spriteName = "";
     private string textToDisplay3 = "Возьмите мотыгу и вскопайте грядку";
     private string textToDisplay5 = "Возьмите и посадите семечко";
     private string textToDisplay7 = "Возьмите лейку и полейте грядку";
@@ -25,18 +27,21 @@ public class TutorialScript : MonoBehaviour
 
     void Start()
     {
-        myText1.text = textToDisplay1;
         myText2.text = textToDisplay3;
         isTutorialFinished = false;
+        //Sprite loadedSprite = Resources.Load<Sprite>("Assets/Sprites/Objects/Basic_tools_and_meterials 1.png");
+        //myImage2.sprite = loadedSprite;
     }
 
     // Update is called once per frame
     void Update()
     {
         myImage.transform.position = Player.PlayerObj.transform.position+new Vector3(0, 10, 0);
-        if (Objects.Seedbeds.Count > 0) myText2.text = textToDisplay5;
+        myImage2.transform.position = Player.PlayerObj.transform.position+new Vector3(0, 20, 0);
+        if (Objects.Seedbeds.Count > 0){ myText2.text = textToDisplay5;}
         if (Objects.Seedbeds.Any(x => x.Value.IsBusy)) myText2.text = textToDisplay7;
-        if (Objects.Seedbeds.Any(x => x.Value.IsBusy) && Objects.Seedbeds.Any(x => x.Value.IsPoured)) myText2.text = textToDisplay9;
+        if (Objects.Seedbeds.Any(x => x.Value.IsBusy) 
+            && Objects.Seedbeds.Any(x => x.Value.IsPoured)) myText2.text = textToDisplay9;
         if (Objects.Things.Any(x => x is Fruit)) myText2.text = textToDisplay11;
         //Tables.Any(x => x.Value.Fruits.Count > 0)
         if (isTutorialFinished) myText2.text = textToDisplay12;
