@@ -927,7 +927,7 @@ GameObject:
   - component: {fileID: 1112712682}
   - component: {fileID: 1112712681}
   - component: {fileID: 1112712680}
-  - component: {fileID: 1112712679}
+  - component: {fileID: 1112712683}
   m_Layer: 0
   m_Name: PlayButton10
   m_TagString: Untagged
@@ -955,19 +955,6 @@ RectTransform:
   m_AnchoredPosition: {x: 175, y: 50}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1112712679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1112712677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c96749df0756de4cafa0928e148bf03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputField: {fileID: 1858259953}
 --- !u!114 &1112712680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,8 +999,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1112712679}
-        m_TargetAssemblyTypeName: PlayButton, Assembly-CSharp
+      - m_Target: {fileID: 1112712683}
+        m_TargetAssemblyTypeName: PlayButtonLong, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -1062,6 +1049,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112712677}
   m_CullTransparentMesh: 1
+--- !u!114 &1112712683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112712677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463ca3d6c49a4bbcb76b036415d2da8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputField: {fileID: 1858259953}
 --- !u!1 &1311064365
 GameObject:
   m_ObjectHideFlags: 0
