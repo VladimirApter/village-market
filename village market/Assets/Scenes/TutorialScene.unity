@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 67992260}
   - component: {fileID: 67992259}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Instruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -670,7 +670,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 35
+  orthographic size: 27.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -11537,10 +11537,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 69a8d9e7fcfa46aaa21f285740e74866, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
-        m_Mode: 5
+      - m_Target: {fileID: 1584340497}
+        m_TargetAssemblyTypeName: ExitTutorialButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
