@@ -11,5 +11,6 @@ namespace Model
         public static float TakingRadius { get; set; } = 5;
         public static int TotalScore = 0;
         public static string Name { get; set; }
+        public static float Time { get; set; }
     }
 }

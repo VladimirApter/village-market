@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public float timeStart = 60;
+    public static float timeStart = Player.Time;
     public Text timerText;
     
     void Start()

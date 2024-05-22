@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayButton : MonoBehaviour
+public class PlayButtonLong : MonoBehaviour
 {
     public InputField inputField;
     public void OnClick()
@@ -11,7 +11,7 @@ public class PlayButton : MonoBehaviour
         if (inputField.text == "") return;
         
         SceneManager.LoadScene("GameScene");
-        Player.Time = 30;
+        Player.Time = 60;
         Player.Name = inputField.text;
     }
 }
