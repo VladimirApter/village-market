@@ -27,6 +27,7 @@ public class DestroyAppleTree : MonoBehaviour
                     foreach (var seedbed in appleTreeSeed.Seedbeds)
                     {
                         seedbed.CanDestroy = true;
+                        seedbed.IsBusy = false;
                     }
                     Destroy(appleTreeSeed.ThingObj);
                     Objects.Things.Remove(appleTreeSeed);

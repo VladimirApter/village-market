@@ -57,7 +57,7 @@ public class SeedGrowing : MonoBehaviour
         {
             var spriteRenderer = seed.ThingObj.GetComponent<SpriteRenderer>();
             spriteRenderer.sortingLayerName = "seedbeds";
-            spriteRenderer.sortingOrder = 1;
+            spriteRenderer.sortingOrder = 2;
             
             seed.CanCarried = false;
             foreach (var seedbed in seed.Seedbeds)
@@ -166,7 +166,7 @@ public class SeedGrowing : MonoBehaviour
                 {
                     var spriteRenderer = apple.ThingObj.GetComponent<SpriteRenderer>();
                     spriteRenderer.sortingLayerName = "seedbeds";
-                    spriteRenderer.sortingOrder = 0;
+                    spriteRenderer.sortingOrder = 1;
                 }
                 yield return apple;
             }
