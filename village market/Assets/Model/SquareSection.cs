@@ -11,14 +11,19 @@ namespace Model
         public UnityEngine.Vector2 Coords { get; set; }
         public static Vector3 SquareSectionScale = new(4, 4, 1);
 
-        public static (int, int) GetCurrentSectionCoordinates()
+        public static IEnumerable<(int, int)> GetCurrentSectionCoordinates()
         {
             var playerPos = Player.PlayerObj.transform.position;
-            var x = Math.Max((int)(Math.Abs(playerPos.x) / SquareSectionScale.x) + 1, 1) * Math.Sign(playerPos.x);
-            var ySign = playerPos.y == 0 ? 1 : Math.Sign(playerPos.y);
-            var y = Math.Max((int)(Math.Abs(playerPos.y) / SquareSectionScale.y) + 1, 1) * ySign;
+            var playerPosFix = ConvertSectionToVector(ConvertVectorToSection(playerPos));
 
-            return (x, y);
+            for (int dx = -4; dx <= 4; dx += 4)
+            {
+                for (int dy = -4; dy <= 4; dy += 4)
+                {
+                    var a = playerPosFix + new Vector2(dx, dy);
+                    yield return ConvertVectorToSection(a);
+                }
+            }
         }
 
         public static Vector2 ConvertSectionToVector((int, int) coordinates)
@@ -35,10 +40,11 @@ namespace Model
             var xSign = Math.Sign(vector.x);
             var ySign = Math.Sign(vector.y);
 
-            var sectionX = (int)Math.Floor((vector.x - SquareSectionScale.x / 2 * xSign) / SquareSectionScale.x) +
+            var sectionX = (int)Math.Floor((vector.x - SquareSectionScale.x * xSign) / SquareSectionScale.x) +
                            xSign;
             var sectionY = (int)Math.Floor((vector.y - SquareSectionScale.y / 2 * ySign) / SquareSectionScale.y) +
                            ySign;
+            if (sectionY == 0) sectionY = -1;
 
             return (sectionX, sectionY);
         }

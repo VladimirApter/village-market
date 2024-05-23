@@ -9,7 +9,6 @@ public class PourSeedbed : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -20,19 +19,23 @@ public class PourSeedbed : MonoBehaviour
         var leica = instruments.FirstOrDefault(x => x is Leica);
         
         if (leica == null) return;
+        
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var seedbedCoordinates =
+            SquareSection.ConvertVectorToSection(mousePosition +
+                                                 new Vector3(0, SquareSection.SquareSectionScale.y / 2));
+        
+        if (!SquareSection.GetCurrentSectionCoordinates().Contains(seedbedCoordinates) ||
+            Vector2.Distance(SquareSection.ConvertSectionToVector(seedbedCoordinates), mousePosition) >
+            new Vector2(SquareSection.SquareSectionScale.x, SquareSection.SquareSectionScale.y)
+                .magnitude || !seedBeds.Keys.Contains(seedbedCoordinates)) return;
 
-        foreach (var coords in seedBeds.Keys)
+        if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) &&
+            !seedBeds[seedbedCoordinates].IsPoured && leica.IsCarried)
         {
-            var coordLeica = (Vector2)leica.ThingObj.transform.position;
-            var cordSeedBed = SquareSection.ConvertSectionToVector(coords);
-
-            if (Vector2.Distance(coordLeica, cordSeedBed + new Vector2(0, 1.5f)) <= new Vector2(SquareSection.SquareSectionScale.x / 2, SquareSection.SquareSectionScale.y / 2).magnitude &&
-                (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) && !seedBeds[coords].IsPoured && leica.IsCarried)
-            {
-                var seedbed = seedBeds[coords];
-                seedbed.IsPoured = true;
-                seedbed.SeedbedObj.GetComponent<SpriteRenderer>().color = new Color(0.36f, 0.25f, 0.2f);
-            }
+            var seedbed = seedBeds[seedbedCoordinates];
+            seedbed.IsPoured = true;
+            seedbed.SeedbedObj.GetComponent<SpriteRenderer>().color = new Color(0.36f, 0.25f, 0.2f);
         }
     }
 }

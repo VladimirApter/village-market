@@ -17,14 +17,18 @@ public class ThingsCarrying : MonoBehaviour
     void Update()
     {
         var things = Objects.Things;
+        var worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.L))
         {
+            var closestThing = things.OrderBy(CalculateDistancePlayerToThing)
+                .FirstOrDefault(t => CalculateDistancePlayerToThing(t) < Player.TakingRadius &&
+                                     Vector2.Distance(worldPosition, t.ThingObj.transform.position) <=
+                                     new Vector2(SquareSection.SquareSectionScale.x / 2,
+                                         SquareSection.SquareSectionScale.y / 2).magnitude);
             if (!Player.IsCarrying)
             {
-                var closestThing = things.OrderBy(CalculateDistancePlayerToThing)
-                    .FirstOrDefault(t => CalculateDistancePlayerToThing(t) < Player.TakingRadius);
-                
-                if (closestThing != null && closestThing.CanCarried)
+                if (closestThing is { CanCarried: true })
                 {
                     closestThing.IsCarried = true;
                     Player.IsCarrying = true;
@@ -34,7 +38,7 @@ public class ThingsCarrying : MonoBehaviour
                         var seedbed = Objects.Seedbeds.FirstOrDefault(x =>
                             x.Value.IsBusy && SquareSection.ConvertSectionToVector(x.Key) ==
                             closestThing.Cords);
-                        
+
                         if (closestThing is AppleTreeSeed seed2)
                         {
                             var seedbeds = seed2.Seedbeds;
@@ -59,9 +63,8 @@ public class ThingsCarrying : MonoBehaviour
                             {
                                 seedbed.Value.IsBusy = false;
                             }
-                            
                         }
-   
+
                         if (closestThing is Fruit)
                         {
                             var table = Objects.Tables.FirstOrDefault(x =>
@@ -98,7 +101,7 @@ public class ThingsCarrying : MonoBehaviour
                 if (thing != null)
                 {
                     thing.IsCarried = false;
-                    
+
                     var spriteRenderer = thing.ThingObj.GetComponent<SpriteRenderer>();
                     spriteRenderer.sortingLayerName = "things";
                     spriteRenderer.sortingOrder = 0;
@@ -117,7 +120,7 @@ public class ThingsCarrying : MonoBehaviour
         foreach (var thing in things.Where(x => x.IsCarried))
         {
             thing.ThingObj.transform.position = player.transform.position + (Vector3)direction.normalized * 2.2f;
-            
+
             var spriteRenderer = thing.ThingObj.GetComponent<SpriteRenderer>();
             spriteRenderer.sortingLayerName = "player";
             spriteRenderer.sortingOrder = 0;
@@ -127,9 +130,10 @@ public class ThingsCarrying : MonoBehaviour
                 spriteRenderer.sortingLayerName = "player";
                 spriteRenderer.sortingOrder = 2;
             }
+
             if (Math.Abs(direction.x + 1f) < 1e-3)
                 spriteRenderer.flipX = true;
-            
+
             break;
         }
     }

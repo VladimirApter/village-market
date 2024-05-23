@@ -24,15 +24,22 @@ public class CreateSeedbeds : MonoBehaviour
         if (!(Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) || !Player.IsCarrying) return;
         if (Player.PlayerObj.transform.position.x > 0) return;
 
-        var seedbedCoordinates = SquareSection.GetCurrentSectionCoordinates();
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var seedbedCoordinates =
+            SquareSection.ConvertVectorToSection(mousePosition +
+                                                 new Vector3(0, SquareSection.SquareSectionScale.y / 2));
         
+        if (!SquareSection.GetCurrentSectionCoordinates().Contains(seedbedCoordinates) ||
+            Vector2.Distance(SquareSection.ConvertSectionToVector(seedbedCoordinates), mousePosition) >
+            new Vector2(SquareSection.SquareSectionScale.x, SquareSection.SquareSectionScale.y)
+                .magnitude) return;
+
         if (Objects.Seedbeds.Keys.Contains(seedbedCoordinates))
         {
             Destroy(Objects.Seedbeds[seedbedCoordinates].SeedbedObj);
             Objects.Seedbeds.Remove(seedbedCoordinates);
             return;
         }
-
 
         var newSeedbed = new Seedbed()
         {
