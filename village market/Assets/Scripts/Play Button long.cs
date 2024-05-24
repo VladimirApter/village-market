@@ -11,7 +11,7 @@ public class PlayButtonLong : MonoBehaviour
         if (inputField.text == "") return;
         
         SceneManager.LoadScene("GameScene");
-        Player.Time = 60;
+        Player.GameTime = 60;
         Player.Name = inputField.text;
     }
 }

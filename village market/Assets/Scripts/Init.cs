@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Model;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -30,21 +31,30 @@ public class Init : MonoBehaviour
     {
         Model.Player.PlayerObj = Player;
         Model.Platform.PlatformObj = Platform;
-        Model.Seed.SeedPrefab = SeedPrefab;
-        Model.Leica.LeicaPrefab = LeicaPrefab;
-        Model.Hoe.HoePrefab = HoePrefab;
-        Model.Seedbed.SeedbedPrefab = SeedbedPrefab;
-        Model.Fruit.FruitPrefab = FruitPrefab;
-        Model.Table.TablePrefab = TablePrefab;
-        Model.Request.RequestPrefab = RequestPrefab;
-        Model.BeetSeed.BeetSeedPrefab = BeetSeedPrefab;
-        Model.Beet.BeetPrefab = BeetPrefab;
-        Model.WheatSeed.WheatSeedPrefab = WheatSeedPrefab;
-        Model.Wheat.WheatPrefab = WheatPrefab;
-        Model.Request.DestroyBarPrefab = DestroyBarPrefab;
-        Model.Apple.ApplePrefab = ApplePrefab;
-        Model.AppleTreeSeed.AppleTreeSeedPrefab = AppleTreeSeedPrefab;
-        Model.Axe.AxePrefab = AxePrefab;
-        Model.Log.LogPrefab = LogPrefab;
+        Seed.SeedPrefab = SeedPrefab;
+        Leica.LeicaPrefab = LeicaPrefab;
+        Hoe.HoePrefab = HoePrefab;
+        Seedbed.SeedbedPrefab = SeedbedPrefab;
+        Fruit.FruitPrefab = FruitPrefab;
+        Table.TablePrefab = TablePrefab;
+        Request.RequestPrefab = RequestPrefab;
+        BeetSeed.BeetSeedPrefab = BeetSeedPrefab;
+        Beet.BeetPrefab = BeetPrefab;
+        WheatSeed.WheatSeedPrefab = WheatSeedPrefab;
+        Wheat.WheatPrefab = WheatPrefab;
+        Request.DestroyBarPrefab = DestroyBarPrefab;
+        Apple.ApplePrefab = ApplePrefab;
+        AppleTreeSeed.AppleTreeSeedPrefab = AppleTreeSeedPrefab;
+        Axe.AxePrefab = AxePrefab;
+        Log.LogPrefab = LogPrefab;
+
+        Objects.Instruments = new List<Instrument>();
+        Objects.Tables = new Dictionary<(int, int), Table>();
+        Objects.Things = new List<Thing>();
+        Objects.Seedbeds = new Dictionary<(int, int), Seedbed>();
+        Objects.Fruits = new List<Fruit>();
+        Objects.Requests = new Dictionary<(int, int), Request>();
+        Model.Player.CurrentTime = Model.Player.GameTime;
+        Model.Player.TotalScore = 0;
     }
 }

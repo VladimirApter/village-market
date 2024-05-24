@@ -11,6 +11,7 @@ namespace Model
         public static float TakingRadius { get; set; } = SquareSection.SquareSectionScale.x * 1.5f;
         public static int TotalScore = 0;
         public static string Name { get; set; }
-        public static float Time { get; set; }
+        public static float CurrentTime { get; set; }
+        public static float GameTime { get; set; }
     }
 }
