@@ -6,7 +6,8 @@ using UnityEngine;
 public class CreateTable : MonoBehaviour
 {
     public GameObject tableObjs;
-    private readonly (int, int)[] coordsTable = new[] {(7, 4), (7, 2), (7, -1), (7, -3), (7, -5) };
+
+    private readonly (int, int)[] coordsTable = new[] { (7, 2), (7, -1), (7, -3) };
     // Start is called before the first frame update
     void Start()
     {

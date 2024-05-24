@@ -13,7 +13,7 @@ public class CreateRequests : MonoBehaviour
     public GameObject requestFruits;
     public GameObject destroyBars;
 
-    private readonly (int, int)[] coordsRequests = new[] { (10, -1), (10, 2), (10, 4), (10, -3), (10, -5) };
+    private readonly (int, int)[] coordsRequests = new[] { (10, -1), (10, 2), (10, -3) };
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +53,7 @@ public class CreateRequests : MonoBehaviour
                     SquareSection.ConvertSectionToVector(coordRequest),
                     Quaternion.identity, requestObjs.transform),
                 FruitsCount = { ["wheat"] = wheatCount, ["beet"] = beetsCount, ["apple"] = applesCount},
-                Price = maxFruitsCount * 100,
+                Price = totalFruitsCount * 100,
                 FramesToDestroy = 1000 * totalFruitsCount,
                 DestroyBar = Instantiate(Request.DestroyBarPrefab,
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2(8, 0),

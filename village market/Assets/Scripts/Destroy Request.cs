@@ -32,7 +32,7 @@ public class DestroyRequest : MonoBehaviour
 
         foreach (var (requestCoords, request) in requestsToDestroy)
         {
-            Player.TotalScore -= request.Price;
+            Player.TotalScore -= (int)(request.Price * 0.5);
             foreach (var fruit in request.Fruits)
                 Destroy(fruit);
             Objects.Requests.Remove(requestCoords);
