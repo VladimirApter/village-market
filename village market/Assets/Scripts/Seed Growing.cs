@@ -146,7 +146,6 @@ public class SeedGrowing : MonoBehaviour
                 break;
         }
 
-        fruit.Cords = coords;
         fruit.ThingObj = Instantiate(prefab, coords, Quaternion.identity, fruitObjs.transform);
         return fruit;
     }

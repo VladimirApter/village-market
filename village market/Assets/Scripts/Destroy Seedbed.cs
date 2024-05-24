@@ -31,25 +31,18 @@ public class DestroySeedbed : MonoBehaviour
                 var seed = (Seed)Objects.Things.FirstOrDefault(x => x is Seed { Seedbed: not null } seed && seed.Seedbed.Coords == seedbed.Value.Coords);
                 var seedAppleTree = (Seed)Objects.Things.FirstOrDefault(x => x is Seed { Seedbeds: not null } seedApple && seedApple.Seedbeds.Any(seedbedApple => seedbedApple.Coords == seedbed.Value.Coords));
                 if (seed != null)
-                {
                     seed.Seedbed = null;
-                }
 
                 if (seedAppleTree != null)
                 {
                     if (seedAppleTree.GrowingFramesCount != seedAppleTree.FramesToGrow)
                     {
                         foreach (var seedbed1 in seedAppleTree.Seedbeds)
-                        {
                             seedbed1.IsBusy = false;
-                        }
                         seedAppleTree.Seedbeds = null;
                     }
                     else
-                    {
                         return;
-                    }
-                    
                 }
                 
                 Destroy(seedbed.Value.SeedbedObj);

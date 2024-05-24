@@ -24,6 +24,9 @@ public class DestroyAppleTree : MonoBehaviour
             {
                 if (axe != null && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)))
                 {
+                    PlayerMoving.IsActionAtCurrentMoment = true;
+                    PlayerMoving.CurrentActionPos = appleTreeSeed.Cords;
+                    
                     foreach (var seedbed in appleTreeSeed.Seedbeds)
                     {
                         seedbed.CanDestroy = true;

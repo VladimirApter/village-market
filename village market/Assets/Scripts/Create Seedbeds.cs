@@ -34,6 +34,9 @@ public class CreateSeedbeds : MonoBehaviour
             new Vector2(SquareSection.SquareSectionScale.x, SquareSection.SquareSectionScale.y)
                 .magnitude) return;
 
+        PlayerMoving.IsActionAtCurrentMoment = true;
+        PlayerMoving.CurrentActionPos = SquareSection.ConvertSectionToVector(seedbedCoordinates);
+
         if (Objects.Seedbeds.Keys.Contains(seedbedCoordinates))
         {
             Destroy(Objects.Seedbeds[seedbedCoordinates].SeedbedObj);

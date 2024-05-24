@@ -8,6 +8,7 @@ namespace Model
         public GameObject ThingObj { get; set; }
         public bool IsCarried { get; set; } = false;
         public bool CanCarried { get; set; } = true;
-        public UnityEngine.Vector2 Cords { get; set; }
+
+        public UnityEngine.Vector2 Cords => ThingObj.transform.position;
     }
 }

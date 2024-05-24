@@ -26,10 +26,14 @@ public class ThingsCarrying : MonoBehaviour
                                      Vector2.Distance(worldPosition, t.ThingObj.transform.position) <=
                                      new Vector2(SquareSection.SquareSectionScale.x / 2,
                                          SquareSection.SquareSectionScale.y / 2).magnitude);
+            
             if (!Player.IsCarrying)
             {
                 if (closestThing is { CanCarried: true })
                 {
+                    PlayerMoving.IsActionAtCurrentMoment = true;
+                    PlayerMoving.CurrentActionPos = closestThing.Cords;
+                    
                     closestThing.IsCarried = true;
                     Player.IsCarrying = true;
 
@@ -108,14 +112,14 @@ public class ThingsCarrying : MonoBehaviour
                 }
             }
         }
+    }
 
-        var xMoving = Input.GetAxisRaw("Horizontal");
-        var yMoving = Input.GetAxisRaw("Vertical");
-        if (xMoving != 0 || yMoving != 0)
-        {
-            direction.x = xMoving;
-            direction.y = yMoving;
-        }
+    private void LateUpdate()
+    {
+        var things = Objects.Things;
+        
+        if (PlayerMoving.Direction != Vector2.zero)
+            direction = PlayerMoving.Direction;
 
         foreach (var thing in things.Where(x => x.IsCarried))
         {

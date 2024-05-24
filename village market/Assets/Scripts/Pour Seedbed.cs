@@ -33,6 +33,9 @@ public class PourSeedbed : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) &&
             !seedBeds[seedbedCoordinates].IsPoured && leica.IsCarried)
         {
+            PlayerMoving.IsActionAtCurrentMoment = true;
+            PlayerMoving.CurrentActionPos = SquareSection.ConvertSectionToVector(seedbedCoordinates);
+            
             var seedbed = seedBeds[seedbedCoordinates];
             seedbed.IsPoured = true;
             seedbed.SeedbedObj.GetComponent<SpriteRenderer>().color = new Color(0.36f, 0.25f, 0.2f);

@@ -29,6 +29,9 @@ public class PutOnTable : MonoBehaviour
                 new Vector2(SquareSection.SquareSectionScale.x / 2, SquareSection.SquareSectionScale.y / 2).magnitude &&
                 (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)))
             {
+                PlayerMoving.IsActionAtCurrentMoment = true;
+                PlayerMoving.CurrentActionPos = coordsTable;
+                
                 switch (fruit)
                 {
                     case Wheat:
@@ -48,7 +51,6 @@ public class PutOnTable : MonoBehaviour
                 Objects.Fruits.Add(fruit);
 
                 fruit.ThingObj.transform.position = coordsTable;
-                fruit.Cords = coordsTable;
                 fruit.IsCarried = false;
 
                 //table.IsBusy = true;

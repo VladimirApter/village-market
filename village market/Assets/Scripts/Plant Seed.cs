@@ -31,6 +31,8 @@ public class PlantSeed : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) && !seedBeds[seedbedCoordinates].IsBusy)
         {
+            PlayerMoving.IsActionAtCurrentMoment = true;
+            PlayerMoving.CurrentActionPos = coordsSeedBed;
             if (seed is AppleTreeSeed)
             {
                 var directions = new Vector2[] { new(-4, 4), new(-4, -4), new(4, 4), new(4, -4) };
@@ -78,7 +80,6 @@ public class PlantSeed : MonoBehaviour
     private void UpdateSeedPosition(Seed seed, Vector2 position)
     {
         seed.ThingObj.transform.position = position;
-        seed.Cords = position;
         seed.IsCarried = false;
 
         var spriteRenderer = seed.ThingObj.GetComponent<SpriteRenderer>();

@@ -44,8 +44,6 @@ public class CreateSeeds : MonoBehaviour
             });
         }
 
-        foreach (var seed in seeds)
-            seed.Cords = seed.ThingObj.transform.position;
         Objects.Things.AddRange(seeds);
     }
 
