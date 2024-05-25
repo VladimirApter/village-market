@@ -26,6 +26,8 @@ public class Timer : MonoBehaviour
         }
         else if (Player.CurrentTime < 0)
         {
+            PlayerPrefs.SetInt(Player.Name, Player.TotalScore);
+            
             Player.CurrentTime = 0;
             timerText.color = Color.red;
             SceneManager.LoadScene("LeaderBoardScene");

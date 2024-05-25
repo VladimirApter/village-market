@@ -8,10 +8,17 @@ public class PlayButton : MonoBehaviour
     public InputField inputField;
     public void OnClick()
     {
-        if (inputField.text == "") return;
+        var playerName = inputField.text;
+        if (playerName == "") return;
+        var existingPlayers = PlayerPrefs.GetString("existingPlayers");
+        if (!existingPlayers.Contains(playerName))
+        {
+            PlayerPrefs.SetString("existingPlayers", $"{existingPlayers}|{playerName}" );
+        }
+        
         
         SceneManager.LoadScene("GameScene");
         Player.GameTime = 30;
-        Player.Name = inputField.text;
+        Player.Name = playerName;
     }
 }
