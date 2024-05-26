@@ -17,6 +17,11 @@ public class PlayerMoving : MonoBehaviour
     private static readonly int Horizontal = Animator.StringToHash("Horizontal");
     private static readonly int Vertical = Animator.StringToHash("Vertical");
     private static readonly int Speed = Animator.StringToHash("Speed");
+    
+    private const float MinXPosition = -14f;
+    private const float MaxXPosition = 48f;
+    private const float MinYPosition = -17.5f;
+    private const float MaxYPosition = 17f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +40,7 @@ public class PlayerMoving : MonoBehaviour
             ChangeActionPlayerDirection(player.transform.position, CurrentActionPos);
         }
         
-        if (Direction != new Vector2(0, 0))
+        if (Direction != Vector2.zero)
         {
             animator.SetFloat(Horizontal, Direction.x);
             animator.SetFloat(Vertical, Direction.y);
@@ -47,10 +52,47 @@ public class PlayerMoving : MonoBehaviour
             IsActionAtCurrentMoment = false;
             return;
         }
-        
+
         var position = player.transform.position;
         var movingDelta = new Vector3(Direction.x, Direction.y).normalized * (speed * Time.deltaTime);
-        player.transform.position = position + movingDelta;
+        var newPosition = position + movingDelta;
+        
+        var sections = new[] { (-2, 5), (-2, 4),  (-3, 4), (-3, 3), (-4, 3), (-4, 2), (-4, 1), (-4, -1), (-4, -2), (-4, -3), (-4, -4), (-3, -4), (-3, -5), (-2, -5), (-2, -6), (-1, -5), (7, 2), (7, -1), (7, -3) };
+        var square = SquareSection.SquareSectionScale;
+
+        foreach (var section in sections)
+        {
+            var sectionCoords = SquareSection.ConvertSectionToVector(section);
+            var halfSquare = square / 2.0f;
+
+            var minX = sectionCoords.x - halfSquare.x;
+            var maxX = sectionCoords.x + halfSquare.x;
+            var minY = sectionCoords.y;
+            var maxY = sectionCoords.y + 2*halfSquare.y;
+
+            if (newPosition.x > minX && newPosition.x < maxX && newPosition.y > minY && newPosition.y < maxY)
+            {
+                return;
+            }
+            if (newPosition.x < MinXPosition)
+            {
+                newPosition.x = MinXPosition;
+            }
+            if (newPosition.y < MinYPosition )
+            {
+                newPosition.y = MinYPosition;
+            }
+            if (newPosition.y > MaxYPosition )
+            {
+                newPosition.y = MaxYPosition;
+            }
+            if (newPosition.x > MaxXPosition )
+            {
+                newPosition.x = MaxXPosition;
+            }
+        }
+        
+        player.transform.position = newPosition;
     }
 
     public static void ChangeActionPlayerDirection(Vector2 playerPos, Vector2 actionObjectPos)

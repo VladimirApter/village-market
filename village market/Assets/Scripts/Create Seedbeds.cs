@@ -19,15 +19,14 @@ public class CreateSeedbeds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var hoe = GetHoe(Objects.Instruments);
-        if (hoe is null || !hoe.IsCarried) return;
-        if (!(Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) || !Player.IsCarrying) return;
-        if (Player.PlayerObj.transform.position.x > 0) return;
-
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var seedbedCoordinates =
             SquareSection.ConvertVectorToSection(mousePosition +
                                                  new Vector3(0, SquareSection.SquareSectionScale.y / 2));
+        var hoe = GetHoe(Objects.Instruments);
+        if (hoe is null || !hoe.IsCarried) return;
+        if (!(Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) || !Player.IsCarrying) return;
+        if (seedbedCoordinates.Item1 < 1 || seedbedCoordinates.Item1 > 4 || seedbedCoordinates.Item2 < -5 || seedbedCoordinates.Item2 > 4) return;
         
         if (!SquareSection.GetCurrentSectionCoordinates().Contains(seedbedCoordinates) ||
             Vector2.Distance(SquareSection.ConvertSectionToVector(seedbedCoordinates), mousePosition) >

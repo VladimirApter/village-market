@@ -29,7 +29,7 @@ public class CreateSeeds : MonoBehaviour
         {
             seedsToAdd.Add(new BeetSeed()
             {
-                ThingObj = Instantiate(BeetSeed.BeetSeedPrefab, SquareSection.ConvertSectionToVector((-4, 4)),
+                ThingObj = Instantiate(BeetSeed.BeetSeedPrefab, SquareSection.ConvertSectionToVector((-4, -2)),
                     Quaternion.identity, seedsObjs.transform),
             });
         }
@@ -37,7 +37,7 @@ public class CreateSeeds : MonoBehaviour
         {
             seedsToAdd.Add(new WheatSeed()
             {
-                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, SquareSection.ConvertSectionToVector((-2, 4)),
+                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, SquareSection.ConvertSectionToVector((-4, 1)),
                     Quaternion.identity, seedsObjs.transform),
             });
         }
@@ -45,7 +45,7 @@ public class CreateSeeds : MonoBehaviour
         {
             seedsToAdd.Add(new AppleTreeSeed()
             {
-                ThingObj = Instantiate(AppleTreeSeed.AppleTreeSeedPrefab, SquareSection.ConvertSectionToVector((-1, 4)),
+                ThingObj = Instantiate(AppleTreeSeed.AppleTreeSeedPrefab, SquareSection.ConvertSectionToVector((-4, -1)),
                     Quaternion.identity, seedsObjs.transform),
             });
         }

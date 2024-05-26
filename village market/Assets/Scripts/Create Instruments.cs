@@ -17,21 +17,21 @@ public class CreateInstruments : MonoBehaviour
         instruments.Add(new Leica()
         {
             IsCarried = false,
-            ThingObj = Instantiate(Leica.LeicaPrefab, platform.transform.position,
+            ThingObj = Instantiate(Leica.LeicaPrefab,SquareSection.ConvertSectionToVector((-3, 1)),
                 Quaternion.identity, instrumentsObjs.transform),
         });
         
         instruments.Add(new Hoe()
         {
             IsCarried = false,
-            ThingObj = Instantiate(Hoe.HoePrefab, (Vector2)platform.transform.position + Vector2.right * 3,
+            ThingObj = Instantiate(Hoe.HoePrefab, SquareSection.ConvertSectionToVector((-3, -1)),
                 Quaternion.identity, instrumentsObjs.transform),
         });
         
         instruments.Add(new Axe()
         {
             IsCarried = false,
-            ThingObj = Instantiate(Axe.AxePrefab, (Vector2)platform.transform.position - Vector2.right * 3,
+            ThingObj = Instantiate(Axe.AxePrefab, SquareSection.ConvertSectionToVector((-3, -2)),
                 Quaternion.identity, instrumentsObjs.transform),
         });
 

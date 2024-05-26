@@ -45,6 +45,7 @@ namespace Model
             var sectionY = (int)Math.Floor((vector.y - SquareSectionScale.y / 2 * ySign) / SquareSectionScale.y) +
                            ySign;
             if (sectionY == 0) sectionY = -1;
+            if (sectionX >= 0) sectionX++;
 
             return (sectionX, sectionY);
         }

@@ -54,7 +54,7 @@ public class PlantSeed : MonoBehaviour
                 {
                     var coordSeedBedMin = validPositions.OrderBy(vec => vec.x).ThenBy(vec => vec.y).First();
 
-                    UpdateSeedPosition(seed, coordSeedBedMin + new Vector2(2.5f, 2.5f));
+                    UpdateSeedPosition(seed, coordSeedBedMin + new Vector2(SquareSection.SquareSectionScale.x/2, SquareSection.SquareSectionScale.y/2));
 
                     var seedBedsForSeed = validPositions
                         .Select(x => Objects.Seedbeds[SquareSection.ConvertVectorToSection(x)]).ToArray();
