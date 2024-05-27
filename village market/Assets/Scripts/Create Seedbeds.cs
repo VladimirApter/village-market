@@ -38,6 +38,22 @@ public class CreateSeedbeds : MonoBehaviour
 
         if (Objects.Seedbeds.Keys.Contains(seedbedCoordinates))
         {
+            var seed = (Seed)Objects.Things.FirstOrDefault(x => x is Seed { Seedbed: not null } seed && seed.Seedbed.Coords == SquareSection.ConvertSectionToVector(seedbedCoordinates));
+            var seedAppleTree = (Seed)Objects.Things.FirstOrDefault(x => x is Seed { Seedbeds: not null } seedApple && seedApple.Seedbeds.Any(seedbedApple => seedbedApple.Coords == SquareSection.ConvertSectionToVector(seedbedCoordinates)));
+            if (seed != null)
+                seed.Seedbed = null;
+
+            if (seedAppleTree != null)
+            {
+                if (seedAppleTree.GrowingFramesCount != seedAppleTree.FramesToGrow)
+                {
+                    foreach (var seedbed1 in seedAppleTree.Seedbeds)
+                        seedbed1.IsBusy = false;
+                    seedAppleTree.Seedbeds = null;
+                }
+                else
+                    return;
+            }
             Destroy(Objects.Seedbeds[seedbedCoordinates].SeedbedObj);
             Objects.Seedbeds.Remove(seedbedCoordinates);
             return;

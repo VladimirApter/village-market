@@ -14,49 +14,59 @@ public class PutOnTable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var tables = Objects.Tables;
         var things = Objects.Things;
         var fruit = (Fruit)things.FirstOrDefault(x => x.IsCarried && x is Fruit);
 
         if (fruit == null) return;
         var fruitCoords = (Vector2)fruit.ThingObj.transform.position;
 
-        foreach (var table in tables.Values)
+        var tables = Objects.Tables;
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var tableCoordinates =
+            SquareSection.ConvertVectorToSection(mousePosition +
+                                                 new Vector3(0, SquareSection.SquareSectionScale.y / 2));
+
+        if (!SquareSection.GetCurrentSectionCoordinates().Contains(tableCoordinates) ||
+            Vector2.Distance(SquareSection.ConvertSectionToVector(tableCoordinates), mousePosition) >
+            new Vector2(SquareSection.SquareSectionScale.x, SquareSection.SquareSectionScale.y)
+                .magnitude || !tables.Keys.Contains(tableCoordinates)) return;
+
+
+        var coordsTable = tables[tableCoordinates].Coords;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K))
         {
-            var coordsTable = table.Coords;
+            PlayerMoving.IsActionAtCurrentMoment = true;
+            PlayerMoving.CurrentActionPos = coordsTable;
 
-            if (Vector2.Distance(fruitCoords, coordsTable + new Vector2(0, 1.5f)) <=
-                new Vector2(SquareSection.SquareSectionScale.x / 2, SquareSection.SquareSectionScale.y / 2).magnitude &&
-                (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)))
+            switch (fruit)
             {
-                PlayerMoving.IsActionAtCurrentMoment = true;
-                PlayerMoving.CurrentActionPos = coordsTable;
-                
-                switch (fruit)
-                {
-                    case Wheat:
-                        table.FruitsCount["wheat"]++;
-                        break;
-                    case Beet:
-                        table.FruitsCount["beet"]++;
-                        break;
-                    case Apple:
-                        table.FruitsCount["apple"]++;
-                        break;
-                    default:
-                        table.FruitsCount["fruit"]++;
-                        break;
-                }
-                
-                Objects.Fruits.Add(fruit);
-
-                fruit.ThingObj.transform.position = coordsTable;
-                fruit.IsCarried = false;
-
-                //table.IsBusy = true;
-                table.Fruits.Add(fruit);
-                Player.IsCarrying = false;
+                case Wheat:
+                    tables[tableCoordinates].FruitsCount["wheat"]++;
+                    break;
+                case Beet:
+                    tables[tableCoordinates].FruitsCount["beet"]++;
+                    break;
+                case Apple:
+                    tables[tableCoordinates].FruitsCount["apple"]++;
+                    break;
+                default:
+                    tables[tableCoordinates].FruitsCount["fruit"]++;
+                    break;
             }
+
+            Objects.Fruits.Add(fruit);
+
+            fruit.ThingObj.transform.position = coordsTable;
+            fruit.IsCarried = false;
+            var spriteRenderer = fruit.ThingObj.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingLayerName = "seedbeds";
+            spriteRenderer.sortingOrder = 1;
+            spriteRenderer.flipX = false;
+
+            //table.IsBusy = true;
+            tables[tableCoordinates].Fruits.Add(fruit);
+            Player.IsCarrying = false;
         }
     }
 }
