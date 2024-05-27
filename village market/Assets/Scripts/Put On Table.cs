@@ -18,7 +18,6 @@ public class PutOnTable : MonoBehaviour
         var fruit = (Fruit)things.FirstOrDefault(x => x.IsCarried && x is Fruit);
 
         if (fruit == null) return;
-        var fruitCoords = (Vector2)fruit.ThingObj.transform.position;
 
         var tables = Objects.Tables;
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
