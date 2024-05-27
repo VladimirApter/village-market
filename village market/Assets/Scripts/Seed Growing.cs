@@ -31,6 +31,10 @@ public class SeedGrowing : MonoBehaviour
                 seed.GrowingFramesCount = 0;
             }
 
+            if ((seed.IsPlanted || seed.IsPlantedOnSeedbeds) && seed.GrowingFramesCount == 0)
+            {
+                UnGrowSeed(seed);
+            }
             if (seed.IsPlanted && seed.Seedbed.IsPoured ||
                 seed.IsPlantedOnSeedbeds && seed.Seedbeds.All(seedBed => seedBed.IsPoured))
             {
@@ -100,6 +104,13 @@ public class SeedGrowing : MonoBehaviour
         };
 
         seed.ThingObj.GetComponent<SpriteRenderer>().sprite = newSprites[spriteIndex];
+        seed.ThingObj.transform.localScale = seed switch
+        {
+            WheatSeed => new Vector3(25, 25, 1),
+            BeetSeed => new Vector3(25, 25, 1),
+            AppleTreeSeed => new Vector3(25f, 25f, 1),
+            _ => throw new ArgumentOutOfRangeException(nameof(seed), seed, null)
+        };
         return;
 
         int GetSpriteIndex(Seed seed2, int baseIndex, double multiplier)
@@ -118,6 +129,32 @@ public class SeedGrowing : MonoBehaviour
             BeetSeed => newSprites[5],
             AppleTreeSeed => newSprites[10],
             _ => seed.ThingObj.GetComponent<SpriteRenderer>().sprite
+        };
+        seed.ThingObj.transform.localScale = seed switch
+        {
+            WheatSeed => new Vector3(25, 25, 1),
+            BeetSeed => new Vector3(25, 25, 1),
+            AppleTreeSeed => new Vector3(0.6f, 0.6f, 1),
+            _ => throw new ArgumentOutOfRangeException(nameof(seed), seed, null)
+        };
+    }
+    
+    private void UnGrowSeed(Seed seed)
+    {
+        seed.GrowingFramesCount = 0;
+        seed.ThingObj.GetComponent<SpriteRenderer>().sprite = seed switch
+        {
+            WheatSeed => newSprites[15],
+            BeetSeed => newSprites[16],
+            AppleTreeSeed => newSprites[17],
+            _ => seed.ThingObj.GetComponent<SpriteRenderer>().sprite
+        };
+        seed.ThingObj.transform.localScale = seed switch
+        {
+            WheatSeed => new Vector3(1, 1, 1),
+            BeetSeed => new Vector3(1, 1, 1),
+            AppleTreeSeed => new Vector3(1, 1, 1),
+            _ => throw new ArgumentOutOfRangeException(nameof(seed), seed, null)
         };
     }
 
