@@ -8,10 +8,11 @@ public class CreateLogTable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var logTable = new LogTable()
+        var logTable = new LogTable
         {
             TableObj = Instantiate(LogTable.LogTablePrefab, SquareSection.ConvertSectionToVector((-1, -5)),
-                Quaternion.identity)
+                Quaternion.identity),
+            Coords = SquareSection.ConvertSectionToVector((-1, -5))
         };
 
         Objects.LogTable = logTable;

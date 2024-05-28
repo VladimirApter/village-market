@@ -28,7 +28,7 @@ public class PutLogOnTable : MonoBehaviour
 
         if (Vector2.Distance(SquareSection.ConvertSectionToVector(logTableCoordinates), mousePosition) >
             new Vector2(SquareSection.SquareSectionScale.x, SquareSection.SquareSectionScale.y)
-                .magnitude) return;
+                .magnitude || logTable.Coords != SquareSection.ConvertSectionToVector(logTableCoordinates)) return;
         
 
         if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K))
