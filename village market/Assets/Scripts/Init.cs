@@ -5,7 +5,7 @@ using Model;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Init : MonoBehaviour
+public class Init : Sounds
 {
     public GameObject Player;
     public GameObject Platform;
@@ -56,5 +56,6 @@ public class Init : MonoBehaviour
         Objects.Requests = new Dictionary<(int, int), Request>();
         Model.Player.CurrentTime = Model.Player.GameTime;
         Model.Player.TotalScore = 0;
+        Play(sounds[0]);
     }
 }

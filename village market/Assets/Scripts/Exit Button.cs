@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ExitButton : MonoBehaviour
+public class ExitButton : Sounds
 {
     public void ExitGame()
     {
+        Play(sounds[0]);
         Application.Quit();
     }
 }

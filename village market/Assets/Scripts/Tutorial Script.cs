@@ -32,7 +32,7 @@ public class TutorialScript : MonoBehaviour
 
     void LoadSprites()
     {
-        Sprite hoeSprite = Resources.Load<Sprite>("Hoe");
+        Sprite hoeSprite = Resources.Load<Sprite>("Hoe.png");
         if (hoeSprite != null)
         {
             //ImageTest.sprite = hoeSprite; // Присваиваем спрайт ImageTest
@@ -52,13 +52,13 @@ public class TutorialScript : MonoBehaviour
         if (Objects.Seedbeds.Count > 0)
         {
             myText2.text = textToDisplay5;
-            myImage2.sprite = Resources.Load<Sprite>("Seed");
+            myImage2.sprite = Resources.Load<Sprite>("Seed.png");
         }
 
         if (Objects.Seedbeds.Any(x => x.Value.IsBusy))
         {
             myText2.text = textToDisplay7;
-            myImage2.sprite = Resources.Load<Sprite>("Leica");
+            myImage2.sprite = Resources.Load<Sprite>("Leica.png");
         }
 
         if (Objects.Seedbeds.Any(x => x.Value.IsBusy)
