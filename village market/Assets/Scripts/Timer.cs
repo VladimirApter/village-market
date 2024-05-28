@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Model;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Timer: MonoBehaviour
