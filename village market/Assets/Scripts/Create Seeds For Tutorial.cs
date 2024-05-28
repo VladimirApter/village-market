@@ -9,7 +9,8 @@ using UnityEngine.Serialization;
 public class CreateSeedsForTutorial : MonoBehaviour
 {
     public GameObject seedsObjs;
-    public int seedsCount = 20;
+    private int wheatSeedsCount = 5;
+    private int appleTreeSeedsCount = 5;
     
     // Start is called before the first frame update
     void Start()
@@ -23,11 +24,19 @@ public class CreateSeedsForTutorial : MonoBehaviour
         var seeds = Objects.Things.Where(t => t is Seed).ToArray();
         var seedsToAdd = new List<Seed>();
         
-        for (var i = 0; i < seedsCount - seeds.Count(s => s is WheatSeed); i++)
+        for (var i = 0; i < wheatSeedsCount - seeds.Count(s => s is WheatSeed); i++)
         {
             seedsToAdd.Add(new WheatSeed()
             {
-                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, SquareSection.ConvertSectionToVector((-2, 4)),
+                ThingObj = Instantiate(WheatSeed.WheatSeedPrefab, SquareSection.ConvertSectionToVector((-4, 1)),
+                    Quaternion.identity, seedsObjs.transform),
+            });
+        }
+        for (var i = 0; i < appleTreeSeedsCount - seeds.Count(s => s is AppleTreeSeed); i++)
+        {
+            seedsToAdd.Add(new AppleTreeSeed()
+            {
+                ThingObj = Instantiate(AppleTreeSeed.AppleTreeSeedPrefab, SquareSection.ConvertSectionToVector((-4, -1)),
                     Quaternion.identity, seedsObjs.transform),
             });
         }

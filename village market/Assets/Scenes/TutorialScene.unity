@@ -8063,7 +8063,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seedsObjs: {fileID: 1338582267}
-  seedsCount: 20
 --- !u!1 &1347352198
 GameObject:
   m_ObjectHideFlags: 0
@@ -12298,11 +12297,12 @@ MonoBehaviour:
   BeetPrefab: {fileID: 4744106278931427204, guid: 129c07dd7b9e7bb478672789a0523e12, type: 3}
   WheatSeedPrefab: {fileID: 8040092593742384278, guid: c531bd908fbb87f40852df4e0ddc68bd, type: 3}
   WheatPrefab: {fileID: 8876820962116748285, guid: bd6992d6413e83248b8f493eb62c7382, type: 3}
-  DestroyBarPrefab: {fileID: 0}
-  ApplePrefab: {fileID: 0}
-  AppleTreeSeedPrefab: {fileID: 0}
+  DestroyBarPrefab: {fileID: 3445736955579975412, guid: fce9550458fe6d341b12495f83bb529b, type: 3}
+  ApplePrefab: {fileID: 4744106278931427204, guid: d661ed2e43841bf40aa628f683e9475b, type: 3}
+  AppleTreeSeedPrefab: {fileID: 4744106278931427204, guid: bdb143d760086584984c888bcb3e2580, type: 3}
   AxePrefab: {fileID: 3595754936706886835, guid: 5264f3c06f34f6c44b86f937f903977c, type: 3}
-  LogPrefab: {fileID: 0}
+  LogPrefab: {fileID: 4744106278931427204, guid: 6dac48fc4a8990f4abd77ad3dabb8a1f, type: 3}
+  LogTablePrefab: {fileID: 8660773530765641002, guid: 40efb983d6cd94449832d1a098117f40, type: 3}
 --- !u!1 &2141343290
 GameObject:
   m_ObjectHideFlags: 0

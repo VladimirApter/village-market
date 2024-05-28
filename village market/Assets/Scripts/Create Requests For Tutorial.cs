@@ -30,7 +30,7 @@ public class CreateRequestsForTutorial : MonoBehaviour
                 RequestObj = Instantiate(Request.RequestPrefab,
                     SquareSection.ConvertSectionToVector(coordRequest),
                     Quaternion.identity, requestObjs.transform),
-                FruitsCount = { ["wheat"] = fruitsCount },
+                FruitsCount = { ["wheat"] = fruitsCount, ["apple"] = fruitsCount },
                 Price = fruitsCount * 100,
                 FramesToDestroy = 10000000 * fruitsCount
             };
@@ -41,6 +41,13 @@ public class CreateRequestsForTutorial : MonoBehaviour
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((i - 2) * 2, 0),
                     Quaternion.identity, requestFruits.transform);
                 request.Fruits.Add(wheat);
+            }
+            for (var i = 0; i < fruitsCount; i++)
+            {
+                var apple = Instantiate(Apple.ApplePrefab,
+                    SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((1 + i - 2) * 2, 0),
+                    Quaternion.identity, requestFruits.transform);
+                request.Fruits.Add(apple);
             }
 
             Objects.Requests.Add(coordRequest, request);
