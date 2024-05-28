@@ -11,5 +11,6 @@ namespace Model
         public static Dictionary<(int, int), Table> Tables { get; set; } = new();
         public static Dictionary<(int, int), Request> Requests { get; set; } = new();
         public static List<Fruit> Fruits { get; set; } = new();
+        public static LogTable LogTable = new();
     }
 }

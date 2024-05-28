@@ -25,6 +25,7 @@ public class Init : Sounds
     public GameObject AppleTreeSeedPrefab;
     public GameObject AxePrefab;
     public GameObject LogPrefab;
+    public GameObject LogTablePrefab;
     
     // Start is called before the first frame update
     void Awake()
@@ -47,6 +48,7 @@ public class Init : Sounds
         AppleTreeSeed.AppleTreeSeedPrefab = AppleTreeSeedPrefab;
         Axe.AxePrefab = AxePrefab;
         Log.LogPrefab = LogPrefab;
+        LogTable.LogTablePrefab = LogTablePrefab;
 
         Objects.Instruments = new List<Instrument>();
         Objects.Tables = new Dictionary<(int, int), Table>();
