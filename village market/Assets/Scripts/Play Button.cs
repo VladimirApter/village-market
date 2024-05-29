@@ -13,10 +13,10 @@ public class PlayButton : Sounds
         if (playerName == "") return;
         Play(sounds[0]);
         
-        var existingPlayers = PlayerPrefs.GetString("existingPlayers");
+        var existingPlayers = PlayerPrefs.GetString("3minPlayers");
         if (!existingPlayers.Contains(playerName))
         {
-            PlayerPrefs.SetString("existingPlayers", $"{existingPlayers}|{playerName}" );
+            PlayerPrefs.SetString("3minPlayers", $"{existingPlayers}|{playerName}:3min" );
         }
         
         

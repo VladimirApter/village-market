@@ -12,10 +12,10 @@ public class PlayButtonLong : Sounds
         if (playerName == "") return;
         Play(sounds[0]);
         
-        var existingPlayers = PlayerPrefs.GetString("existingPlayers");
+        var existingPlayers = PlayerPrefs.GetString("5minPlayers");
         if (!existingPlayers.Contains(playerName))
         {
-            PlayerPrefs.SetString("existingPlayers", $"{existingPlayers}|{playerName}" );
+            PlayerPrefs.SetString("5minPlayers", $"{existingPlayers}|{playerName}:5min" );
         }
         
         SceneManager.LoadScene("GameScene");

@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Model;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Timer: MonoBehaviour
@@ -34,9 +33,11 @@ public class Timer: MonoBehaviour
         {
             timeStart = 0;
             //game over
-            PlayerPrefs.SetInt(Player.Name, Player.TotalScore);
+            if (Player.GameTime == 30)
+                PlayerPrefs.SetInt($"{Player.Name}:3min", Player.TotalScore);
+            if (Player.GameTime == 60)
+                PlayerPrefs.SetInt($"{Player.Name}:5min", Player.TotalScore);
             SceneManager.LoadScene("LeaderBoardScene");
-
         }
 
         int minutes = Mathf.FloorToInt(timeStart / 60);
