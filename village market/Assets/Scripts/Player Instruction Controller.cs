@@ -4,13 +4,15 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Model;
+using TMPro;
+
 
 public class PlayerInstructionController : MonoBehaviour
 {
     public Image LeftClick;
     public Image RightClick;
     
-    public Text instructionText;
+    public TMP_Text instructionText;
     public Image textImage;
     public Image instructionImage;
     
