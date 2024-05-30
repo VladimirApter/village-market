@@ -9,9 +9,6 @@ using TMPro;
 
 public class PlayerInstructionController : MonoBehaviour
 {
-    public Image LeftClick;
-    public Image RightClick;
-    
     public TMP_Text instructionText;
     public Image textImage;
     public Image instructionImage;

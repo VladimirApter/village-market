@@ -9,5 +9,6 @@ public class ExitButton : Sounds
     {
         Play(sounds[0]);
         Application.Quit();
+        Debug.Log("Exit is completed");
     }
 }
