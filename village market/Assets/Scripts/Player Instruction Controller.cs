@@ -11,7 +11,7 @@ public class PlayerInstructionController : MonoBehaviour
     public Image RightClick;
     
     public Text instructionText;
-    
+    public Image textImage;
     public Image instructionImage;
     
     public Sprite actionSprite0;
@@ -42,7 +42,9 @@ public class PlayerInstructionController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        instructionImage.transform.position = Player.PlayerObj.transform.position + new Vector3(0, 10, 0);
+        var playerPosition = Player.PlayerObj.transform.position;
+        textImage.transform.position = playerPosition + new Vector3(0, 12, 0);
+        instructionImage.transform.position = playerPosition + new Vector3(0, 16, 0);
         if (Objects.Seedbeds.Count > 0)
         {
             instructionText.text = "Возьми и посадите семечко пшеницы на грядку";
@@ -60,10 +62,32 @@ public class PlayerInstructionController : MonoBehaviour
             instructionImage.sprite = actionSprite3;
         }
 
-        if (Objects.Things.Any(x => x is Fruit))
+        if (Objects.Things.Any(x => x is Wheat))
         {
             instructionText.text = "Возьми пшеницу с грядки и положи на стол для заказов";
             instructionImage.sprite = actionSprite4;
+        }
+        
+        if (Objects.Things.Any(x => x is Apple))
+        {
+            instructionText.text = "Возьми яблоко с грядки и положи на стол для заказов";
+            instructionImage.sprite = actionSprite4;
+        }
+        if (isTutorialFinished)
+        {
+            instructionText.text = "Теперь возьми топор и сруби яблоню";
+            instructionImage.sprite = actionSprite4;
+        }
+
+        if (Objects.Things.Any(x => x is Log))
+        {
+            instructionText.text = "Возьми бревно и положи на стол для бревен";
+            instructionImage.sprite = actionSprite0;
+        }
+        if (Objects.Things.Any(x => x is Log && !x.CanCarried))
+        {
+            instructionText.text = "Поздравляем, ты прошел обучение!";
+            instructionImage.sprite = actionSprite0;
         }
     }
 }
