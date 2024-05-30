@@ -26,16 +26,16 @@ public class PlayerInstructionController : MonoBehaviour
     public Sprite actionSprite10;
     public Sprite actionSprite11;
     public Sprite actionSprite12;
-    
-    
+
     public static bool isTutorialFinished;
+
+    private float waitTime = 600f;
+    private float timer;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        instructionText.text = "Возьми мотыгу и вскопай грядку";
-        instructionImage.sprite = actionSprite0;
         isTutorialFinished = false;
     }
 
@@ -45,20 +45,37 @@ public class PlayerInstructionController : MonoBehaviour
         var playerPosition = Player.PlayerObj.transform.position;
         textImage.transform.position = playerPosition + new Vector3(0, 12, 0);
         instructionImage.transform.position = playerPosition + new Vector3(0, 16, 0);
-        if ("затоптал грядку" is null)
+
+        if (DestroySeedbed.IsBroken)
         {
             instructionText.text = "Ой, ты затоптал грядку! Теперь придется заново ее вскапывать.";
+            timer = waitTime;
+            DestroySeedbed.IsBroken = false;
         }
+        if (timer > 0)
+        {
+            timer--;
+            return;
+        }
+        
+        if (Objects.Seedbeds.Count == 0)
+        {
+            instructionText.text = "Возьми мотыгу и вскопай грядку";
+            instructionImage.sprite = actionSprite0;
+        }
+
         if (Objects.Seedbeds.Count > 0)
         {
             instructionText.text = "Возьми и посади семечко пшеницы на грядку";
             instructionImage.sprite = actionSprite1;
         }
+
         if (Objects.Seedbeds.Any(x => x.Value.IsBusy))
         {
             instructionText.text = "Возьми лейку и полей грядку";
             instructionImage.sprite = actionSprite2;
         }
+
         if (Objects.Seedbeds.Any(x => x.Value.IsBusy)
             && Objects.Seedbeds.Any(x => x.Value.IsPoured))
         {
@@ -72,32 +89,38 @@ public class PlayerInstructionController : MonoBehaviour
             instructionImage.sprite = actionSprite4;
         }
 
-        if ("пшеницу положили на стол" is null)
+        var isWheatOnTable = Objects.Tables.Values.Any(table => table.Fruits.Any(x => x is Wheat));
+
+        if (isWheatOnTable)
         {
             instructionText.text = "Теперь посадим яблоню. Вскопай 4 грядки";
             instructionImage.sprite = actionSprite5;
         }
-        if ("вскопали 4 грядки и пшеница на столе" is null)
+
+        if (Objects.Seedbeds.Count == 4 && isWheatOnTable)
         {
             instructionText.text = "Возьми семечко яблони и посади его";
             instructionImage.sprite = actionSprite6;
         }
-        if ("посадили яблоню и пшеница на столе" is null)
+
+        if (Objects.Things.Any(x => x is AppleTreeSeed { IsPlantedOnSeedbeds: true }) && isWheatOnTable)
         {
             instructionText.text = "Возьми лейку и полей все грядки";
             instructionImage.sprite = actionSprite7;
         }
-        if ("яблоня полита и пшеница на столе" is null)
+
+        if (Objects.Things.Any(x => x is AppleTreeSeed { GrowingFramesCount: >= 1 }) && isWheatOnTable)
         {
             instructionText.text = "Подожди, пока яблоня вырастет";
             instructionImage.sprite = actionSprite8;
         }
-        
+
         if (Objects.Things.Any(x => x is Apple))
         {
             instructionText.text = "Возьми яблоко с грядки и положи на стол для заказов";
             instructionImage.sprite = actionSprite9;
         }
+
         if (isTutorialFinished)
         {
             instructionText.text = "Теперь возьми топор и сруби яблоню";
@@ -109,6 +132,7 @@ public class PlayerInstructionController : MonoBehaviour
             instructionText.text = "Возьми бревно и положи на стол для бревен";
             instructionImage.sprite = actionSprite11;
         }
+
         if (Objects.Things.Any(x => x is Log && !x.CanCarried))
         {
             instructionText.text = "Поздравляем, ты прошел обучение!";

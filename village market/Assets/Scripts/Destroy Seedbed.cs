@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class DestroySeedbed : MonoBehaviour
 {
+    public static bool IsBroken;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,7 @@ public class DestroySeedbed : MonoBehaviour
             {
                 seedbed.Value.DestroyFramesCount++;
             }
-
+            if(seedbed.Value.DestroyFramesCount == Seedbed.FramesToDestroy)IsBroken = true;
             if (seedbed.Value.DestroyFramesCount >= Seedbed.FramesToDestroy)
             {
                 var seed = (Seed)Objects.Things.FirstOrDefault(x => x is Seed { Seedbed: not null } seed && seed.Seedbed.Coords == seedbed.Value.Coords);
