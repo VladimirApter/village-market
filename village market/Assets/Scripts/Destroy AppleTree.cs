@@ -20,7 +20,7 @@ public class DestroyAppleTree : MonoBehaviour
         {
             var coordsAppleTree = appleTreeSeed.Cords;
             if (Vector2.Distance(Player.PlayerObj.transform.position, coordsAppleTree + new Vector2(0, 1.5f)) <=
-                new Vector2(SquareSection.SquareSectionScale.x, SquareSection.SquareSectionScale.y).magnitude)
+                new Vector2(SquareSection.SquareSectionScale.x * 1.5f, SquareSection.SquareSectionScale.y * 1.5f).magnitude)
             {
                 if (axe != null && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)))
                 {
