@@ -54,7 +54,7 @@ public class CreateRequests : MonoBehaviour
                     Quaternion.identity, requestObjs.transform),
                 FruitsCount = { ["wheat"] = wheatCount, ["beet"] = beetsCount, ["apple"] = applesCount},
                 Price = totalFruitsCount * 100,
-                FramesToDestroy = 1000 * totalFruitsCount,
+                FramesToDestroy = 2500 * totalFruitsCount,
                 DestroyBar = Instantiate(Request.DestroyBarPrefab,
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2(8, 0),
                     Quaternion.identity, destroyBars.transform)

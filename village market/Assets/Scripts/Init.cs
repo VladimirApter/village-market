@@ -26,6 +26,9 @@ public class Init : Sounds
     public GameObject AxePrefab;
     public GameObject LogPrefab;
     public GameObject LogTablePrefab;
+
+    public static float ShortGameTime = 180;
+    public static float LongGameTime = 300;
     
     // Start is called before the first frame update
     void Awake()

@@ -56,6 +56,9 @@ public class SeedGrowing : MonoBehaviour
         seed.GrowingFramesCount++;
         UpdateSeedSprite(seed);
 
+        if (seed is AppleTreeSeed)
+            seed.FramesToGrow = AppleTreeSeed.AppleTreeFramesToGrow;
+
         if (seed.GrowingFramesCount < seed.FramesToGrow) return;
         if (seed.GrowingFramesCount == seed.FramesToGrow && seed is AppleTreeSeed)
         {

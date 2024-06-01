@@ -19,7 +19,7 @@ public class PlayButtonLong : Sounds
         }
         
         SceneManager.LoadScene("GameScene");
-        Player.GameTime = 60;
+        Player.GameTime = Init.LongGameTime;
         Player.Name = inputField.text;
     }
 }

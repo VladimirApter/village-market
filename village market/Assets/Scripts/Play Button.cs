@@ -21,7 +21,7 @@ public class PlayButton : Sounds
         
         
         SceneManager.LoadScene("GameScene");
-        Player.GameTime = 30;
+        Player.GameTime = Init.ShortGameTime;
         Player.Name = playerName;
     }
 }

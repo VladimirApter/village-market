@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,9 +34,9 @@ public class Timer: MonoBehaviour
         {
             timeStart = 0;
             //game over
-            if (Player.GameTime == 30)
+            if (Math.Abs(Player.GameTime - Init.ShortGameTime) < 1e-3)
                 PlayerPrefs.SetInt($"{Player.Name}:3min", Player.TotalScore);
-            if (Player.GameTime == 60)
+            if (Math.Abs(Player.GameTime - Init.LongGameTime) < 1e-3)
                 PlayerPrefs.SetInt($"{Player.Name}:5min", Player.TotalScore);
             SceneManager.LoadScene("LeaderBoardScene");
         }
