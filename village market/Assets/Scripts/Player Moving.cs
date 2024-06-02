@@ -57,7 +57,7 @@ public class PlayerMoving : MonoBehaviour
         var movingDelta = new Vector3(Direction.x, Direction.y).normalized * (speed * Time.deltaTime);
         var newPosition = position + movingDelta;
         
-        var sections = new[] { (-2, 5), (-2, 4),  (-3, 4), (-3, 3), (-4, 3), (-4, 2), (-4, 1), (-4, -1), (-4, -2), (-4, -3), (-4, -4), (-3, -4), (-3, -5), (-2, -5), (-2, -6), (-1, -5), (7, 2), (7, -1), (7, -3) };
+        var sections = new[] { (-2, 5), (-2, 4),  (-3, 4), (-3, 3), (-4, 3), (-4, 2), (-4, 1), (-4, -1), (-4, -2), (-4, -3), (-4, -4), (-3, -4), (-3, -5), (-2, -5), (-2, -6), (-2, -4), (7, 2), (7, -1), (7, -3) };
         var square = SquareSection.SquareSectionScale;
 
         foreach (var section in sections)
