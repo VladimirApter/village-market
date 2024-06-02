@@ -28,6 +28,8 @@ public class Timer: MonoBehaviour
         //Debug.LogError("timer");
         if (timeStart > 0)
         {
+            if (timeStart <= 30)
+                timerText.color = Color.red;
             timeStart -= Time.deltaTime;
         }
         else if (timeStart < 0)
