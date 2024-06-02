@@ -24,9 +24,12 @@ public class CreateSeedbeds : MonoBehaviour
             SquareSection.ConvertVectorToSection(mousePosition +
                                                  new Vector3(0, SquareSection.SquareSectionScale.y / 2));
         var hoe = GetHoe(Objects.Instruments);
+        var walkWay = new[] { (1, -1), (2, -1), (3, -1), (4, -1) };
+        
         if (hoe is null || !hoe.IsCarried) return;
         if (!(Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) || !Player.IsCarrying) return;
-        if (seedbedCoordinates.Item1 < 1 || seedbedCoordinates.Item1 > 4 || seedbedCoordinates.Item2 < -5 || seedbedCoordinates.Item2 > 4) return;
+        if (seedbedCoordinates.Item1 < 1 || seedbedCoordinates.Item1 > 4 || seedbedCoordinates.Item2 < -5 || seedbedCoordinates.Item2 > 4 ||
+        walkWay.Contains(seedbedCoordinates)) return;
         
         if (!SquareSection.GetCurrentSectionCoordinates().Contains(seedbedCoordinates) ||
             Vector2.Distance(SquareSection.ConvertSectionToVector(seedbedCoordinates), mousePosition) >
