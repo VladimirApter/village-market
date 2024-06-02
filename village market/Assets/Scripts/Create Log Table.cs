@@ -10,9 +10,9 @@ public class CreateLogTable : MonoBehaviour
     {
         var logTable = new LogTable
         {
-            TableObj = Instantiate(LogTable.LogTablePrefab, SquareSection.ConvertSectionToVector((-1, -5)),
+            TableObj = Instantiate(LogTable.LogTablePrefab, SquareSection.ConvertSectionToVector((-2, -4)),
                 Quaternion.identity),
-            Coords = SquareSection.ConvertSectionToVector((-1, -5))
+            Coords = SquareSection.ConvertSectionToVector((-2, -4))
         };
 
         Objects.LogTable = logTable;
