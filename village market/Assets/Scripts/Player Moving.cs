@@ -19,9 +19,9 @@ public class PlayerMoving : MonoBehaviour
     private static readonly int Speed = Animator.StringToHash("Speed");
     
     private const float MinXPosition = -14f;
-    private const float MaxXPosition = 48f;
-    private const float MinYPosition = -17.5f;
-    private const float MaxYPosition = 17f;
+    private const float MaxXPosition = 47.5f;
+    private const float MinYPosition = -19.4f;
+    private const float MaxYPosition = 19.4f;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +57,11 @@ public class PlayerMoving : MonoBehaviour
         var movingDelta = new Vector3(Direction.x, Direction.y).normalized * (speed * Time.deltaTime);
         var newPosition = position + movingDelta;
         
-        var sections = new[] { (-2, 5), (-2, 4),  (-3, 4), (-3, 3), (-4, 3), (-4, 2), (-4, 1), (-4, -1), (-4, -2), (-4, -3), (-4, -4), (-3, -4), (-3, -5), (-2, -5), (-2, -6), (-2, -4), (7, 2), (7, -1), (7, -3) };
+        var sections = new[]
+        {
+            (-2, 5), (-2, 4),  (-3, 4), (-3, 3), (-4, 3), (-4, 2), (-4, 1), (-4, -1), (-4, -2), (-4, -3), (-4, -4), (-3, -4), (-3, -5), (-2, -5), (-2, -6), (-2, -4), (7, 2), (7, -1), (7, -3),
+            (8, -5), (9, -5), (10, -5), (11, -5), (12, -5), (8, 4), (9, 4), (10, 4), (11, 4), (12, 4), (8, 5), (8, 4), (8, -6), (8, -5)
+        };
         var square = SquareSection.SquareSectionScale;
 
         foreach (var section in sections)
