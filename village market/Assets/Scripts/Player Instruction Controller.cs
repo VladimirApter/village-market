@@ -44,7 +44,7 @@ public class PlayerInstructionController : Sounds
     {
         var playerPosition = Player.PlayerObj.transform.position;
         textImage.transform.position = playerPosition + new Vector3(0, 12, 0);
-        instructionImage.transform.position = playerPosition + new Vector3(0, 16, 0);
+        instructionImage.transform.position = playerPosition + new Vector3(0, 13.5f, 0);
 
         if (DestroySeedbed.IsBroken)
         {
