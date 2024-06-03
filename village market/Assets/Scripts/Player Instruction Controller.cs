@@ -137,7 +137,7 @@ public class PlayerInstructionController : Sounds
         {
             instructionText.text = "Поздравляем, ты прошел обучение!";
             instructionImage.sprite = actionSprite12;
-            Play(sounds[0]);
+            Play(sounds[0], volume: 0.3f);
         }
     }
 }

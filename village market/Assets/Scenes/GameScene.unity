@@ -6785,7 +6785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 8300000, guid: 9e18484069db118428cfb158751a2550, type: 3}
+  - {fileID: 8300000, guid: c43a514e2fe6ee34a9549c7a87581521, type: 3}
 --- !u!82 &706048795
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9814,9 +9814,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 8300000, guid: 8a51c319ee53184499313088c57be2a0, type: 3}
+  - {fileID: 8300000, guid: 070fdcf2b94c0344d9cb4b70460f9270, type: 3}
   - {fileID: 8300000, guid: bb72c73c28fffad45b3ec27901baa420, type: 3}
-  - {fileID: 8300000, guid: 2aa86a8003d2d974badd883ab75d10a7, type: 3}
+  - {fileID: 8300000, guid: 9d3779af9295f774fa194a966dbc88b7, type: 3}
   player: {fileID: 1295264875}
 --- !u!95 &1295264880 stripped
 Animator:
@@ -9949,8 +9949,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f39ef4f6715754faf16feb5997d733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - {fileID: 8300000, guid: 3ef12c013375d774492c1f3a7542e66c, type: 3}
   fruitObjs: {fileID: 1327752393}
   newSprites:
   - {fileID: 1226625167, guid: 198c4d96adad5c04e85476a0fbb71814, type: 3}
@@ -13794,7 +13792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 8300000, guid: 2e4324042f685f749b0ebc6977ce47b9, type: 3}
+  - {fileID: 8300000, guid: de8070a1de4cd8646a9de0009c4749d3, type: 3}
   seedbedObjs: {fileID: 1998476248}
 --- !u!4 &1998476250
 Transform:

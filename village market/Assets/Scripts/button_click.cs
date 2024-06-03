@@ -9,6 +9,6 @@ public class button_click : MonoBehaviour
 
     public void ClickSound()
     {
-        myClick.PlayOneShot(myClip);
+        myClick.PlayOneShot(myClip, volumeScale: 0.1f);
     }
 }

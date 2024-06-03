@@ -5,7 +5,7 @@ using System.Linq;
 using Model;
 using UnityEngine;
 
-public class SeedGrowing : Sounds
+public class SeedGrowing : MonoBehaviour
 {
     public GameObject fruitObjs;
     private readonly List<Seed> seedsGrewInThisFrame = new();
@@ -167,7 +167,6 @@ public class SeedGrowing : Sounds
         }
 
         fruit.ThingObj = Instantiate(prefab, coords, Quaternion.identity, fruitObjs.transform);
-        Play(sounds[0]);
         return fruit;
     }
 

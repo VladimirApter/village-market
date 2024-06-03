@@ -39,7 +39,7 @@ public class ThingsCarrying : Sounds
 
                     if (closestThing is Seed || closestThing is Fruit)
                     {
-                        if (closestThing is Seed) Play(sounds[0]);
+                        if (closestThing is Seed) Play(sounds[0], volume: 0.3f);
                         var seedbed = Objects.Seedbeds.FirstOrDefault(x =>
                             x.Value.IsBusy && SquareSection.ConvertSectionToVector(x.Key) ==
                             closestThing.Cords);
@@ -98,7 +98,7 @@ public class ThingsCarrying : Sounds
                         }
                     }
                     if (closestThing is Leica || closestThing is Axe || closestThing is Hoe) Play(sounds[1]);
-                    if (closestThing is Log) Play(sounds[2]);
+                    if (closestThing is Log) Play(sounds[2], volume: 0.3f);
                 }
             }
             else

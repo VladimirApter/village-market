@@ -38,7 +38,7 @@ public class PourSeedbed : Sounds
             
             var seedbed = seedBeds[seedbedCoordinates];
             seedbed.IsPoured = true;
-            Play(sounds[0]);
+            Play(sounds[0], volume: 0.02f);
             seedbed.SeedbedObj.GetComponent<SpriteRenderer>().color = new Color(0.36f, 0.25f, 0.2f);
         }
     }
