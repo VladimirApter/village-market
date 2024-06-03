@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ExitTutorialButton : Sounds
+public class ExitTutorialButton : MonoBehaviour
 {
     
     public void OnClick()
     {
-        //
-        Play(sounds[0]);
         SceneManager.LoadScene("MenuScene");
         
     }

@@ -4,14 +4,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class PlayButton : Sounds
+public class PlayButton : MonoBehaviour
 {
     public InputField inputField;
     public void OnClick()
     {
         var playerName = inputField.text;
         if (playerName == "") return;
-        Play(sounds[0]);
         
         var existingPlayers = PlayerPrefs.GetString("3minPlayers");
         if (!existingPlayers.Contains(playerName))
