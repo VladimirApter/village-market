@@ -4,7 +4,7 @@ using System.Linq;
 using Model;
 using UnityEngine;
 
-public class CheckRequest : MonoBehaviour
+public class CheckRequest : Sounds
 {
     // Start is called before the first frame update
     void Start()
@@ -31,6 +31,7 @@ public class CheckRequest : MonoBehaviour
                 continue;
             Player.TotalScore += request.Price;
             PlayerInstructionController.isTutorialFinished = true;
+            Play(sounds[0]);
 
             var fruitsToDestroy = new List<Fruit>();
 

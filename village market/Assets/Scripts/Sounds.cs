@@ -7,13 +7,23 @@ public class Sounds : MonoBehaviour
     public AudioClip[] sounds;
     private AudioSource audioSrc => GetComponent<AudioSource>();
 
-    public void Play(AudioClip clip, float volume = 1f, bool destroyed = false, float p1 = 0.85f, float p2 = 1.2f)
+    public void Play(AudioClip clip, float volume = 1f, bool destroyed = false, float p1 = 1f, bool loopFlag = false)
     {
-        audioSrc.pitch = Random.Range(p1, p2);
+        audioSrc.pitch = p1;
 
         if (destroyed)
-            AudioSource.PlayClipAtPoint(clip, transform.position, volume);
+            AudioSource.PlayClipAtPoint(clip, transform.position);
         else
-            audioSrc.PlayOneShot(clip, volume);
+        {
+            if (!loopFlag) audioSrc.PlayOneShot(clip, volume);
+            else
+            {
+                audioSrc.loop = loopFlag;
+                audioSrc.clip = clip;
+                audioSrc.Play();
+            }
+        }
+            
+        
     }
 }

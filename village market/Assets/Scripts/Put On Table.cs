@@ -4,7 +4,7 @@ using System.Linq;
 using Model;
 using UnityEngine;
 
-public class PutOnTable : MonoBehaviour
+public class PutOnTable : Sounds
 {
     // Start is called before the first frame update
     void Start()
@@ -65,6 +65,7 @@ public class PutOnTable : MonoBehaviour
 
             //table.IsBusy = true;
             tables[tableCoordinates].Fruits.Add(fruit);
+            Play(sounds[0]);
             Player.IsCarrying = false;
         }
     }

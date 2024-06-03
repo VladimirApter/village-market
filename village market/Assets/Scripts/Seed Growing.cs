@@ -5,7 +5,7 @@ using System.Linq;
 using Model;
 using UnityEngine;
 
-public class SeedGrowing : MonoBehaviour
+public class SeedGrowing : Sounds
 {
     public GameObject fruitObjs;
     private readonly List<Seed> seedsGrewInThisFrame = new();
@@ -138,6 +138,7 @@ public class SeedGrowing : MonoBehaviour
             AppleTreeSeed => newSprites[17],
             _ => seed.ThingObj.GetComponent<SpriteRenderer>().sprite
         };
+        //Play(sounds[1]);
     }
 
     private Fruit CreateNewFruit(Seed seed, Vector2 coords)
@@ -166,6 +167,7 @@ public class SeedGrowing : MonoBehaviour
         }
 
         fruit.ThingObj = Instantiate(prefab, coords, Quaternion.identity, fruitObjs.transform);
+        Play(sounds[0]);
         return fruit;
     }
 

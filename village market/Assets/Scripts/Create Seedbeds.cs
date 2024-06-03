@@ -5,7 +5,7 @@ using System.Linq;
 using Model;
 using UnityEngine;
 
-public class CreateSeedbeds : MonoBehaviour
+public class CreateSeedbeds : Sounds
 {
     public GameObject seedbedObjs;
     private GameObject platform;
@@ -72,6 +72,7 @@ public class CreateSeedbeds : MonoBehaviour
             IsPoured = false,
             CanDestroy = false,
         };
+        Play(sounds[0]);
         
         var spriteRenderer = newSeedbed.SeedbedObj.GetComponent<SpriteRenderer>();
         spriteRenderer.sortingLayerName = "default";

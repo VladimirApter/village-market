@@ -3,7 +3,7 @@ using System.Linq;
 using Model;
 using UnityEngine;
 
-public class ThingsCarrying : MonoBehaviour
+public class ThingsCarrying : Sounds
 {
     public GameObject player = Player.PlayerObj;
     private Vector2 direction;
@@ -39,6 +39,7 @@ public class ThingsCarrying : MonoBehaviour
 
                     if (closestThing is Seed || closestThing is Fruit)
                     {
+                        if (closestThing is Seed) Play(sounds[0]);
                         var seedbed = Objects.Seedbeds.FirstOrDefault(x =>
                             x.Value.IsBusy && SquareSection.ConvertSectionToVector(x.Key) ==
                             closestThing.Cords);
@@ -96,6 +97,8 @@ public class ThingsCarrying : MonoBehaviour
                             }
                         }
                     }
+                    if (closestThing is Leica || closestThing is Axe || closestThing is Hoe) Play(sounds[1]);
+                    if (closestThing is Log) Play(sounds[2]);
                 }
             }
             else
@@ -104,11 +107,14 @@ public class ThingsCarrying : MonoBehaviour
                 var thing = things.FirstOrDefault(x => x.IsCarried);
                 if (thing != null)
                 {
+                    if(thing is Seed) Play(sounds[0], destroyed: true);
+                    if (thing is Leica || thing is Axe || thing is Hoe) Play(sounds[1]);
                     thing.IsCarried = false;
-
+                    
                     var spriteRenderer = thing.ThingObj.GetComponent<SpriteRenderer>();
                     spriteRenderer.sortingLayerName = "things";
                     spriteRenderer.sortingOrder = 0;
+                    
                 }
             }
         }

@@ -61,6 +61,6 @@ public class Init : Sounds
         Objects.Requests = new Dictionary<(int, int), Request>();
         Model.Player.CurrentTime = Model.Player.GameTime;
         Model.Player.TotalScore = 0;
-        Play(sounds[0]);
+        Play(sounds[0], loopFlag: true);
     }
 }

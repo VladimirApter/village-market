@@ -8,12 +8,14 @@ using TMPro;
 using Model;
 using UnityEngine.SceneManagement;
 
-public class Timer: MonoBehaviour
+public class Timer: Sounds
 {
     // Start is called before the first frame update
 
     public float timeStart;
     public Text timerText;
+    private int counter = 0;
+    private int int_time = 0;
     
     void Start()
     {
@@ -25,11 +27,15 @@ public class Timer: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (counter == 1) Play(sounds[0], loopFlag: true);
         //Debug.LogError("timer");
         if (timeStart > 0)
         {
             if (timeStart <= 30)
+            {
                 timerText.color = Color.red;
+            }
+            
             timeStart -= Time.deltaTime;
         }
         else if (timeStart < 0)
@@ -42,9 +48,11 @@ public class Timer: MonoBehaviour
                 PlayerPrefs.SetInt($"{Player.Name}:5min", Player.TotalScore);
             SceneManager.LoadScene("LeaderBoardScene");
         }
-
+        
         int minutes = Mathf.FloorToInt(timeStart / 60);
         int seconds = Mathf.FloorToInt(timeStart % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        int_time = minutes * 60 + seconds;
+        if (int_time <= 30) {counter++;}
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using Model;
 using UnityEngine;
 
-public class PutLogOnTable : MonoBehaviour
+public class PutLogOnTable : Sounds
 {
     // Start is called before the first frame update
     void Start()
@@ -37,6 +37,7 @@ public class PutLogOnTable : MonoBehaviour
             PlayerMoving.CurrentActionPos = logTable.Coords;
 
             Player.TotalScore += 50;
+            Play(sounds[0]);
 
             log.ThingObj.transform.position = SquareSection.ConvertSectionToVector(logTableCoordinates) + new Vector2(0, 0.5f);
             log.IsCarried = false;

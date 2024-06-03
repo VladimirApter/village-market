@@ -7,6 +7,6 @@ public class SoundForMenu : Sounds
 {
     private void Start()
     {
-        Play(sounds[0]);
+        Play(sounds[0], loopFlag: true);
     }
 }

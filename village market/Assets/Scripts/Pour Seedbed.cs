@@ -4,7 +4,7 @@ using System.Linq;
 using Model;
 using UnityEngine;
 
-public class PourSeedbed : MonoBehaviour
+public class PourSeedbed : Sounds
 {
     // Start is called before the first frame update
     void Start()
@@ -38,6 +38,7 @@ public class PourSeedbed : MonoBehaviour
             
             var seedbed = seedBeds[seedbedCoordinates];
             seedbed.IsPoured = true;
+            Play(sounds[0]);
             seedbed.SeedbedObj.GetComponent<SpriteRenderer>().color = new Color(0.36f, 0.25f, 0.2f);
         }
     }

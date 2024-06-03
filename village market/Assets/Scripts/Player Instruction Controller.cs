@@ -7,7 +7,7 @@ using Model;
 using TMPro;
 
 
-public class PlayerInstructionController : MonoBehaviour
+public class PlayerInstructionController : Sounds
 {
     public TMP_Text instructionText;
     public Image textImage;
@@ -137,6 +137,7 @@ public class PlayerInstructionController : MonoBehaviour
         {
             instructionText.text = "Поздравляем, ты прошел обучение!";
             instructionImage.sprite = actionSprite12;
+            Play(sounds[0]);
         }
     }
 }

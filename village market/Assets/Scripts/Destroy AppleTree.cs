@@ -4,7 +4,7 @@ using System.Linq;
 using Model;
 using UnityEngine;
 
-public class DestroyAppleTree : MonoBehaviour
+public class DestroyAppleTree : Sounds
 {
     public GameObject logObjs;
     // Start is called before the first frame update
@@ -24,6 +24,7 @@ public class DestroyAppleTree : MonoBehaviour
             {
                 if (axe != null && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)))
                 {
+                    Play(sounds[0], destroyed:true);
                     PlayerMoving.IsActionAtCurrentMoment = true;
                     PlayerMoving.CurrentActionPos = appleTreeSeed.Cords;
                     
