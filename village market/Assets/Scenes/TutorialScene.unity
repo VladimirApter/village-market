@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 8300000, guid: de8070a1de4cd8646a9de0009c4749d3, type: 3}
+  - {fileID: 8300000, guid: e4301adb0c6af8f42b2319c15f75bb89, type: 3}
   seedbedObjs: {fileID: 24622965}
 --- !u!4 &24622969
 Transform:
@@ -13067,7 +13067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 8300000, guid: 070fdcf2b94c0344d9cb4b70460f9270, type: 3}
+  - {fileID: 8300000, guid: c51ba4ecc783ac045b5567642a9c4cb8, type: 3}
   - {fileID: 8300000, guid: bb72c73c28fffad45b3ec27901baa420, type: 3}
   - {fileID: 8300000, guid: 9d3779af9295f774fa194a966dbc88b7, type: 3}
   player: {fileID: 1435243996}
