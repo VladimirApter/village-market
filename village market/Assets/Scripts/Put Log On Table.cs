@@ -31,7 +31,7 @@ public class PutLogOnTable : Sounds
                 .magnitude || logTable.Coords != SquareSection.ConvertSectionToVector(logTableCoordinates)) return;
         
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             PlayerMoving.IsActionAtCurrentMoment = true;
             PlayerMoving.CurrentActionPos = logTable.Coords;

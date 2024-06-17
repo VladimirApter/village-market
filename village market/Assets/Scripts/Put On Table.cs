@@ -62,11 +62,11 @@ public class PutOnTable : Sounds
             spriteRenderer.sortingLayerName = "seedbeds";
             spriteRenderer.sortingOrder = 1;
             spriteRenderer.flipX = false;
-
-            //table.IsBusy = true;
+            
             tables[tableCoordinates].Fruits.Add(fruit);
             Play(sounds[0]);
-            Player.IsCarrying = false;
+            
+            StartCoroutine(Table.WaitAndCanDestroy());
         }
     }
 }

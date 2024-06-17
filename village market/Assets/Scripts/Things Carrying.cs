@@ -17,23 +17,31 @@ public class ThingsCarrying : Sounds
     void Update()
     {
         var things = Objects.Things;
-        var worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var seedbedCoordinates =
+            SquareSection.ConvertVectorToSection(mousePosition +
+                                                 new Vector3(0, SquareSection.SquareSectionScale.y / 2));
+        var walkWay = new[] { (1, -1), (2, -1), (3, -1), (4, -1) };
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.L))
         {
             var closestThing = things.OrderBy(CalculateDistancePlayerToThing)
-                .FirstOrDefault(t => CalculateDistancePlayerToThing(t) < Player.TakingRadius &&
-                                     Vector2.Distance(worldPosition, t.ThingObj.transform.position) <=
-                                     new Vector2(SquareSection.SquareSectionScale.x / 2,
-                                         SquareSection.SquareSectionScale.y / 2).magnitude);
-            
+                .FirstOrDefault(t =>
+                    !(!SquareSection.GetCurrentSectionCoordinates()
+                          .Contains(SquareSection.ConvertVectorToSection(t.Cords)) ||
+                      Vector2.Distance(
+                          SquareSection.ConvertSectionToVector(SquareSection.ConvertVectorToSection(t.Cords)),
+                          mousePosition) >
+                      new Vector2(SquareSection.SquareSectionScale.x / 2, SquareSection.SquareSectionScale.y / 2)
+                          .magnitude));
+
             if (!Player.IsCarrying)
             {
                 if (closestThing is { CanCarried: true })
                 {
                     PlayerMoving.IsActionAtCurrentMoment = true;
                     PlayerMoving.CurrentActionPos = closestThing.Cords;
-                    
+
                     closestThing.IsCarried = true;
                     Player.IsCarrying = true;
 
@@ -97,24 +105,35 @@ public class ThingsCarrying : Sounds
                             }
                         }
                     }
+
                     if (closestThing is Leica || closestThing is Axe || closestThing is Hoe) Play(sounds[1]);
                     if (closestThing is Log) Play(sounds[2], volume: 0.3f);
                 }
             }
             else
             {
-                Player.IsCarrying = false;
                 var thing = things.FirstOrDefault(x => x.IsCarried);
+
                 if (thing != null)
                 {
-                    if(thing is Seed) Play(sounds[0], destroyed: true);
+                    if (!(seedbedCoordinates.Item1 < 1 || seedbedCoordinates.Item1 > 4 ||
+                          seedbedCoordinates.Item2 < -5 || seedbedCoordinates.Item2 > 4 ||
+                          walkWay.Contains(seedbedCoordinates)) && (thing is Instrument || thing is Seed)) return;
+                    if (!SquareSection.GetCurrentSectionCoordinates().Contains(seedbedCoordinates) ||
+                        Vector2.Distance(SquareSection.ConvertSectionToVector(seedbedCoordinates), mousePosition) >
+                        new Vector2(SquareSection.SquareSectionScale.x, SquareSection.SquareSectionScale.y)
+                            .magnitude) return;
+                    Player.IsCarrying = false;
+
+
+                    thing.ThingObj.transform.position = SquareSection.ConvertSectionToVector(seedbedCoordinates);
+                    if (thing is Seed) Play(sounds[0], destroyed: true);
                     if (thing is Leica || thing is Axe || thing is Hoe) Play(sounds[1]);
                     thing.IsCarried = false;
-                    
+
                     var spriteRenderer = thing.ThingObj.GetComponent<SpriteRenderer>();
                     spriteRenderer.sortingLayerName = "things";
                     spriteRenderer.sortingOrder = 0;
-                    
                 }
             }
         }
@@ -123,7 +142,7 @@ public class ThingsCarrying : Sounds
     private void LateUpdate()
     {
         var things = Objects.Things;
-        
+
         if (PlayerMoving.Direction != Vector2.zero)
             direction = PlayerMoving.Direction;
 

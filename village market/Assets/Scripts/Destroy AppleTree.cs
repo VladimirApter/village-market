@@ -22,7 +22,7 @@ public class DestroyAppleTree : Sounds
             if (Vector2.Distance(Player.PlayerObj.transform.position, coordsAppleTree + new Vector2(0, 1.5f)) <=
                 new Vector2(SquareSection.SquareSectionScale.x * 1.5f, SquareSection.SquareSectionScale.y * 1.5f).magnitude)
             {
-                if (axe != null && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)))
+                if (axe != null && Input.GetKeyDown(KeyCode.Mouse0) && appleTreeSeed.Seedbeds != null)
                 {
                     Play(sounds[0], destroyed:true);
                     PlayerMoving.IsActionAtCurrentMoment = true;
