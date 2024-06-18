@@ -126,6 +126,7 @@ public class SeedGrowing : MonoBehaviour
             AppleTreeSeed => newSprites[10],
             _ => seed.ThingObj.GetComponent<SpriteRenderer>().sprite
         };
+        
     }
     
     private void UnGrowSeed(Seed seed)
@@ -138,6 +139,7 @@ public class SeedGrowing : MonoBehaviour
             AppleTreeSeed => newSprites[17],
             _ => seed.ThingObj.GetComponent<SpriteRenderer>().sprite
         };
+        
         //Play(sounds[1]);
     }
 

@@ -8,10 +8,10 @@ using Slider = UnityEngine.UI.Slider;
 public class DestroySeedbed : MonoBehaviour
 {
     public static bool IsBroken;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -27,16 +27,27 @@ public class DestroySeedbed : MonoBehaviour
             {
                 seedbed.Value.DestroyFramesCount++;
             }
-            if(seedbed.Value.DestroyFramesCount == Seedbed.FramesToDestroy)IsBroken = true;
+
+            if (seedbed.Value.DestroyFramesCount == Seedbed.FramesToDestroy) IsBroken = true;
             if (seedbed.Value.DestroyBar != null)
             {
+                Debug.Log("sdfsdfsdf");
+                var spriteRenderer = seedbed.Value.DestroyBar.GetComponent<SpriteRenderer>();
+                if (seedbed.Value.DestroyFramesCount == 0) seedbed.Value.DestroyBar.SetActive(false);
+                else seedbed.Value.DestroyBar.SetActive(true);
+
                 var slider = seedbed.Value.DestroyBar.GetComponent<Slider>();
                 slider.value = 1 - (float)seedbed.Value.DestroyFramesCount / Seedbed.FramesToDestroy;
+                slider.enabled = false;
             }
+
             if (seedbed.Value.DestroyFramesCount >= Seedbed.FramesToDestroy)
             {
-                var seed = (Seed)Objects.Things.FirstOrDefault(x => x is Seed { Seedbed: not null } seed && seed.Seedbed.Coords == seedbed.Value.Coords);
-                var seedAppleTree = (Seed)Objects.Things.FirstOrDefault(x => x is Seed { Seedbeds: not null } seedApple && seedApple.Seedbeds.Any(seedbedApple => seedbedApple.Coords == seedbed.Value.Coords));
+                var seed = (Seed)Objects.Things.FirstOrDefault(x =>
+                    x is Seed { Seedbed: not null } seed && seed.Seedbed.Coords == seedbed.Value.Coords);
+                var seedAppleTree = (Seed)Objects.Things.FirstOrDefault(x =>
+                    x is Seed { Seedbeds: not null } seedApple &&
+                    seedApple.Seedbeds.Any(seedbedApple => seedbedApple.Coords == seedbed.Value.Coords));
                 if (seed != null)
                     seed.Seedbed = null;
 
@@ -47,11 +58,15 @@ public class DestroySeedbed : MonoBehaviour
                         foreach (var seedbed1 in seedAppleTree.Seedbeds)
                             seedbed1.IsBusy = false;
                         seedAppleTree.Seedbeds = null;
+
+                        seedAppleTree.ThingObj.transform.position =
+                            SquareSection.ConvertSectionToVector(
+                                SquareSection.ConvertVectorToSection(Player.PlayerObj.transform.position));
                     }
                     else
                         return;
                 }
-                
+
                 Destroy(seedbed.Value.SeedbedObj);
                 Destroy(seedbed.Value.DestroyBar);
                 Objects.Seedbeds.Remove(seedbed.Key);
