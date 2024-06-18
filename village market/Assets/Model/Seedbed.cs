@@ -17,5 +17,6 @@ namespace Model
             yield return new WaitForSeconds(2f);
             CanDestroy = !CanDestroy;
         }
+        public GameObject DestroyBar { get; set; }
     }
 }

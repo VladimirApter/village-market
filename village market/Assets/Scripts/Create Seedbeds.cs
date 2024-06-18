@@ -8,8 +8,9 @@ using UnityEngine;
 public class CreateSeedbeds : Sounds
 {
     public GameObject seedbedObjs;
+    public GameObject destroyBars;
     private GameObject platform;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +59,7 @@ public class CreateSeedbeds : Sounds
                     return;
             }
             Destroy(Objects.Seedbeds[seedbedCoordinates].SeedbedObj);
+            Destroy(Objects.Seedbeds[seedbedCoordinates].DestroyBar);
             Objects.Seedbeds.Remove(seedbedCoordinates);
             return;
         }
@@ -71,7 +73,12 @@ public class CreateSeedbeds : Sounds
             IsBusy = false,
             IsPoured = false,
             CanDestroy = false,
+            DestroyBar = Instantiate(Request.DestroyBarPrefab,
+                SquareSection.ConvertSectionToVector(seedbedCoordinates) + new Vector2(0, -1.5f),
+                Quaternion.identity * Quaternion.Euler(0, 0, -90), destroyBars.transform)
         };
+        newSeedbed.DestroyBar.transform.localScale = new Vector3(16, 4, 1);
+        
         Play(sounds[0]);
         
         var spriteRenderer = newSeedbed.SeedbedObj.GetComponent<SpriteRenderer>();

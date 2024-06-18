@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Model;
 using UnityEngine;
+using Slider = UnityEngine.UI.Slider;
 
 public class DestroySeedbed : MonoBehaviour
 {
@@ -27,6 +28,11 @@ public class DestroySeedbed : MonoBehaviour
                 seedbed.Value.DestroyFramesCount++;
             }
             if(seedbed.Value.DestroyFramesCount == Seedbed.FramesToDestroy)IsBroken = true;
+            if (seedbed.Value.DestroyBar != null)
+            {
+                var slider = seedbed.Value.DestroyBar.GetComponent<Slider>();
+                slider.value = 1 - (float)seedbed.Value.DestroyFramesCount / Seedbed.FramesToDestroy;
+            }
             if (seedbed.Value.DestroyFramesCount >= Seedbed.FramesToDestroy)
             {
                 var seed = (Seed)Objects.Things.FirstOrDefault(x => x is Seed { Seedbed: not null } seed && seed.Seedbed.Coords == seedbed.Value.Coords);
@@ -47,6 +53,7 @@ public class DestroySeedbed : MonoBehaviour
                 }
                 
                 Destroy(seedbed.Value.SeedbedObj);
+                Destroy(seedbed.Value.DestroyBar);
                 Objects.Seedbeds.Remove(seedbed.Key);
                 return;
             }

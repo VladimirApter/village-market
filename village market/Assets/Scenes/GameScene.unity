@@ -6964,7 +6964,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -580334963
+  m_SortingLayerID: -1302046783
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &713635711
@@ -13807,6 +13807,7 @@ MonoBehaviour:
   sounds:
   - {fileID: 8300000, guid: e4301adb0c6af8f42b2319c15f75bb89, type: 3}
   seedbedObjs: {fileID: 1998476248}
+  destroyBars: {fileID: 713635706}
 --- !u!4 &1998476250
 Transform:
   m_ObjectHideFlags: 0
