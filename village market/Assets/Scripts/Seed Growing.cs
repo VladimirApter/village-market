@@ -36,7 +36,7 @@ public class SeedGrowing : MonoBehaviour
                 UnGrowSeed(seed);
             }
             if (seed.IsPlanted && seed.Seedbed.IsPoured ||
-                seed.IsPlantedOnSeedbeds && seed.Seedbeds.All(seedBed => seedBed.IsPoured))
+                seed.IsPlantedOnSeedbeds && seed.Seedbeds.All(seedBed => seedBed.IsPoured) && seed.GrowingFramesCount != seed.FramesToGrow)
             {
                 UpdateGrowingSeed(seed);
             }
