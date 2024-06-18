@@ -40,6 +40,8 @@ public class CreateSeedbeds : Sounds
         PlayerMoving.IsActionAtCurrentMoment = true;
         PlayerMoving.CurrentActionPos = SquareSection.ConvertSectionToVector(seedbedCoordinates);
 
+        if (!Seedbed.CanCreate) return;
+        
         if (Objects.Seedbeds.Keys.Contains(seedbedCoordinates))
         {
             var seed = (Seed)Objects.Things.FirstOrDefault(x => x is Seed { Seedbed: not null } seed && seed.Seedbed.Coords == SquareSection.ConvertSectionToVector(seedbedCoordinates));
@@ -58,13 +60,16 @@ public class CreateSeedbeds : Sounds
                 else
                     return;
             }
+            
+            StartCoroutine(Seedbed.WaitAndCanCreate());
+            
             Destroy(Objects.Seedbeds[seedbedCoordinates].SeedbedObj);
             Destroy(Objects.Seedbeds[seedbedCoordinates].DestroyBar);
             Objects.Seedbeds.Remove(seedbedCoordinates);
             return;
         }
 
-        if (!Seedbed.CanCreate) return;
+        
         
         var newSeedbed = new Seedbed()
         {

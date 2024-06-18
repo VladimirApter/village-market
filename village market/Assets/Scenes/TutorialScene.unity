@@ -13088,7 +13088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1435243996}
-  speed: 10
+  speed: 15
   animator: {fileID: 1435243999}
 --- !u!95 &1435243999 stripped
 Animator:

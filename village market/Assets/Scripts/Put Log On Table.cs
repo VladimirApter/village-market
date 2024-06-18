@@ -26,10 +26,11 @@ public class PutLogOnTable : Sounds
             SquareSection.ConvertVectorToSection(mousePosition +
                                                  new Vector3(0, SquareSection.SquareSectionScale.y / 2));
 
-        if (Vector2.Distance(SquareSection.ConvertSectionToVector(logTableCoordinates), mousePosition) >
+        if (!SquareSection.GetCurrentSectionCoordinates().Contains(logTableCoordinates) ||
+            Vector2.Distance(SquareSection.ConvertSectionToVector(logTableCoordinates), mousePosition) >
             new Vector2(SquareSection.SquareSectionScale.x, SquareSection.SquareSectionScale.y)
                 .magnitude || logTable.Coords != SquareSection.ConvertSectionToVector(logTableCoordinates)) return;
-        
+
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -39,7 +40,7 @@ public class PutLogOnTable : Sounds
             Player.TotalScore += 50;
             Play(sounds[0]);
 
-            log.ThingObj.transform.position = SquareSection.ConvertSectionToVector(logTableCoordinates) + new Vector2(0, 0.5f);
+            log.ThingObj.transform.position = logTable.Coords;
             log.IsCarried = false;
             log.CanCarried = false;
             var spriteRenderer = log.ThingObj.GetComponent<SpriteRenderer>();
@@ -48,8 +49,6 @@ public class PutLogOnTable : Sounds
             spriteRenderer.flipX = false;
 
             Player.IsCarrying = false;
-            
-            StartCoroutine(Table.WaitAndCanDestroy());
         }
     }
 }

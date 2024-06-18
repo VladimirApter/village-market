@@ -120,9 +120,12 @@ public class ThingsCarrying : Sounds
                 {
                     if (!(seedbedCoordinates.Item1 < 1 || seedbedCoordinates.Item1 > 4 ||
                           seedbedCoordinates.Item2 < -5 || seedbedCoordinates.Item2 > 4 ||
-                          walkWay.Contains(seedbedCoordinates)) && (thing is Instrument || thing is Seed)
+                          walkWay.Contains(seedbedCoordinates)) && (thing is Hoe || thing is Seed)
                                                                 && !Input.GetKeyDown(KeyCode.Mouse1))
                         return;
+                    if ((thing is Leica || thing is Axe)&& Objects.Seedbeds.ContainsKey(seedbedCoordinates) && Input.GetKeyDown(KeyCode.Mouse0)) return;
+                    if (Objects.LogTable.Coords == SquareSection.ConvertSectionToVector(seedbedCoordinates)) return;
+                    
                     if (!SquareSection.GetCurrentSectionCoordinates().Contains(seedbedCoordinates) ||
                         Vector2.Distance(SquareSection.ConvertSectionToVector(seedbedCoordinates), mousePosition) >
                         new Vector2(SquareSection.SquareSectionScale.x, SquareSection.SquareSectionScale.y)
