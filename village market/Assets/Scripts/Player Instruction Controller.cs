@@ -37,6 +37,7 @@ public class PlayerInstructionController : Sounds
     void Start()
     {
         isTutorialFinished = false;
+        instructionImage.sprite = actionSprite0;
     }
 
     // Update is called once per frame
@@ -97,7 +98,7 @@ public class PlayerInstructionController : Sounds
             instructionImage.sprite = actionSprite5;
         }
 
-        if (Objects.Seedbeds.Count == 4 && isWheatOnTable)
+        if (Objects.Seedbeds.Count >= 4 && isWheatOnTable)
         {
             instructionText.text = "Возьми семечко яблони и посади его";
             instructionImage.sprite = actionSprite6;
@@ -135,7 +136,7 @@ public class PlayerInstructionController : Sounds
 
         if (Objects.Things.Any(x => x is Log && !x.CanCarried))
         {
-            instructionText.text = "Поздравляем, ты прошел обучение!";
+            instructionText.text = "Поздравляем, ты прошел обучение! Свекла растет как пшеница";
             instructionImage.sprite = actionSprite12;
             Play(sounds[0], volume: 0.3f);
         }
