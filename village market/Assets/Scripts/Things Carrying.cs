@@ -23,22 +23,24 @@ public class ThingsCarrying : Sounds
                                                  new Vector3(0, SquareSection.SquareSectionScale.y / 2));
         var walkWay = new[] { (1, -1), (2, -1), (3, -1), (4, -1) };
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
         {
-            var closestThing = things.OrderBy(CalculateDistancePlayerToThing)
+            var closestThing = things
                 .FirstOrDefault(t =>
-                    !(!SquareSection.GetCurrentSectionCoordinates()
-                          .Contains(SquareSection.ConvertVectorToSection(t.Cords)) ||
-                      Vector2.Distance(
-                          SquareSection.ConvertSectionToVector(SquareSection.ConvertVectorToSection(t.Cords)),
-                          mousePosition) >
-                      new Vector2(SquareSection.SquareSectionScale.x / 2, SquareSection.SquareSectionScale.y / 2)
-                          .magnitude));
+                    SquareSection.GetCurrentSectionCoordinates()
+                        .Contains(seedbedCoordinates) &&
+                    t.Cords == SquareSection.ConvertSectionToVector(seedbedCoordinates));
+
 
             if (!Player.IsCarrying)
             {
                 if (closestThing is { CanCarried: true })
                 {
+                    if (closestThing is Instrument && Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        StartCoroutine(Seedbed.WaitAndCanCreate());
+                    }
+
                     PlayerMoving.IsActionAtCurrentMoment = true;
                     PlayerMoving.CurrentActionPos = closestThing.Cords;
 
@@ -118,7 +120,9 @@ public class ThingsCarrying : Sounds
                 {
                     if (!(seedbedCoordinates.Item1 < 1 || seedbedCoordinates.Item1 > 4 ||
                           seedbedCoordinates.Item2 < -5 || seedbedCoordinates.Item2 > 4 ||
-                          walkWay.Contains(seedbedCoordinates)) && (thing is Instrument || thing is Seed)) return;
+                          walkWay.Contains(seedbedCoordinates)) && (thing is Instrument || thing is Seed)
+                                                                && !Input.GetKeyDown(KeyCode.Mouse1))
+                        return;
                     if (!SquareSection.GetCurrentSectionCoordinates().Contains(seedbedCoordinates) ||
                         Vector2.Distance(SquareSection.ConvertSectionToVector(seedbedCoordinates), mousePosition) >
                         new Vector2(SquareSection.SquareSectionScale.x, SquareSection.SquareSectionScale.y)
@@ -165,10 +169,5 @@ public class ThingsCarrying : Sounds
 
             break;
         }
-    }
-
-    private float CalculateDistancePlayerToThing(Thing t)
-    {
-        return Vector3.Distance(player.transform.position, t.ThingObj.transform.position);
     }
 }

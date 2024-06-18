@@ -28,7 +28,7 @@ public class CreateSeedbeds : Sounds
         var walkWay = new[] { (1, -1), (2, -1), (3, -1), (4, -1) };
         
         if (hoe is null || !hoe.IsCarried) return;
-        if (!(Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K)) || !Player.IsCarrying) return;
+        if (!Input.GetKeyDown(KeyCode.Mouse0) || !Player.IsCarrying) return;
         if (seedbedCoordinates.Item1 < 1 || seedbedCoordinates.Item1 > 4 || seedbedCoordinates.Item2 < -5 || seedbedCoordinates.Item2 > 4 ||
         walkWay.Contains(seedbedCoordinates)) return;
         
@@ -64,6 +64,8 @@ public class CreateSeedbeds : Sounds
             return;
         }
 
+        if (!Seedbed.CanCreate) return;
+        
         var newSeedbed = new Seedbed()
         {
             Coords = SquareSection.ConvertSectionToVector(seedbedCoordinates),
