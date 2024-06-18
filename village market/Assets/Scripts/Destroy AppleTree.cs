@@ -15,6 +15,10 @@ public class DestroyAppleTree : Sounds
     // Update is called once per frame
     void Update()
     {
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var seedbedCoordinates =
+            SquareSection.ConvertVectorToSection(mousePosition +
+                                                 new Vector3(0, SquareSection.SquareSectionScale.y / 2));
         var axe = Objects.Instruments.FirstOrDefault(x => x.IsCarried && x is Axe);
         foreach (var appleTreeSeed in Objects.Things.OfType<AppleTreeSeed>())
         {
@@ -38,7 +42,7 @@ public class DestroyAppleTree : Sounds
                     
                     Objects.Things.Add(new Log
                     {
-                        ThingObj = Instantiate(Log.LogPrefab, appleTreeSeed.Cords + (Vector2)SquareSection.SquareSectionScale/2,
+                        ThingObj = Instantiate(Log.LogPrefab, SquareSection.ConvertSectionToVector(seedbedCoordinates),
                             Quaternion.identity, logObjs.transform),
                     });
                     break;

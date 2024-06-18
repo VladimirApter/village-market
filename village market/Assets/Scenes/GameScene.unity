@@ -13807,7 +13807,7 @@ MonoBehaviour:
   sounds:
   - {fileID: 8300000, guid: e4301adb0c6af8f42b2319c15f75bb89, type: 3}
   seedbedObjs: {fileID: 1998476248}
-  destroyBars: {fileID: 713635706}
+  destroyBars: {fileID: 335392559}
 --- !u!4 &1998476250
 Transform:
   m_ObjectHideFlags: 0

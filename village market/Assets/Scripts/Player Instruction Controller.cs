@@ -29,7 +29,7 @@ public class PlayerInstructionController : Sounds
 
     public static bool isTutorialFinished;
 
-    private float waitTime = 600f;
+    private float waitTime = 300f;
     private float timer;
     
     

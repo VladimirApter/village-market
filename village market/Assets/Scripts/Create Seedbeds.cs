@@ -56,6 +56,10 @@ public class CreateSeedbeds : Sounds
                     foreach (var seedbed1 in seedAppleTree.Seedbeds)
                         seedbed1.IsBusy = false;
                     seedAppleTree.Seedbeds = null;
+                    
+                    seedAppleTree.ThingObj.transform.position =
+                        SquareSection.ConvertSectionToVector(
+                            seedbedCoordinates);
                 }
                 else
                     return;
@@ -84,7 +88,7 @@ public class CreateSeedbeds : Sounds
                 SquareSection.ConvertSectionToVector(seedbedCoordinates) + new Vector2(0, -1.5f),
                 Quaternion.identity * Quaternion.Euler(0, 0, -90), destroyBars.transform)
         };
-        newSeedbed.DestroyBar.transform.localScale = new Vector3(16, 4, 1);
+        newSeedbed.DestroyBar.transform.localScale = new Vector3(1, 0.5f, 1);
         
         Play(sounds[0]);
         
