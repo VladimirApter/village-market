@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using Model;
 using UnityEngine;
@@ -70,9 +71,16 @@ public class PlantSeed : MonoBehaviour
             seed.Seedbed = seedBeds[seedbedCoordinates];
             seedBeds[seedbedCoordinates].IsBusy = true;
             Player.IsCarrying = false;
+            
+            StartCoroutine(WaitAndCanCreate(seed));
         }
     }
-
+    public static IEnumerator WaitAndCanCreate(Seed seed)
+    {
+        seed.CanCarried = false;
+        yield return new WaitForSeconds(0.1f);
+        seed.CanCarried = true;
+    }
     private bool IsSeedbedBusy(Vector2 baseCoord, Vector2 offset) =>
         Objects.Seedbeds.ContainsKey(SquareSection.ConvertVectorToSection(baseCoord + offset)) &&
         !Objects.Seedbeds[SquareSection.ConvertVectorToSection(baseCoord + offset)].IsBusy;

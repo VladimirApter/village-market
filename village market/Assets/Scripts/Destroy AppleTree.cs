@@ -38,7 +38,7 @@ public class DestroyAppleTree : Sounds
                     
                     Objects.Things.Add(new Log
                     {
-                        ThingObj = Instantiate(Log.LogPrefab, appleTreeSeed.Cords,
+                        ThingObj = Instantiate(Log.LogPrefab, appleTreeSeed.Cords + (Vector2)SquareSection.SquareSectionScale/2,
                             Quaternion.identity, logObjs.transform),
                     });
                     break;

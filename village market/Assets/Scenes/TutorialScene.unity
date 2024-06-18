@@ -185,6 +185,7 @@ MonoBehaviour:
   sounds:
   - {fileID: 8300000, guid: e4301adb0c6af8f42b2319c15f75bb89, type: 3}
   seedbedObjs: {fileID: 24622965}
+  destroyBars: {fileID: 1307041772}
 --- !u!4 &24622969
 Transform:
   m_ObjectHideFlags: 0
@@ -13048,6 +13049,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7948461372507537089, guid: 6d0c1214e14389747bf2e3efef65770d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1435244000}
+    - targetCorrespondingSourceObject: {fileID: 7948461372507537089, guid: 6d0c1214e14389747bf2e3efef65770d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1435244003}
   m_SourcePrefab: {fileID: 100100000, guid: 6d0c1214e14389747bf2e3efef65770d, type: 3}
 --- !u!1 &1435243996 stripped
 GameObject:
@@ -13187,6 +13191,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1435244003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435243996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002852075d8caa74db9590c9b242802e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LightingCellPrefab: {fileID: 6505117651110972073, guid: cf95bc7042af03048b05204645bf079b, type: 3}
 --- !u!1 &1549261332
 GameObject:
   m_ObjectHideFlags: 0

@@ -48,6 +48,8 @@ public class PutLogOnTable : Sounds
             spriteRenderer.flipX = false;
 
             Player.IsCarrying = false;
+            
+            StartCoroutine(Table.WaitAndCanDestroy());
         }
     }
 }
