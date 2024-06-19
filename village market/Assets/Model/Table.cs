@@ -12,7 +12,7 @@ namespace Model
         public Dictionary<string, int> FruitsCount = new() { { "beet", 0 }, { "wheat", 0 }, { "apple", 0 }, { "fruit", 0 } };
         public static IEnumerator WaitAndCanDestroy()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.1f);
             Player.IsCarrying = false;
         }
     }
