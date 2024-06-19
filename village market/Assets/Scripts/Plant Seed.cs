@@ -57,8 +57,10 @@ public class PlantSeed : MonoBehaviour
 
                     UpdateSeedPosition(seed, coordSeedBedMin + new Vector2(SquareSection.SquareSectionScale.x/2, SquareSection.SquareSectionScale.y/2));
 
-                    var seedBedsForSeed = validPositions
-                        .Select(x => Objects.Seedbeds[SquareSection.ConvertVectorToSection(x)]).ToArray();
+                    var seedBedsForSeed = validPositions//.OrderBy(vec => vec.x).ThenBy(vec => vec.y)
+                        .Select(x => Objects.Seedbeds[SquareSection.ConvertVectorToSection(x)])
+                        .Take(4)
+                        .ToArray();
                     seed.Seedbeds = seedBedsForSeed;
                     foreach (var sb in seedBedsForSeed) sb.IsBusy = true;
 
