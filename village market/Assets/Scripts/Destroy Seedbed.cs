@@ -31,8 +31,6 @@ public class DestroySeedbed : MonoBehaviour
             if (seedbed.Value.DestroyFramesCount == Seedbed.FramesToDestroy) IsBroken = true;
             if (seedbed.Value.DestroyBar != null)
             {
-                Debug.Log("sdfsdfsdf");
-                var spriteRenderer = seedbed.Value.DestroyBar.GetComponent<SpriteRenderer>();
                 if (seedbed.Value.DestroyFramesCount == 0) seedbed.Value.DestroyBar.SetActive(false);
                 else seedbed.Value.DestroyBar.SetActive(true);
 

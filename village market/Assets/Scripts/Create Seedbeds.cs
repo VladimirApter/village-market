@@ -88,7 +88,7 @@ public class CreateSeedbeds : Sounds
                 SquareSection.ConvertSectionToVector(seedbedCoordinates) + new Vector2(0, -1.5f),
                 Quaternion.identity * Quaternion.Euler(0, 0, -90), destroyBars.transform)
         };
-        newSeedbed.DestroyBar.transform.localScale = new Vector3(1, 0.5f, 1);
+        newSeedbed.DestroyBar.transform.localScale = new Vector3(0.6f, 0.4f, 1);
         
         Play(sounds[0]);
         

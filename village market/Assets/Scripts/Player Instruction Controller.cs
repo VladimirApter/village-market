@@ -98,7 +98,37 @@ public class PlayerInstructionController : Sounds
             instructionImage.sprite = actionSprite5;
         }
 
-        if (Objects.Seedbeds.Count >= 4 && isWheatOnTable)
+        var fourSeedbeds = false;
+
+        foreach (var seedbedsValue in Objects.Seedbeds.Values)
+        {
+            var coordsSeedBed = seedbedsValue.Coords; 
+            var directions = new Vector2[] { new(-4, 4), new(-4, -4), new(4, 4), new(4, -4) };
+
+            var validPositions = directions
+                .Where(direction =>
+                    IsSeedbedBusy(coordsSeedBed, direction) &&
+                    IsSeedbedBusy(coordsSeedBed, new Vector2(0, direction.y)) &&
+                    IsSeedbedBusy(coordsSeedBed, new Vector2(direction.x, 0)))
+                .SelectMany(direction => new[]
+                {
+                    coordsSeedBed,
+                    coordsSeedBed + direction,
+                    coordsSeedBed + new Vector2(0, direction.y),
+                    coordsSeedBed + new Vector2(direction.x, 0)
+                }).Distinct().ToList();
+            if (validPositions.Any())
+            {
+                fourSeedbeds = true;
+                break;
+            }
+        }
+        
+        bool IsSeedbedBusy(Vector2 baseCoord, Vector2 offset) =>
+            Objects.Seedbeds.ContainsKey(SquareSection.ConvertVectorToSection(baseCoord + offset)) &&
+            !Objects.Seedbeds[SquareSection.ConvertVectorToSection(baseCoord + offset)].IsBusy;
+        
+        if (fourSeedbeds && isWheatOnTable)
         {
             instructionText.text = "Возьми семечко яблони и посади его";
             instructionImage.sprite = actionSprite6;
