@@ -23,8 +23,8 @@ public class DestroyAppleTree : Sounds
         foreach (var appleTreeSeed in Objects.Things.OfType<AppleTreeSeed>())
         {
             var coordsAppleTree = appleTreeSeed.Cords;
-            if (Vector2.Distance(Player.PlayerObj.transform.position, coordsAppleTree + new Vector2(0, 1.5f)) <=
-                new Vector2(SquareSection.SquareSectionScale.x * 1.5f, SquareSection.SquareSectionScale.y * 1.5f).magnitude)
+            var seedb = appleTreeSeed.Seedbeds;
+            if (seedb != null && seedb.Where(x => SquareSection.GetCurrentSectionCoordinates().Contains(SquareSection.ConvertVectorToSection(x.Coords)) && SquareSection.ConvertVectorToSection(x.Coords) == seedbedCoordinates).Any())
             {
                 if (axe != null && Input.GetKeyDown(KeyCode.Mouse0) && appleTreeSeed.Seedbeds != null)
                 {
