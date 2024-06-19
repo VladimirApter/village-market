@@ -94,7 +94,7 @@ public class PlayerInstructionController : Sounds
 
         if (isWheatOnTable)
         {
-            instructionText.text = "Теперь посадим яблоню. Вскопай 4 грядки";
+            instructionText.text = "Теперь посадим яблоню. Вскопай 4 грядки рядом";
             instructionImage.sprite = actionSprite5;
         }
 

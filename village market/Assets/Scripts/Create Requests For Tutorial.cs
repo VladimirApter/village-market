@@ -37,16 +37,18 @@ public class CreateRequestsForTutorial : MonoBehaviour
 
             for (var i = 0; i < fruitsCount; i++)
             {
-                var wheat = Instantiate(Wheat.WheatPrefab,
+                var wheatObj = Instantiate(Wheat.WheatPrefab,
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((i - 2) * 2, 0),
                     Quaternion.identity, requestFruits.transform);
+                var wheat = new Wheat { ThingObj = wheatObj };
                 request.Fruits.Add(wheat);
             }
             for (var i = 0; i < fruitsCount; i++)
             {
-                var apple = Instantiate(Apple.ApplePrefab,
+                var appleObj = Instantiate(Apple.ApplePrefab,
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((1 + i - 2) * 2, 0),
                     Quaternion.identity, requestFruits.transform);
+                var apple = new Apple { ThingObj = appleObj };
                 request.Fruits.Add(apple);
             }
 

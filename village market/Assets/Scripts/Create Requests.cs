@@ -62,25 +62,28 @@ public class CreateRequests : MonoBehaviour
 
             for (var i = 0; i < wheatCount; i++)
             {
-                var wheat = Instantiate(Wheat.WheatPrefab,
+                var wheatObj = Instantiate(Wheat.WheatPrefab,
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((i - 2) * 2, 0),
                     Quaternion.identity, requestFruits.transform);
+                var wheat = new Wheat { ThingObj = wheatObj };
                 request.Fruits.Add(wheat);
             }
 
             for (var i = 0; i < beetsCount; i++)
             {
-                var beet = Instantiate(Beet.BeetPrefab,
+                var beetObj = Instantiate(Beet.BeetPrefab,
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((wheatCount + i - 2) * 2, 0),
                     Quaternion.identity, requestFruits.transform);
+                var beet = new Beet { ThingObj = beetObj };
                 request.Fruits.Add(beet);
             }
             
             for (var i = 0; i < applesCount; i++)
             {
-                var apple = Instantiate(Apple.ApplePrefab,
+                var appleObj = Instantiate(Apple.ApplePrefab,
                     SquareSection.ConvertSectionToVector(coordRequest) + new Vector2((wheatCount + beetsCount + i - 2) * 2, 0),
                     Quaternion.identity, requestFruits.transform);
+                var apple = new Apple { ThingObj = appleObj };
                 request.Fruits.Add(apple);
             }
 
