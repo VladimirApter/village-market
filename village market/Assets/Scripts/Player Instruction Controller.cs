@@ -29,7 +29,7 @@ public class PlayerInstructionController : Sounds
 
     public static bool isTutorialFinished;
 
-    private float waitTime = 600f;
+    private float waitTime = 300f;
     private float timer;
     
     
@@ -94,7 +94,7 @@ public class PlayerInstructionController : Sounds
 
         if (isWheatOnTable)
         {
-            instructionText.text = "Теперь посадим яблоню. Вскопай 4 грядки";
+            instructionText.text = "Теперь посадим яблоню. Вскопай 4 грядки рядом";
             instructionImage.sprite = actionSprite5;
         }
 

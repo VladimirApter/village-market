@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Model;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CheckRequest : Sounds
@@ -19,6 +20,27 @@ public class CheckRequest : Sounds
         {
             var request = Objects.Requests[requestCoords];
             var table = Objects.Tables[(requestCoords.Item1 - 3, requestCoords.Item2)];
+
+
+            foreach (var fruit in request.Fruits)
+                fruit.ThingObj.GetComponent<SpriteRenderer>().color = Color.white;
+                
+            foreach (var (fruitName, fruitCount) in table.FruitsCount)
+            {
+                var i = fruitCount;
+                foreach (var fruit in request.Fruits)
+                {
+                    if (i <= 0) break;
+                    
+                    if ((fruitName == "wheat" && fruit is Wheat) ||
+                        (fruitName == "beet" && fruit is Beet) ||
+                        (fruitName == "apple" && fruit is Apple))
+                    {
+                        fruit.ThingObj.GetComponent<SpriteRenderer>().color = new Color(0.25f, 0.25f, 0.25f);
+                        i--;
+                    }
+                }
+            }
 
             var isRequestCompleted = true; 
             foreach (var fruit in request.FruitsCount.Keys)
@@ -65,7 +87,7 @@ public class CheckRequest : Sounds
             }
             
             foreach (var fruit in request.Fruits)
-                Destroy(fruit);
+                Destroy(fruit.ThingObj);
             Objects.Requests.Remove(requestCoords);
             Destroy(request.RequestObj);
             break;

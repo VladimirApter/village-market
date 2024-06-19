@@ -132,7 +132,6 @@ public class ThingsCarrying : Sounds
                             .magnitude) return;
                     Player.IsCarrying = false;
 
-
                     thing.ThingObj.transform.position = SquareSection.ConvertSectionToVector(seedbedCoordinates);
                     if (thing is Seed) Play(sounds[0], destroyed: true);
                     if (thing is Leica || thing is Axe || thing is Hoe) Play(sounds[1]);

@@ -8,7 +8,7 @@ namespace Model
     {
         public GameObject SeedbedObj { get; set; }
         public static GameObject SeedbedPrefab { get; set; }
-        public static int FramesToDestroy { get; } = 30;
+        public static int FramesToDestroy { get; } = 60;
         public static bool CanCreate { get; set; } = true;
         public bool IsPoured { get; set; }
         public bool CanDestroy { get; set; }

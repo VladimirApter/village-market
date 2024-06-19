@@ -33,7 +33,7 @@ public class PutOnTable : Sounds
 
         var coordsTable = tables[tableCoordinates].Coords;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.K))
         {
             PlayerMoving.IsActionAtCurrentMoment = true;
             PlayerMoving.CurrentActionPos = coordsTable;
