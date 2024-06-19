@@ -136,6 +136,9 @@ public class ThingsCarrying : Sounds
                     if (thing is Seed) Play(sounds[0], destroyed: true);
                     if (thing is Leica || thing is Axe || thing is Hoe) Play(sounds[1]);
                     thing.IsCarried = false;
+                    
+                    PlayerMoving.IsActionAtCurrentMoment = true;
+                    PlayerMoving.CurrentActionPos = thing.Cords;
 
                     var spriteRenderer = thing.ThingObj.GetComponent<SpriteRenderer>();
                     spriteRenderer.sortingLayerName = "things";
