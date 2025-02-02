@@ -3,9 +3,13 @@
 Village market - это компьютерная игра, в которой нужно выращивать овощи и фрукты,
 собирать урожай и выполнять задания, играя за кота-садовода.
 
-[Скачать игру](https://drive.google.com/file/d/1vhKl5hGbINnAX770ij-wMiKyVLgTXwrg/view?usp=drive_link)
-
 ![gameplay example](gameplay_example.jpg)
+
+## Скачать игру
+Чтобы поиграть в village market скачайте [zip архив](https://drive.google.com/file/d/1vhKl5hGbINnAX770ij-wMiKyVLgTXwrg/view?usp=drive_link)
+с игрой, извлеките все файлы в любую папку на компьютере и запустите файл 
+village market.exe. Важно! Не переносите запускаемый файл из папки в которую вы извлекли
+архив, он должен находиться в одной папке с остальными файлами архива.
 
 ## Об игре
 Цель игры - набрать как можно больше очков, выращивая овощи и собирая заказы.
